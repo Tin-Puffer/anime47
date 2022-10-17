@@ -1,6 +1,4 @@
-function Header() {
-    return <div> This iss headder </div>;
-}
+import Header from "../Header/Header";
 function Bottom() {
     return <div> This iss Sidebar </div>;
 }

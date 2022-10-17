@@ -1,0 +1,172 @@
+
+$mobile-breakpoint: 320px;
+$tablet-breakpoint: 1024px;
+.header {
+    background: #282828 url(https://anime47.com/skin/24032017/img/header-bg.jpg) repeat-x;
+    height: 56px;
+    width: 100%;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+.container {
+    max-width: 1000px;
+    width: 100%;
+    margin: auto;
+    .item {
+        transition: 0.4s all;
+    }
+}
+.header-logo {
+    display: inline-block;
+    margin-top: 0px;
+    float: left;
+    .logo {
+        width: 260px;
+        height: 55px;
+        display: block;
+        background: url(https://anime47.com/skin/24032017/img/image.png?v=1.2) 0px -320px no-repeat;
+    }
+}
+.widget_search {
+    display: block;
+    float: left;
+    margin-top: 8px;
+    width: 100%;
+    position: relative;
+    input {
+        min-width: 325px;
+        width: 80%;
+
+        outline: none;
+        color: #9f9f9f;
+        display: block;
+        box-shadow: none;
+        border: 1px solid #273e52;
+        font-size: 13px;
+        border-radius: 20px;
+        position: relative;
+        padding: 10px 40px;
+        background: #12171b6e url(https://anime47.com/skin/24032017/img/search.svg) 5px 2px no-repeat;
+    }
+}
+.widget_user_header {
+    display: inline-block;
+    float: right;
+    margin-top: 10px;
+    color: #ddd;
+    .button-register {
+        background: transparent url(https://anime47.com/skin/24032017/img/image.png?v=1.2) no-repeat 0 0;
+        width: 79px;
+        height: 38px;
+        display: inline-block;
+        float: left;
+    }
+    .button-login {
+        background: transparent url(https://anime47.com/skin/24032017/img/image.png?v=1.2) no-repeat -79px 0;
+        width: 98px;
+        height: 38px;
+        display: inline-block;
+        float: left;
+    }
+    .button-login-fb {
+        background: transparent url(https://anime47.com/skin/24032017/img/image.png?v=1.2) no-repeat -177px 0;
+        width: 161px;
+        height: 38px;
+        display: inline-block;
+    }
+}
+.button-register:hover {
+    background: transparent url(https://anime47.com/skin/24032017/img/image.png?v=1.2) no-repeat 0 -41px;
+}
+.button-login:hover {
+    background: transparent url(https://anime47.com/skin/24032017/img/image.png?v=1.2) no-repeat -79px -41px;
+}
+.button-login-fb:hover {
+    background: transparent url(https://anime47.com/skin/24032017/img/image.png?v=1.2) no-repeat -177px -41px;
+}
+.nav {
+    margin-bottom: 8px;
+    background-color: #131313;
+    .nav-search {
+        width: 100%;
+        max-width: 1000px;
+        display: block;
+        background-color: #131313;
+        margin: auto;
+        .mega-menu-1 {
+            list-style: none;
+            padding: 0;
+            width: 100%;
+            height: auto;
+            position: relative;
+            text-transform: uppercase;
+            display: flex;
+            flex-wrap: wrap;
+            .item-search {
+                position: relative;
+                color: white;
+                font-size: 15px;
+                padding: 11px 15px;
+            }
+        }
+    }
+}
+.mega-menu-2 {
+    display: none;
+    position: absolute;
+    width: auto;
+    top: 100%;
+    left: 0;
+    text-align: start;
+    z-index: 2;
+    background-color: #08080886;
+    .m2 {
+        font-size: 13px;
+        width: 160px;
+        padding: 7px 10px;
+        
+    }
+    @media screen and (min-width: 630px) {
+        width: 320px;
+    }
+    @media screen and (min-width: 719px) {
+        width: 640px;
+    }
+    @media screen and (min-width: 930px) {//1024 trở lên
+        width: 800px;
+    }
+}
+.mega-menu-3 {
+    display: none;
+    position: absolute;
+    width: auto;
+    top: 100%;
+    left: 0;
+    text-align: start;
+    z-index: 2;
+    background-color: #08080886;
+    .m2 {
+        font-size: 13px;
+        width: 160px;
+        padding: 7px 10px;
+        
+    }
+    @media screen and (min-width: 630px) {
+        width: 320px;
+    }
+    @media screen and (max-width: 630px) {
+        width: 160px;
+    }
+    
+}
+.m2:hover{
+            background-color: #4e4b4b33;
+        }
+.item-search:hover {
+    background-color: green;
+    cursor: pointer;
+
+    .mega-menu-2,.mega-menu-3 {
+        display: flex;
+    }
+     
+}
