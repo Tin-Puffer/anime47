@@ -1,7 +1,7 @@
+import './App.css';
 import { Routes, Route } from 'react-router-dom';
 import DefaultLayout from './components/Layouts/DefaultLayout';
 import Login from './features/auth/page/Login';
-import './App.css';
 import Register from './features/auth/page/Register';
 
 function App() {

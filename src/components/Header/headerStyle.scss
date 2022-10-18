@@ -1,11 +1,15 @@
-
 $mobile-breakpoint: 320px;
 $tablet-breakpoint: 1024px;
 .header {
-    background: #282828 url(https://anime47.com/skin/24032017/img/header-bg.jpg) repeat-x;
-    height: 56px;
     width: 100%;
     font-family: 'Roboto Condensed', sans-serif;
+}
+.top-line {
+    width: 100%;
+    height: 56px;
+    display: block;
+    background: #282828 url(https://anime47.com/skin/24032017/img/header-bg.jpg) repeat-x;
+    position: absolute;
 }
 .container {
     max-width: 1000px;
@@ -59,6 +63,9 @@ $tablet-breakpoint: 1024px;
         height: 38px;
         display: inline-block;
         float: left;
+        &:hover {
+    background: transparent url(https://anime47.com/skin/24032017/img/image.png?v=1.2) no-repeat 0 -41px;
+    }
     }
     .button-login {
         background: transparent url(https://anime47.com/skin/24032017/img/image.png?v=1.2) no-repeat -79px 0;
@@ -66,23 +73,21 @@ $tablet-breakpoint: 1024px;
         height: 38px;
         display: inline-block;
         float: left;
+        &:hover {
+            background: transparent url(https://anime47.com/skin/24032017/img/image.png?v=1.2) no-repeat -79px -41px;
+        }
     }
     .button-login-fb {
         background: transparent url(https://anime47.com/skin/24032017/img/image.png?v=1.2) no-repeat -177px 0;
         width: 161px;
         height: 38px;
         display: inline-block;
+        &:hover {
+            background: transparent url(https://anime47.com/skin/24032017/img/image.png?v=1.2) no-repeat -177px -41px;
+        }
     }
 }
-.button-register:hover {
-    background: transparent url(https://anime47.com/skin/24032017/img/image.png?v=1.2) no-repeat 0 -41px;
-}
-.button-login:hover {
-    background: transparent url(https://anime47.com/skin/24032017/img/image.png?v=1.2) no-repeat -79px -41px;
-}
-.button-login-fb:hover {
-    background: transparent url(https://anime47.com/skin/24032017/img/image.png?v=1.2) no-repeat -177px -41px;
-}
+
 .nav {
     margin-bottom: 8px;
     background-color: #131313;
@@ -106,6 +111,15 @@ $tablet-breakpoint: 1024px;
                 color: white;
                 font-size: 15px;
                 padding: 11px 15px;
+                &:hover {
+                    background-color: green;
+                    cursor: pointer;
+                    .mega-menu-2,
+                    .mega-menu-3,
+                    .mega-menu-4 {
+                        display: flex;
+                    }
+                }
             }
         }
     }
@@ -118,55 +132,63 @@ $tablet-breakpoint: 1024px;
     left: 0;
     text-align: start;
     z-index: 2;
-    background-color: #08080886;
+    background-color: #191919e6;
     .m2 {
         font-size: 13px;
         width: 160px;
         padding: 7px 10px;
-        
-    }
-    @media screen and (min-width: 630px) {
-        width: 320px;
-    }
-    @media screen and (min-width: 719px) {
-        width: 640px;
-    }
-    @media screen and (min-width: 930px) {//1024 trở lên
-        width: 800px;
-    }
-}
-.mega-menu-3 {
-    display: none;
-    position: absolute;
-    width: auto;
-    top: 100%;
-    left: 0;
-    text-align: start;
-    z-index: 2;
-    background-color: #08080886;
-    .m2 {
-        font-size: 13px;
-        width: 160px;
-        padding: 7px 10px;
-        
-    }
-    @media screen and (min-width: 630px) {
-        width: 320px;
-    }
-    @media screen and (max-width: 630px) {
-        width: 160px;
-    }
-    
-}
-.m2:hover{
+        &:hover {
             background-color: #4e4b4b33;
         }
-.item-search:hover {
-    background-color: green;
-    cursor: pointer;
-
-    .mega-menu-2,.mega-menu-3 {
-        display: flex;
     }
-     
+    &.type {
+        @media screen and (min-width: 630px) {
+            width: 320px;
+        }
+        @media screen and (min-width: 719px) {
+            width: 640px;
+        }
+        @media screen and (min-width: 930px) {
+            //1024 trở lên
+            width: 800px;
+        }
+    }
+    &.status {
+        @media screen and (min-width: 630px) {
+            width: 320px;
+        }
+        @media screen and (max-width: 630px) {
+            width: 160px;
+        }
+    }
+    &.viewCount {
+        @media screen and (min-width: 630px) {
+            width: 320px;
+        }
+        @media screen and (min-width: 880px) {
+            width: 480px;
+        }
+        @media screen and (min-width: 1024px) {
+            width: 640px;
+        }
+    }
+    &.commentCount {
+        @media screen and (min-width: 780px) {
+            width: 320px;
+        }
+        @media screen and (min-width: 880px) {
+            width: 480px;
+        }
+        @media screen and (min-width: 1100px) {
+            width: 640px;
+        }
+    }
+    &.type-2 {
+        @media screen and (min-width: 870px) {
+            width: 320px;
+        }
+        @media screen and (min-width: 1040px) {
+            width: 480px;
+        }
+    }
 }
