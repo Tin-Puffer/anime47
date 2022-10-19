@@ -1,0 +1,46 @@
+.top-member-container {
+    width: 93%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.top-member-list {
+    padding: 10px;
+}
+.top-member-content {
+    width: 100%;
+    margin-bottom: 30px;
+    background-color: #eff1f2;
+}
+.top-member-item {
+    width: 100%;
+    margin: auto;
+    background-color: white;
+    border-top: 1px solid #dedede;
+    padding: 10px 0;
+    .t-item {
+        text-align: left;
+    }
+    .avatar {
+        float: left;
+        margin-right: 10px;
+        vertical-align: middle;
+    }
+    .txt-rank {
+        float: left;
+        width: 40px;
+        line-height: 45px;
+        text-align: center;
+        display: block;
+        font-size: 20px;
+        color: #3498db !important;
+    }
+    .title {
+        font-size: 14px;
+        font-weight: 400;
+        margin: 0;
+        margin-bottom: 5px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+}

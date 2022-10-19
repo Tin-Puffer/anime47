@@ -5,17 +5,17 @@ import { Link } from 'react-router-dom';
 export default function Footet() {
     return (
         <div className="footer">
-            <div className="container">
+            <div className="container" style={{ padding: '20px 0' }}>
                 <Row className="content">
-                    <Col xs={{ offset: 2, span: 22 }} md={{ offset: 0, span: 10 }} className="item-bottom">
-                        <Link to={'/'} style={{ marginBottom: '15px', display: 'block', marginLeft: '5px' }}>
+                    <Col xs={{ offset: 2, span: 22 }} md={{ offset: 0, span: 10 }}>
+                        <Link to={'/'} style={{ marginBottom: '10px', display: 'block', marginLeft: '5px' }}>
                             Xem anime
                         </Link>
                         <p className="title-p"> © 2022 NguyenChiTin •</p>
                     </Col>
-                    <Col xs={{ offset: 2, span: 22 }} md={{ offset: 0, span: 14 }} className="item-bottom">
+                    <Col xs={{ offset: 2, span: 22 }} md={{ offset: 0, span: 14 }}>
                         <Row>
-                            <Col span={10}>
+                            <Col xs={{ span: 24 }} md={{ offset: 0, span: 10 }}>
                                 <div className="box">
                                     <a className="logo fb"></a>
                                     <div className="title">
@@ -32,7 +32,7 @@ export default function Footet() {
                                     </div>
                                 </div>
                             </Col>
-                            <Col span={14}>
+                            <Col xs={{ span: 24 }} md={{ offset: 0, span: 14 }}>
                                 <div className="box">
                                     <a className="logo mail"></a>
                                     <div className="title">

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Col, Row } from 'antd';
-import 'antd/dist/antd.css';
+import 'antd/dist/antd.less';
 import './headerStyle.scss';
 import { Link } from 'react-router-dom';
 export default function () {

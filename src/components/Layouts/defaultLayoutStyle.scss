@@ -1,0 +1,21 @@
+.container-df {
+    .content-main {
+        width: 100%;
+        max-width: 1000px;
+        
+        margin: auto;
+    }
+}
+.select-col.off {
+    @media screen and (max-width: 990px) {
+   
+            display: none;
+        
+    }
+}
+.main-col {
+    min-height: 300px;
+    background-color: #282828;
+}
+.select-col {
+}
