@@ -19,7 +19,7 @@ function DefaultLayout(props: DefaultLayoutProps) {
             <div>
                 <div className="container-df">
                     <div className="content-main">
-                        <Row>{props.header}</Row>
+                        <Row style={{overflow:'hidden',margin:"15px 0"}}>{props.header}</Row>
                         <Row>
                             <Col xs={24} sm={24} lg={16} className="main-col">
                                 {props.main}

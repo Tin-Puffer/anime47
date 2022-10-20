@@ -1,0 +1,71 @@
+.center {
+    width: 100%;
+    max-width: 1000px;
+    background: #4f4e52 url(https://anime47.com/skin/24032017/img/item_bg.gif) repeat;
+    padding-left: 10px;
+    padding-right: 10px;
+    &:nth-child(1) {
+    }
+}
+.carousel-item {
+    margin: 10px 0px 10px 8px;
+    &:hover{
+        .block-wrapper{
+
+            opacity: 0.7;
+            cursor: pointer;
+        }
+    }
+    .block-wrapper {
+        background-image: url('https://animeanime.jp/imgs/p/jtKDOVlKAvjRrNw8SXAVejagI61Nrq_oqaqr/523880.jpg');
+        background-size: cover;
+        height: 250px;
+        width: 183px;
+        position: relative;
+        .movie-title-1 {
+            display: block;
+            overflow: hidden;
+            position: absolute;
+            bottom: 0;
+
+            width: 100%;
+            height: auto;
+            padding: 10px;
+            background: url('https://anime47.com/skin/24032017/img/mask-title.png') top repeat-x;
+            z-index: 5;
+            color: #fff;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            text-transform: none;
+            font-size: 14px;
+            font-weight: normal;
+            text-align: center;
+            white-space: normal;
+        }
+        .movie-status {
+            position: absolute;
+            color: #fff;
+            background: #811204;
+            font-size: 11px;
+            font-weight: bold;
+            float: left;
+            clear: both;
+            padding: 3px 6px;
+            left: 5px;
+            top: 5px;
+            white-space: nowrap;
+            display: inline-block;
+            border-radius: 4px;
+        }
+    }
+}
+.carousel-arrow-btn {
+    padding: '30px  10px';
+    background-color: rgba(0, 0, 0, 0.6);
+    position: absolute;
+    z-index: 1;
+    padding: 20px 10px;
+    &:hover {
+        background-color: black;
+        cursor: pointer;
+    }
+}
