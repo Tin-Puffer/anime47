@@ -20,16 +20,18 @@ export default function () {
                 </Col>
                 <Col className="item" xs={24} md={24} lg={9}>
                     <div className="widget_user_header">
-                        <Link to={'/'} className="button-register"></Link>
-                        <Link to={'/'} className="button-login"></Link>
-                        <Link to={'/'} className="button-login-fb"></Link>
+                        <Link to={'/register'} className="button-register"></Link>
+                        <Link to={'/login'} className="button-login"></Link>
+                        <Link to={'/login'} className="button-login-fb"></Link>
                     </div>
                 </Col>
             </Row>
             <div className="nav">
                 <div className="nav-search">
                     <Row className="mega-menu-1">
-                        <Col className="item-search">trang chủ</Col>
+                        <Link to={'/'}>
+                            <Col className="item-search">trang chủ</Col>
+                        </Link>
                         <Col className="item-search">
                             thể loại
                             <Row className="mega-menu-2 type">

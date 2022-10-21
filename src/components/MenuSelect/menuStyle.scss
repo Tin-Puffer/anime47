@@ -3,9 +3,12 @@
     margin-bottom: 25px;
 }
 .menu-content {
-    width: 93%;
+    width: 91%;
     margin: auto;
     min-height: 500px;
+    @media screen and (max-width: 993px) {
+            width: 100%;
+        }
 }
 .star-icon {
     background: url('https://anime47.com/skin/24032017/img/image.png?v=1.2') no-repeat 0px -80px;
@@ -86,14 +89,14 @@
     }
 }
 .playlist-content {
-    width: 96%;
+    width: 98%;
     margin-left: auto;
     margin-right: auto;
     margin-top: 5px;
 }
 .list-play {
     min-height: 500px;
-    width: 97%;
+    width: 100%;
     background-color: #1a1a1a;
     margin-top: 60px;
     margin-left: auto;

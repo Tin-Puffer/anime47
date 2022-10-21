@@ -1,0 +1,209 @@
+.center {
+    width: 100%;
+    max-width: 1000px;
+    background: #4f4e52 url(https://anime47.com/skin/24032017/img/item_bg.gif) repeat;
+    padding-left: 10px;
+    padding-right: 10px;
+    &:nth-child(1) {
+    }
+}
+.carousel-item {
+    margin: 10px 0px 10px 8px;
+    &:hover {
+        .block-wrapper {
+            opacity: 0.7;
+            cursor: pointer;
+        }
+    }
+    .block-wrapper {
+        background-image: url('https://animeanime.jp/imgs/p/jtKDOVlKAvjRrNw8SXAVejagI61Nrq_oqaqr/523880.jpg');
+        background-size: cover;
+        height: 250px;
+        width: 183px;
+        position: relative;
+        .movie-title-1 {
+            display: block;
+            overflow: hidden;
+            position: absolute;
+            bottom: 0;
+
+            width: 100%;
+            height: auto;
+            padding: 10px;
+            background: url('https://anime47.com/skin/24032017/img/mask-title.png') top repeat-x;
+            z-index: 5;
+            color: #fff;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            text-transform: none;
+            font-size: 14px;
+            font-weight: normal;
+            text-align: center;
+            white-space: normal;
+        }
+        .movie-status {
+            position: absolute;
+            color: #fff;
+            background: #811204;
+            font-size: 11px;
+            font-weight: bold;
+            float: left;
+            clear: both;
+            padding: 3px 6px;
+            left: 5px;
+            top: 5px;
+            white-space: nowrap;
+            display: inline-block;
+            border-radius: 4px;
+        }
+    }
+}
+.carousel-arrow-btn {
+    padding: '30px  10px';
+    background-color: rgba(0, 0, 0, 0.6);
+    position: absolute;
+    z-index: 1;
+    padding: 20px 10px;
+    &:hover {
+        background-color: black;
+        cursor: pointer;
+    }
+}
+///// home css
+.home-content {
+    margin: 0 10px;
+    .title-home {
+        float: left;
+        color: #daad3b;
+        font-size: 13px;
+        font-weight: bold;
+        position: relative;
+        padding: 10px 10px;
+        text-transform: uppercase;
+        border: 1px solid #1b1b1b;
+        border-radius: 7px;
+    }
+}
+.col-grid-film {
+    background-color: #282828;
+    width: 100%;
+
+    //  @media screen and (min-width: 930px) {
+    //         //1024 trở lên
+    //         width: 800px;
+    //     }
+    .grid-film-content {
+        width: 100%;
+        height: 250px;
+        background-color: antiquewhite;
+        position: relative;
+    }
+}
+
+//
+.grid-film-content {
+    display: inline-block !important;
+    margin-right: 1%;
+    margin-bottom: 10px !important;
+    width: 24%;
+    float: left;
+    text-align: -webkit-match-parent;
+}
+.a {
+    width: 100% !important;
+    display: block;
+    color: #46e1ff;
+    text-decoration: none;
+    &:hover {
+        .a2 {
+            opacity: 0.7;
+        }
+    }
+}
+.a1 {
+    position: relative;
+    padding: 0;
+    background: #4f4e52 url('https://anime47.com/skin/24032017/img/item_bg.gif') repeat;
+    border-bottom: 1px solid #000;
+    color: #ddd;
+    height: auto;
+    display: block;
+}
+.a2 {
+    width: 100% !important;
+    position: relative !important;
+    height: auto !important;
+    padding-top: 133.3333% !important;
+    content: '';
+    display: block;
+    background-image: url('https://www.cheatsheet.com/wp-content/uploads/2022/08/Chainsaw-Man-Anime.jpg');
+    background-size: cover;
+    background-position: center;
+}
+.a2::before {
+    padding-top: 133.3333% !important;
+}
+.a3 {
+    display: block !important;
+    height: 100% !important;
+    width: 100% !important;
+    background-image: url('https://img2.animatetimes.com/2022/09/f6860bbb0470db2a26be7b43602c08ca631ef54e27aa63_59289682_9605d5b40bbe8975984d4a0ca66c2df8fddbb28f.jpg');
+}
+.a4 {
+    margin: 5px;
+    text-align: left;
+}
+.a41 {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+    color: #44e2ff;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none;
+}
+.a51 {
+    background: url('https://anime47.com/skin/24032017/img/comment.png') no-repeat scroll 0px 2px rgba(0, 0, 0, 0);
+    color: #fff;
+    font-size: 11px;
+    padding-left: 15px;
+    display: block;
+    font-weight: bold;
+}
+.a52 {
+    background: url('https://anime47.com/skin/24032017/img/check.gif') no-repeat scroll 0px 2px rgba(0, 0, 0, 0);
+    color: #fff;
+    font-size: 11px;
+    padding-left: 15px;
+    display: block;
+    font-weight: bold;
+    float: right;
+    margin-top: -15px;
+}
+.a53 {
+    position: absolute;
+    color: #fff;
+    background: #811204;
+    font-size: 11px;
+    font-weight: bold;
+    float: left;
+    clear: both;
+    padding: 3px 6px;
+    left: 5px;
+    top: 5px;
+    white-space: nowrap;
+    display: inline-block;
+    border-radius: 4px;
+}
+.xem-them {
+    background-position: center;
+    display: inline-block;
+    padding: 0px 20px 0px 0px;
+
+    color: #c9d427;
+    font-size: 14px;
+    text-decoration: none;
+    background: url('https://anime47.com/skin/24032017/img/viewmore.png') no-repeat 80px 8px;
+}

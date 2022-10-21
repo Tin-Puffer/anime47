@@ -1,5 +1,6 @@
 import { Col, Row } from 'antd';
 import React, { ReactNode } from 'react';
+import { useParams } from 'react-router-dom';
 import Footer from '../Footer/Footet';
 import Header from '../Header/Header';
 import MenuSelect from '../MenuSelect/MenuSelect';
@@ -13,13 +14,15 @@ interface DefaultLayoutProps {
 }
 function DefaultLayout(props: DefaultLayoutProps) {
     const selcetClass = `select-col ${props.offSelectCol}`;
+    let params = useParams();
+    console.log(params['*']); // "one/two"
     return (
         <div>
             <Header />
             <div>
                 <div className="container-df">
                     <div className="content-main">
-                        <Row style={{overflow:'hidden',margin:"15px 0"}}>{props.header}</Row>
+                        <Row style={{ overflow: 'hidden', marginBottom: '20px ' }}>{props.header}</Row>
                         <Row>
                             <Col xs={24} sm={24} lg={16} className="main-col">
                                 {props.main}
