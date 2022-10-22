@@ -1,0 +1,154 @@
+@font-face {
+    font-family: 'utm-cafeta';
+    src: url('https://candyfonts.com/wp-data/2018/10/26/11268/UTM Cafeta.ttf') format('woff'),
+        url('https://candyfonts.com/wp-data/2018/10/26/11268/UTM Cafeta.ttf') format('opentype'),
+        url('https://candyfonts.com/wp-data/2018/10/26/11268/UTM Cafeta.ttf') format('truetype');
+}
+htm_tag {
+    font-family: 'utm-cafeta';
+    font-size: 45px;
+    text-transform: none;
+    color: #f32951;
+}
+.btn {
+    display: inline-block;
+    padding: 8px 6px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.428571429;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+.filter-input-container {
+    min-height: 85px;
+
+    width: 100%;
+    padding: 10px 0px;
+    border: 1px solid #121212;
+    background: #222;
+    text-align: left;
+    .list-movie-flilter-item {
+        float: left;
+        margin: 0px 6px;
+        width: 126px;
+        color: #ddd;
+        &.category {
+            width: 200px;
+        }
+        .filter-eptype-label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .from-control {
+            outline: green;
+            display: inline-block;
+            display: block;
+            width: 100%;
+            height: 38px;
+            padding: 8px 12px;
+            font-size: 14px;
+            line-height: 1.428571429;
+            color: #555555;
+            vertical-align: middle;
+            background-color: #ffffff;
+            border: 1px solid #cccccc;
+            border-radius: 4px;
+            -webkit-box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+            box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+            -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+            transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+        }
+    }
+    .btn-red {
+        color: #ffffff;
+        background-color: #d9534f;
+        border-color: #d9534f;
+        position: relative;
+        top: 27px;
+        margin-bottom: 27px;
+        &:hover {
+            background-color: #d43f3a;
+            border-color: #c9302c;
+        }
+    }
+}
+.selcet {
+    height: 38px;
+    width: 100%;
+
+    .dropdown-container {
+        position: absolute;
+        width: 200px;
+        color: #121212;
+        font-weight: 400;
+        border: none;
+    }
+    .dropdown-content {
+        width: 100%;
+
+        position: absolute;
+        .dropdown-content-item:hover {
+            background-color: #121212;
+        }
+    }
+}
+
+/// paginationCustomFilter
+.paginationCustomFilter {
+    .box {
+        width: 50px;
+        height: 42px;
+    }
+    .ant-pagination {
+    }
+    .box:hover {
+        border: none;
+        color: #dacb46;
+        background-color: #131313;
+    }
+    .ant-pagination-next,
+    .ant-pagination-prev,
+    .ant-pagination-item {
+        padding: 0;
+        border: none;
+        color: #46e1ff;
+        background-color: #191919;
+        margin: 0;
+        height: 42px;
+    }
+    .box-txt {
+        line-height: 41px;
+        width: 100%;
+    }
+    .ant-pagination-item-active {
+        background-color: #000 !important;
+        color: #fff !important;
+    }
+}
+.header-list-index {
+    overflow: hidden;
+    white-space: nowrap;
+    background: url('https://anime47.com/skin/24032017/img/divider_line.gif') bottom repeat-x;
+    margin-bottom: 5px;
+    margin-top: 10px;
+    .title-list-index {
+        float: left;
+      
+        text-transform: uppercase;
+        font-size: 22px;
+        font-weight: 630;
+        display: inline-block;
+        padding: 0 20px;
+        height: 40px;
+        line-height: 43px;
+        background: #dacb46;
+        color: #333;
+        border-radius: 3px 3px 0 0;
+    }
+}

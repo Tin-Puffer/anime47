@@ -100,8 +100,8 @@ export function GridFilm() {
     return (
         <div>
             <Row gutter={[8, 8]}>
-                {ren.map((e) => (
-                    <Col ref={ref} xs={8} md={6} className="col-grid-film">
+                {ren.map((e, i) => (
+                    <Col key={i} ref={ref} xs={8} md={6} className="col-grid-film">
                         <div className="ss">
                             <a className="a">
                                 <div className="a1">
@@ -119,7 +119,6 @@ export function GridFilm() {
                         </div>
                     </Col>
                 ))}
-               
             </Row>
         </div>
     );

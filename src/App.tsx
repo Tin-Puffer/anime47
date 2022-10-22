@@ -3,7 +3,6 @@ import { Routes, Route } from 'react-router-dom';
 import DefaultLayout from './components/Layouts/DefaultLayout';
 import { Login } from './features/auth/page';
 import Register from './features/auth/page/Register';
-import { SliderTop } from './components/Slider/Slider';
 import { CarouselHome, Home } from './features/anime/Home';
 import { FilterAnime, FilterInput } from './features/anime/FilterAnime';
 
@@ -28,12 +27,6 @@ function App() {
 
                 <Route
                     path="/filter/*"
-                    // action={({ params }) => {
-                    //     console.log(params['*']);
-                    // }}
-                    // loader={({ params }) => {
-                    //     console.log(params['*']); // "one/two"
-                    // }}
                     element={
                         <DefaultLayout
                             offSelectCol={'off'}
