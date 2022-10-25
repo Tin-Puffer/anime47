@@ -1,81 +1,109 @@
 import { Row, Col } from 'antd';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { menuselector } from '../../model/user';
 import { TopMember } from '../Topmember/Topmember';
 
 import './menuStyle.scss';
 
-export function StarTiTle(){
+export function StarTiTle({ lable }: { lable: string }) {
     return (
         <div className="title">
             <h2 className="star-icon">
-                <span className="lable">Xem nhiều nhất</span>
+                <span className="lable">{lable}</span>
             </h2>
         </div>
     );
 }
-export function Tabs() {
+export function Tabs({ tab }: { tab: string[] }) {
+    const [active, setActive] = useState(0);
+
+    function handleClickTab(e: any) {
+        // console.log(e.target.getAttribute('data-index'));
+        setActive(e.target.getAttribute('data-index'));
+    }
     return (
         <div className="tabs">
-            <div className="tab active">Ngày</div>
-            <div className="tab">Tuần</div>
-            <div className="tab">Tháng</div>
-            <div className="tab ">Mùa</div>
-            <div className="tab">Năm</div>
+            {tab.map((value, i) => (
+                <div
+                    key={i}
+                    data-index={i}
+                    onClick={(e) => handleClickTab(e)}
+                    className={`tab ${i == active ? 'active' : ''}`}
+                >
+                    {value}
+                </div>
+            ))}
         </div>
     );
 }
-interface FullName {
-    color?: string;
-}
-export function ListAnimeItem(props: FullName) {
-    let xx = 'list-top-movie-item ' + props.color;
+
+export function ListAnimeItem({ data }: { data: menuselector }) {
     return (
-        <div className={xx}>
+        <div className="list-top-movie-item ">
             <Row>
-                <span className="list-top-movie-item-status">03/??</span>
+                <span className="list-top-movie-item-status">
+                    {data.ep}/{data.fep}
+                </span>
                 <Col span={4}>
                     <Link to={'/'}>
-                        <div className="list-top-movie-item-img"></div>
+                        <div className="list-top-movie-item-img" style={{ backgroundImage: `url(${data.img})` }}></div>
                     </Link>
                 </Col>
                 <Col span={19} style={{ marginLeft: '8px' }}>
-                    <span className="list-top-movie-item-name">Shinmai Renkinjutsushi no </span>
+                    <span className="list-top-movie-item-name">{data.name}</span>
                     <span className="list-top-movie-item-decript"> Management of ...</span>
-                    <span className="list-top-movie-item-view"> 4170 Lượt xem</span>
+                    <span className="list-top-movie-item-view"> {data.view} Lượt xem</span>
                 </Col>
             </Row>
             <div className="list-top-movie-item-info"></div>
         </div>
     );
 }
-export default function MenuSelect() {
+export interface MenuProps {
+    data: menuselector[];
+    title: string;
+    tab: string[];
+}
+export default function MenuSelect(props: MenuProps) {
+    const { data, title, tab } = props;
+    const dataFirst: menuselector | undefined = data.shift();
     return (
         <div className="menu-container">
             <div className="menu-content">
-                <StarTiTle></StarTiTle>
-                <Tabs></Tabs>
+                <StarTiTle lable={title}></StarTiTle>
+                <Tabs tab={tab}></Tabs>
                 <div className="list-play">
                     <div className="playlist-content">
                         <div className="list-top-movies">
                             <div className="movie-lable">
-                                <div className="backgound"></div>
-                                <span className="list-top-movie-status">02/??</span>
-                                <div className="list-top-movie-item-info">
-                                    <span className="list-top-movie-item-vn">Bleach: Sennen Kessen-hen</span>
-                                    <span className="list-top-movie-item-en"> Bleach: Huyết ...</span>
-                                    <span className="list-top-movie-item-view">4215 Lượt xem</span>
-                                </div>
+                                {dataFirst ? (
+                                    <div>
+                                        <div
+                                            className="backgound"
+                                            style={{ backgroundImage: `url(${dataFirst.img})` }}
+                                        ></div>
+                                        <span className="list-top-movie-status">
+                                            {dataFirst.ep}/{dataFirst.fep}
+                                        </span>
+                                        <div className="list-top-movie-item-info">
+                                            <span className="list-top-movie-item-vn">
+                                                {dataFirst.name.slice(0, 24)}
+                                            </span>
+                                            <span className="list-top-movie-item-en"> Bleach: Huyết ...</span>
+                                            <span className="list-top-movie-item-view">{dataFirst.view} Lượt xem</span>
+                                        </div>
+                                    </div>
+                                ) : (
+                                    <div></div>
+                                )}
                             </div>
                         </div>
-                        <ListAnimeItem color="dark"></ListAnimeItem>
-                        <ListAnimeItem></ListAnimeItem>
-                        <ListAnimeItem color="dark"></ListAnimeItem>
-                        <ListAnimeItem></ListAnimeItem>
-                        <ListAnimeItem color="dark"></ListAnimeItem>
-                        <ListAnimeItem></ListAnimeItem>
-                        <ListAnimeItem color="dark"></ListAnimeItem>
+                        {data.map((value, i) => (
+                            <ListAnimeItem key={i} data={value}></ListAnimeItem>
+                        ))}
                     </div>
-                </div>       
+                </div>
             </div>
         </div>
     );

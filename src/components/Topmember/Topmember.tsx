@@ -25,7 +25,7 @@ export function TopMemberItem() {
 export function TopMember() {
     return (
         <div className="top-member-container">
-            <StarTiTle></StarTiTle>
+            <StarTiTle lable="??"></StarTiTle>
             <div className="top-member-content">
                 <div className="top-member-list">
                     <TopMemberItem></TopMemberItem>

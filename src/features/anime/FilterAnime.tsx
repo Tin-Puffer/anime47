@@ -47,7 +47,7 @@ export function PaginationCustom() {
             }}
             current={current}
             onChange={onChange}
-            total={100}
+            total={5}
         />
     );
 }

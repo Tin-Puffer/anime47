@@ -3,8 +3,8 @@ import { Routes, Route } from 'react-router-dom';
 import DefaultLayout from './components/Layouts/DefaultLayout';
 import { Login } from './features/auth/page';
 import Register from './features/auth/page/Register';
-import { CarouselHome, Home } from './features/anime/Home';
-import { FilterAnime, FilterInput } from './features/anime/FilterAnime';
+import { FilterAnime, FilterInput, CarouselHome, Home, AnimeDetail } from './features/anime';
+import { AnimeWatch } from './features/anime/AnimeWatch';
 
 function App() {
     return (
@@ -24,7 +24,10 @@ function App() {
                     path="/register"
                     element={<DefaultLayout offSelectCol={'off'} main={<Register></Register>}></DefaultLayout>}
                 ></Route>
-
+                <Route
+                    path="/anime/:id"
+                    element={<DefaultLayout offSelectCol={'off'} main={<AnimeDetail></AnimeDetail>}></DefaultLayout>}
+                ></Route>
                 <Route
                     path="/filter/*"
                     element={
@@ -34,6 +37,10 @@ function App() {
                             main={<FilterAnime></FilterAnime>}
                         ></DefaultLayout>
                     }
+                ></Route>
+                <Route
+                    path="/watch/*"
+                    element={<DefaultLayout offSelectCol={'off'} main={<AnimeWatch></AnimeWatch>}></DefaultLayout>}
                 ></Route>
             </Routes>
         </div>

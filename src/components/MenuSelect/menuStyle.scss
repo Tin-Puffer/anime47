@@ -7,8 +7,8 @@
     margin: auto;
     min-height: 500px;
     @media screen and (max-width: 993px) {
-            width: 100%;
-        }
+        width: 100%;
+    }
 }
 .star-icon {
     background: url('https://anime47.com/skin/24032017/img/image.png?v=1.2') no-repeat 0px -80px;
@@ -93,6 +93,7 @@
     margin-left: auto;
     margin-right: auto;
     margin-top: 5px;
+    padding: 3px;
 }
 .list-play {
     min-height: 500px;
@@ -111,7 +112,7 @@
                 top: 5px;
                 height: 120px;
                 width: 100%;
-                background-image: url('https://jpsharing.net/wp-content/uploads/2022/08/bleach-2022.webp');
+                // background-image: url('https://jpsharing.net/wp-content/uploads/2022/08/bleach-2022.webp');
                 background-repeat: no-repeat;
                 background-size: cover;
                 position: absolute;
@@ -125,6 +126,7 @@
                 z-index: 1;
                 background-color: #811204;
                 color: white;
+                font-weight: bold;
             }
             &:hover {
                 cursor: pointer;
@@ -173,13 +175,13 @@
     }
 }
 .list-top-movie-item {
-    padding: 5px 5px;
+    padding: 5px 0;
     position: relative;
     text-align: left;
     color: white;
     font-size: 11px;
 
-    &.dark {
+    &:nth-child(2n-1) {
         background-color: #131313;
     }
     .list-top-movie-item-img {
@@ -190,9 +192,11 @@
     }
     .list-top-movie-item-name {
         display: inline-block;
-        font-size: 13px;
-
+        font-size: 12px;
+        text-transform: none !important;
         font-weight: bold;
+        max-height: 38px;
+        overflow: hidden;
     }
     .list-top-movie-item-decript {
         display: block;
@@ -209,7 +213,7 @@
     &:hover {
         cursor: pointer;
         .list-top-movie-item-name {
-            color: #dacb46 !important;
+            color: #dacb46;
         }
         .list-top-movie-item-img {
             opacity: 0.7;
@@ -218,6 +222,7 @@
 }
 .list-top-movie-item-status {
     position: absolute;
+    font-weight: bold;
     top: 10px;
     padding: 2px 4px;
     font-size: 10px;

@@ -2,19 +2,28 @@ import Slider from 'react-slick';
 
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-
+import { carouselApi } from '../../api/anime';
 import './homeStyle.scss';
 import { Content } from 'antd/lib/layout/layout';
 import { Col, Row } from 'antd';
 import { Tabs } from '../../components/MenuSelect';
-import { render } from '@testing-library/react';
-import { useEffect, useRef } from 'react';
-function CustomSlide() {
+
+import { useEffect, useRef, useState } from 'react';
+import { carouselItem } from '../../model/user';
+
+function CustomSlide({ data }: { data: carouselItem }) {
+    const Background = {
+        backgroundImage: `url(${data.img})`,
+    };
     return (
         <div className="carousel-item">
-            <div className="block-wrapper">
-                <div className="movie-title-1"> Isekai Uncle, ...</div>
-                <div className="movie-status">07/??</div>
+            <div className="block-wrapper" style={Background}>
+                <div>
+                    <div className="movie-title-1">{data.name.slice(0, 12)}...</div>
+                </div>
+                <div className="movie-status">
+                    {data.ep}/{data.fep}
+                </div>
             </div>
         </div>
     );
@@ -66,29 +75,33 @@ function SamplePrevArrow(props: any) {
     );
 }
 export function CarouselHome() {
+    // console.log('render cr');
+    const [listCarousel, setListCarousel] = useState<carouselItem[]>([]);
+    useEffect(() => {
+        (async () => {
+            await carouselApi.getAll().then((res) => {
+                setListCarousel(res.data);
+            });
+        })();
+    }, []);
     const settings = {
         className: 'center',
         infinite: true,
         centerPadding: '60px',
+
         slidesToShow: 5,
         swipeToSlide: true,
         nextArrow: <SampleNextArrow />,
         prevArrow: <SamplePrevArrow />,
         afterChange: function (index: number) {},
     };
+    // console.log(listCarousel);
     return (
-        <div>
-            <Slider {...settings}>
-                <CustomSlide></CustomSlide>
-                <CustomSlide></CustomSlide>
-                <CustomSlide></CustomSlide>
-
-                <CustomSlide></CustomSlide>
-                <CustomSlide></CustomSlide>
-                <CustomSlide></CustomSlide>
-                <CustomSlide></CustomSlide>
-            </Slider>
-        </div>
+        <Slider {...settings}>
+            {listCarousel.map((e, i) => {
+                return <CustomSlide data={e} key={i}></CustomSlide>;
+            })}
+        </Slider>
     );
 }
 export function TitleHome() {
@@ -135,7 +148,7 @@ export function Home() {
                     md={{ span: '12', offset: '0' }}
                     style={{ marginTop: '4px', marginBottom: '20px' }}
                 >
-                    <Tabs></Tabs>
+                    <Tabs tab={['x', 'hh']}></Tabs>
                 </Col>
             </Row>
             <GridFilm></GridFilm>
@@ -152,7 +165,7 @@ export function Home() {
                     md={{ span: '12', offset: '0' }}
                     style={{ marginTop: '4px', marginBottom: '20px' }}
                 >
-                    <Tabs></Tabs>
+                    <Tabs tab={['x', 'hh']}></Tabs>
                 </Col>
             </Row>
             <GridFilm></GridFilm>
@@ -169,7 +182,7 @@ export function Home() {
                     md={{ span: '12', offset: '0' }}
                     style={{ marginTop: '4px', marginBottom: '20px' }}
                 >
-                    <Tabs></Tabs>
+                    <Tabs tab={['x', 'hh']}></Tabs>
                 </Col>
             </Row>
             <GridFilm></GridFilm>

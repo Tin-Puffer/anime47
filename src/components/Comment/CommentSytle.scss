@@ -1,0 +1,117 @@
+.play_comment {
+    background-color: white;
+    min-height: 200px;
+    text-align: left;
+    margin-top: 20px;
+    .my-coment {
+        padding: 10px;
+        .form-group {
+            width: 50%;
+            padding: 0 10px;
+            display: inline-block;
+        }
+        .name,
+        .email {
+            width: 100%;
+            margin-bottom: 15px;
+            display: block;
+            height: 38px;
+            padding: 8px 12px;
+            font-size: 14px;
+            line-height: 1.428571429;
+            color: #555555;
+            background-color: #ffffff;
+            border: 1px solid #cccccc;
+            border-radius: 4px;
+            &:focus {
+                border-color: rgba(82, 168, 236, 0.8);
+                outline: none;
+                -webkit-box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%), 0 0 8px rgb(82 168 236 / 60%);
+                box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%), 0 0 8px rgb(82 168 236 / 60%);
+            }
+        }
+        .content {
+            height: 100px;
+            width: 100%;
+        }
+    }
+    .form-input {
+        margin: 10px 0;
+    }
+    .cm-now {
+        padding: 8px 12px;
+    }
+}
+
+//
+.comment-item {
+    width: 100%;
+
+    .comment-item-left {
+        float: left;
+        .cmt-user-avatar-wrap {
+            width: 40px;
+            height: 40px;
+            overflow: hidden;
+            background-image: url('https://iili.io/D318ZB.jpg');
+            background-position: center;
+            background-size: cover;
+        }
+        .cmt-btns {
+            margin: 10px 0 0;
+            .cmt-reply {
+                display: block;
+                padding: 3px 4px;
+                background: green;
+                color: #fff;
+                margin: 5px 0 0;
+
+                border-radius: 3px;
+                font-weight: 700;
+                font-size: 10px;
+                cursor: pointer;
+            }
+        }
+    }
+    .comment-item-right {
+        margin-left: 60px;
+        border: 1px solid #d8d8d8;
+        background: #fff;
+        padding: 10px;
+        .cmt-meta-data {
+            color: #ddd;
+            .cmt-username {
+                font-weight: 700;
+                color: #03f;
+                font-size: 13px;
+            }
+            .user-type-user {
+                background: 0 0;
+                border: 1px solid #209cee;
+                color: #209cee;
+                padding: 0px 3px;
+            }
+            .cmt-datetime {
+                border-style: none;
+                font-size: 11px;
+                border: none;
+                color: #999;
+                margin: 4px 0 3px;
+                padding: 4px 0 0 5px;
+            }
+        }
+        .content-cmt {
+            display: block;
+            padding: 7px 0 0;
+            word-wrap: break-word;
+            color: #333;
+            font-size: 14px;
+        }
+    }
+}
+.user-type {
+    font-size: 11px;
+    font-weight: 400;
+    margin-left: 5px;
+    border-radius: 3px;
+}

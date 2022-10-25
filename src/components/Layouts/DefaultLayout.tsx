@@ -1,11 +1,13 @@
 import { Col, Row } from 'antd';
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Footer from '../Footer/Footet';
 import Header from '../Header/Header';
 import MenuSelect from '../MenuSelect/MenuSelect';
 import { TopMember } from '../Topmember/Topmember';
+import { carouselApi } from '../../api/anime';
 import './defaultLayoutStyle.scss';
+import { menuselector } from '../../model/user';
 interface DefaultLayoutProps {
     header?: ReactNode;
     main: ReactNode;
@@ -15,7 +17,16 @@ interface DefaultLayoutProps {
 function DefaultLayout(props: DefaultLayoutProps) {
     const selcetClass = `select-col ${props.offSelectCol}`;
     let params = useParams();
+    // console.log("render")
     console.log(params['*']); // "one/two"
+    const [listView, SetListView] = useState<menuselector[]>([]);
+    useEffect(() => {
+        (async () => {
+            await carouselApi.getMostView().then((res) => {
+                SetListView(res.data);
+            });
+        })();
+    }, []);
     return (
         <div>
             <Header />
@@ -29,8 +40,12 @@ function DefaultLayout(props: DefaultLayoutProps) {
                             </Col>
 
                             <Col xs={24} sm={24} lg={8} className={selcetClass}>
-                                <MenuSelect></MenuSelect>
-                                <MenuSelect></MenuSelect>
+                                <MenuSelect
+                                    data={listView}
+                                    title="Xem nhiều nhất"
+                                    tab={['Ngày', 'Tuần', 'Tháng', 'Mùa', 'năm']}
+                                ></MenuSelect>
+                                {/* <MenuSelect></MenuSelect> */}
                                 <TopMember></TopMember>
                             </Col>
                         </Row>

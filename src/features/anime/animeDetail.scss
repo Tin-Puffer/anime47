@@ -1,0 +1,251 @@
+.anime-deital-container {
+    position: relative;
+    background: #4f4e52 url('https://anime47.com/skin/24032017/img/item_bg.gif') repeat;
+    border-bottom: 1px solid #868489;
+    color: #ddd;
+    height: auto;
+    display: block;
+    padding: 10px;
+    margin-bottom: 20px;
+    .movie-dd {
+        display: inline;
+        margin: 0px 10px -4px 2px;
+    }
+    .col-img {
+        padding-right: 10px;
+        min-height: 1px;
+    }
+    .movie-l-img {
+        position: relative;
+        .btn-block {
+            position: absolute;
+            bottom: 0px;
+            text-align: center;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 10px 0px;
+            margin: 0px;
+            list-style: none;
+            .item {
+                display: inline-block;
+                padding: 4px;
+                margin: 0px;
+            }
+        }
+    }
+    .movie-detail {
+        text-align: left;
+        position: relative;
+        padding-left: 10px;
+        padding-right: 10px;
+        .movie-meta-info {
+            border-radius: 2px;
+            padding: 5px 8px;
+            line-height: 26px;
+            border: 1px solid #121212;
+            font-size: 12px;
+            color: #bbb;
+            background: #222;
+
+            .movie-dl {
+                line-height: 26px;
+                font-size: 12px;
+                color: #bbb;
+                .movie-dt {
+                    display: inline;
+                    font-weight: bold;
+                    line-height: 1.428571429;
+                }
+                .movie-dd.imdb {
+                    color: #000;
+                    padding: 3px;
+                    font-size: 12px;
+                    font-weight: bold;
+                    background: #e3b71e;
+                    border-radius: 3px;
+                }
+            }
+        }
+        .movie-title {
+            margin: 0px 0px 10px 0px;
+            padding: 0px;
+            font-size: initial;
+            .title-1 {
+                text-transform: uppercase;
+                font: 26px 'UTMCafetaRegular';
+                color: #dacb46;
+                display: block;
+            }
+            .title-2 {
+                color: #999;
+                font-size: 12px;
+            }
+            .title-year {
+                font-size: 12px;
+                color: #999;
+            }
+        }
+    }
+}
+.btn-green {
+    color: #ffffff;
+    background-color: #5cb85c;
+    border-color: #5cb85c;
+
+    &.actives {
+        background-color: #98ce2e;
+        border-color: #98ce2e;
+    }
+    &:hover {
+        background-color: #98ce2e;
+        border-color: #98ce2e;
+    }
+}
+.btn-primary {
+    color: #ffffff;
+
+    background-color: #428bca;
+    border-color: #428bca;
+    &:hover {
+        background-color: #357ebd;
+        border-color: #3071a9;
+    }
+}
+.btn-red {
+    color: #ffffff;
+    background-color: #d9534f;
+    border-color: #d9534f;
+    &:hover {
+        background-color: #d43f3a;
+        border-color: #c9302c;
+    }
+}
+.box-rating {
+    position: relative;
+    margin-top: 10px;
+    padding: 10px;
+    background: #222;
+    border: 1px solid #121212;
+    border-radius: 2px;
+}
+.block2 {
+    margin-bottom: 10px;
+    background: #0f0f0f;
+    padding: 5px;
+    overflow: hidden;
+    font-weight: bold;
+    .server {
+        padding: 0px 15px;
+        text-align: left;
+        color: #f19e07;
+        .name {
+            font-weight: 700;
+            line-height: 28px;
+            margin-top: 8px;
+        }
+    }
+    .episodes {
+        background: rgb(247, 239, 239);
+        padding-left: 16px;
+        padding-top: 5px;
+        border-radius: 5px;
+        padding-bottom: 5px;
+        ul {
+            list-style: none;
+            overflow: hidden;
+            padding: 0;
+            margin: 0;
+            li {
+                float: left;
+                margin: 2px;
+                .new-update {
+                    display: block;
+                    background: #cec9c9;
+                    color: #906;
+                    height: 25px;
+                    line-height: 25px;
+                    padding: 0 10px;
+                    min-width: 45px;
+                    text-align: center;
+                    font-weight: 700;
+                    border-radius: 4px;
+                    &:hover {
+                        background: #e2bcbc;
+                    }
+                }
+            }
+        }
+    }
+}
+.block-movie-content {
+    width: 100%;
+    margin-top: 10px !important;
+    border: 1px solid #121212;
+    background: #222;
+    padding: 10px;
+    border-radius: 2px;
+    position: relative;
+    font-weight: bold;
+    &.blockquate {
+        margin: 0 0 20px;
+    }
+    .table-movie {
+        width: 100%;
+
+        .table-title {
+            background: -webkit-gradient(
+                linear,
+                left top,
+                left bottom,
+                color-stop(0.05, #ff7f00),
+                color-stop(1, #bf5f00)
+            );
+
+            background-color: #ff7f00;
+            border: 0px solid #000000;
+            text-align: center;
+        }
+        tr {
+            line-height: 24px;
+            text-align: left;
+            background-color: #fff;
+            td {
+                padding: 4px;
+                border: 1px solid #000000;
+            }
+            &:nth-child(2n + 3) {
+                background-color: #ffaa56;
+            }
+        }
+        tr:first-child td:first-child {
+            border-top-left-radius: 7px;
+        }
+        tr:first-child td:last-child {
+            border-top-right-radius: 7px;
+        }
+        tr:last-child td:first-child {
+            border-bottom-left-radius: 7px;
+        }
+        tr:last-child td:last-child {
+            border-bottom-right-radius: 7px;
+        }
+    }
+    p {
+        text-align: justify;
+        font-weight: lighter;
+        color: #bbb;
+        font-size: 13px;
+        font-family: arial;
+        line-height: 24px;
+    }
+    .movie-detail-h2 {
+        text-align: left;
+        font-size: 12px;
+        font-weight: bold;
+        color: #dacb46;
+        text-transform: uppercase;
+        margin-top: 5px;
+    }
+}
+
+////// coment
