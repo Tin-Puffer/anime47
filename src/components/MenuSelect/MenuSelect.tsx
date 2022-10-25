@@ -1,8 +1,7 @@
 import { Row, Col } from 'antd';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { menuselector } from '../../model/user';
-import { TopMember } from '../Topmember/Topmember';
 
 import './menuStyle.scss';
 
@@ -15,12 +14,15 @@ export function StarTiTle({ lable }: { lable: string }) {
         </div>
     );
 }
-export function Tabs({ tab }: { tab: string[] }) {
-    const [active, setActive] = useState(0);
 
+export const Tabs = React.memo(function Tabs({ tab }: { tab: string[] }) {
+    const [active, setActive] = useState<number>(0);
+    console.log('Rende tab');
     function handleClickTab(e: any) {
-        // console.log(e.target.getAttribute('data-index'));
-        setActive(e.target.getAttribute('data-index'));
+        if (Number(e.target.getAttribute('data-index')) !== active) {
+            setActive(Number(e.target.getAttribute('data-index')));
+        }
+        // Number(e.target.getAttribute('data-index')) == active ? setActive(Number(e.target.getAttribute('data-index'))): {};
     }
     return (
         <div className="tabs">
@@ -29,14 +31,14 @@ export function Tabs({ tab }: { tab: string[] }) {
                     key={i}
                     data-index={i}
                     onClick={(e) => handleClickTab(e)}
-                    className={`tab ${i == active ? 'active' : ''}`}
+                    className={`tab ${i === active ? 'active' : ''}`}
                 >
                     {value}
                 </div>
             ))}
         </div>
     );
-}
+});
 
 export function ListAnimeItem({ data }: { data: menuselector }) {
     return (
@@ -65,7 +67,7 @@ export interface MenuProps {
     title: string;
     tab: string[];
 }
-export default function MenuSelect(props: MenuProps) {
+export const MenuSelect = React.memo(function MenuSelect(props: MenuProps) {
     const { data, title, tab } = props;
     const dataFirst: menuselector | undefined = data.shift();
     return (
@@ -107,4 +109,4 @@ export default function MenuSelect(props: MenuProps) {
             </div>
         </div>
     );
-}
+});

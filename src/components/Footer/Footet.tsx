@@ -1,6 +1,6 @@
 import './footerStyle.scss';
 import { Col, Row } from 'antd';
-import 'antd/dist/antd.css';
+import 'antd/dist/antd.min.css';
 import { Link } from 'react-router-dom';
 export default function Footet() {
     return (
@@ -17,7 +17,7 @@ export default function Footet() {
                         <Row>
                             <Col xs={{ span: 24 }} md={{ offset: 0, span: 10 }}>
                                 <div className="box">
-                                    <a className="logo fb"></a>
+                                    <p className="logo fb"></p>
                                     <div className="title">
                                         <p className="title-p lable">Fanpage Facebook</p>
                                         <div className="btn-link">
@@ -34,7 +34,7 @@ export default function Footet() {
                             </Col>
                             <Col xs={{ span: 24 }} md={{ offset: 0, span: 14 }}>
                                 <div className="box">
-                                    <a className="logo mail"></a>
+                                    <p className="logo mail"></p>
                                     <div className="title">
                                         <p className="title-p lable">Liên hệ quảng cáo</p>
                                         <p className="title-p">nguyenchitin2018@gmail.com</p>
