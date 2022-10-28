@@ -1,16 +1,21 @@
-
-export interface user{
-    id:string,
-    name:string
+export interface user {
+    id: string;
+    name: string;
 }
 export interface carouselItem {
-    id: number;
+    id: string;
     img: string;
     name: string;
+    description: string;
+    status: string;
     ep: string;
-    fep: string;
+    total: string;
 }
 export interface menuselector extends carouselItem {
-    view:number;
-    decriptTitle?:string;
+    view: string    ;
+}
+export interface listViewAll {
+    id: string;
+    select:string;
+    list: menuselector[];
 }

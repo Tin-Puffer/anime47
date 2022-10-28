@@ -15,12 +15,12 @@ export function StarTiTle({ lable }: { lable: string }) {
     );
 }
 
-export const Tabs = React.memo(function Tabs({ tab }: { tab: string[] }) {
+export const Tabs = React.memo(function Tabs({ tab,change=()=>{} }: { tab: string[],change?:Function }) {
     const [active, setActive] = useState<number>(0);
-    console.log('Rende tab');
     function handleClickTab(e: any) {
         if (Number(e.target.getAttribute('data-index')) !== active) {
             setActive(Number(e.target.getAttribute('data-index')));
+           change(Number(e.target.getAttribute('data-index')));
         }
         // Number(e.target.getAttribute('data-index')) == active ? setActive(Number(e.target.getAttribute('data-index'))): {};
     }
@@ -45,7 +45,7 @@ export function ListAnimeItem({ data }: { data: menuselector }) {
         <div className="list-top-movie-item ">
             <Row>
                 <span className="list-top-movie-item-status">
-                    {data.ep}/{data.fep}
+                    {data.ep}/{data.total}
                 </span>
                 <Col span={4}>
                     <Link to={'/'}>
@@ -63,18 +63,20 @@ export function ListAnimeItem({ data }: { data: menuselector }) {
     );
 }
 export interface MenuProps {
+    change: Function;
     data: menuselector[];
     title: string;
     tab: string[];
 }
 export const MenuSelect = React.memo(function MenuSelect(props: MenuProps) {
-    const { data, title, tab } = props;
+    const { data, title, tab,change } = props;
+    console.log("render menu")
     const dataFirst: menuselector | undefined = data.shift();
     return (
         <div className="menu-container">
             <div className="menu-content">
                 <StarTiTle lable={title}></StarTiTle>
-                <Tabs tab={tab}></Tabs>
+                <Tabs tab={tab} change={change}></Tabs>
                 <div className="list-play">
                     <div className="playlist-content">
                         <div className="list-top-movies">
@@ -86,7 +88,7 @@ export const MenuSelect = React.memo(function MenuSelect(props: MenuProps) {
                                             style={{ backgroundImage: `url(${dataFirst.img})` }}
                                         ></div>
                                         <span className="list-top-movie-status">
-                                            {dataFirst.ep}/{dataFirst.fep}
+                                            {dataFirst.ep}/{dataFirst.total}
                                         </span>
                                         <div className="list-top-movie-item-info">
                                             <span className="list-top-movie-item-vn">

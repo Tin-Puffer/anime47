@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { carouselItem } from '../model/user';
 const axiosMock_10 = axios.create({
     baseURL: 'https://63566b9e9243cf412f842b92.mockapi.io',
     headers: {
@@ -11,12 +10,11 @@ export const carouselApi = {
         const URL = '/carousel';
         return axiosMock_10.get(URL);
     },
-    getMostView(): Promise<any> {
-        const URL = '/view';
+    getMostView(value: string): Promise<any> {
+        const URL = '/menuselcet';
         return axiosMock_10.get(URL, {
             params: {
-                sortBy: 'view',
-                order: 'desc',
+                id: value,
             },
         });
     },

@@ -22,7 +22,7 @@ function CustomSlide({ data }: { data: carouselItem }) {
                     <div className="movie-title-1">{data.name.slice(0, 12)}...</div>
                 </div>
                 <div className="movie-status">
-                    {data.ep}/{data.fep}
+                    {data.ep}/{data.total}
                 </div>
             </div>
         </div>

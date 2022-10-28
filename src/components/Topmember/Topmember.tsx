@@ -1,38 +1,43 @@
 import { StarTiTle } from '../MenuSelect';
 
 import './topMember.scss';
-export function TopMemberItem() {
+export function TopMemberItem({ value, rank }: { value: topMember; rank: number }) {
     return (
         <div className="top-member-item">
-            <span className="txt-rank">01</span>
+            <span className="txt-rank">{rank}</span>
             <div className="t-item">
-                <img
-                    src="https://media.tenor.com/9dSDFGuqO00AAAAd/dddd.gif"
-                    style={{ width: '50px', height: '50px' }}
-                    className="avatar"
-                />
+                <img src={value.img} style={{ width: '50px', height: '50px' }} className="avatar" />
                 <div className="member-decript">
-                    <h3 className="title">hoangtuqlns</h3>
+                    <h3 className="title">{value.name}</h3>
                     <span className="member-lv">
                         cấp
-                        <img src="https://anime47.com/skin/24032017/img/gb_rank/02.png" alt="" />
+                        <img src={value.lever} alt="" />
                     </span>
                 </div>
             </div>
         </div>
     );
 }
-export function TopMember() {
+ export interface topMember {
+    id: string;
+    name: string;
+    img: string;
+    lever: string;
+}
+interface PropMember {
+    title: string;
+    list: topMember[];
+}
+export function TopMember(props: PropMember) {
+    const { title, list } = props;
     return (
         <div className="top-member-container">
-            <StarTiTle lable="??"></StarTiTle>
+            <StarTiTle lable={title}></StarTiTle>
             <div className="top-member-content">
                 <div className="top-member-list">
-                    <TopMemberItem></TopMemberItem>
-                    <TopMemberItem></TopMemberItem>
-                    <TopMemberItem></TopMemberItem>
-                    <TopMemberItem></TopMemberItem>
-                    <TopMemberItem></TopMemberItem>
+                    {list.map((value, i) => (
+                        <TopMemberItem key={i} value={value} rank={i + 1}></TopMemberItem>
+                    ))}
                 </div>
             </div>
         </div>

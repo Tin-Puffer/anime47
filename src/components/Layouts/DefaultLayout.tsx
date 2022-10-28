@@ -1,13 +1,13 @@
 import { Col, Row } from 'antd';
-import  { ReactNode, useEffect, useMemo, useState } from 'react';
+import { ReactNode, useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Footer from '../Footer/Footet';
 import Header from '../Header/Header';
-import {MenuSelect} from '../MenuSelect';
-import { TopMember } from '../Topmember/Topmember';
+import { MenuSelect } from '../MenuSelect';
+import { topMember, TopMember } from '../Topmember/Topmember';
 import { carouselApi } from '../../api/anime';
 import './defaultLayoutStyle.scss';
-import { menuselector } from '../../model/user';
+import { listViewAll, menuselector } from '../../model/user';
 interface DefaultLayoutProps {
     header?: ReactNode;
     main: ReactNode;
@@ -16,21 +16,51 @@ interface DefaultLayoutProps {
 }
 function DefaultLayout(props: DefaultLayoutProps) {
     const selcetClass = `select-col ${props.offSelectCol}`;
-    const tabLable= useMemo<string[]>(()=>{
-        return ["Ngày","Tuần","Tháng","Mùa","Năm"]
-    },[])
+    const tabLableView = useMemo<string[]>(() => {
+        return ['Ngày', 'Tuần', 'Tháng', 'Mùa', 'Năm'];
+    }, []);
+    const tabLableComent = useMemo<string[]>(() => {
+        return ['Mùa này', 'Mùa Trước', 'Năm', 'ALL'];
+    }, []);
     let params = useParams();
-    console.log("render default")
+    console.log('render default');
 
-    console.log(params['*']); // "one/two"
+    // console.log(params['*']); // "one/two"
+
     const [listView, SetListView] = useState<menuselector[]>([]);
+    const [listComent, SetListComent] = useState<menuselector[]>([]);
+    const [topList, SetTopList] = useState<topMember[]>([]);
+
+    const [listViewAll, SetListViewAll] = useState<listViewAll[]>();
+    const [listComentAll, SetListComentAll] = useState<listViewAll[]>();
+
+    const [loadView, setLoadView] = useState(0);
+    const [loadComent, setLoadComent] = useState(0);
+
     useEffect(() => {
         (async () => {
-            await carouselApi.getMostView().then((res) => {
-                SetListView(res.data);
+            await carouselApi.getMostView('01').then((res) => {
+                SetListViewAll(res.data[0].data);
+            });
+        })();
+        (async () => {
+            await carouselApi.getMostView('02').then((res) => {
+                SetListComentAll(res.data[0].data);
+            });
+        })();
+        (async () => {
+            await carouselApi.getMostView('03').then((res) => {
+                SetTopList(res.data[0].data);
             });
         })();
     }, []);
+    useEffect(() => {
+        SetListView(listViewAll ? [...listViewAll[loadView].list] : []);
+    }, [listViewAll, loadView]);
+    useEffect(() => {
+        SetListComent(listComentAll ? [...listComentAll[loadComent].list] : []);
+    }, [listViewAll, loadComent]);
+
     return (
         <div>
             <Header />
@@ -44,17 +74,26 @@ function DefaultLayout(props: DefaultLayoutProps) {
                             </Col>
 
                             <Col xs={24} sm={24} lg={8} className={selcetClass}>
-                                <MenuSelect data={listView} title="Xem nhiều nhất" tab={tabLable}></MenuSelect>
-                                {/* <MenuSelect></MenuSelect> */}
-                                <TopMember></TopMember>
+                                <MenuSelect
+                                    data={listView}
+                                    title="Xem nhiều nhất"
+                                    tab={tabLableView}
+                                    change={setLoadView}
+                                ></MenuSelect>
+                                <MenuSelect
+                                    data={listComent}
+                                    title="Bình luận nhiều "
+                                    tab={tabLableComent}
+                                    change={setLoadComent}
+                                ></MenuSelect>
+                                <TopMember list={topList} title="Top thành viên"></TopMember>
                             </Col>
                         </Row>
                     </div>
                 </div>
             </div>
-           
+
             <Footer></Footer>
-            
         </div>
     );
 }
