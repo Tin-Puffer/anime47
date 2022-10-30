@@ -12,10 +12,10 @@ const options = [
 export function PaginationCustom() {
     const [current, setCurrent] = useState(3);
 
-    const onChange = (page:number) => {
+    const onChange = (page: number) => {
         console.log(page);
         setCurrent(page);
-    }
+    };
     return (
         <Pagination
             pageSize={1}
