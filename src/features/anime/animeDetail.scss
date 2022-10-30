@@ -191,7 +191,13 @@
     }
     .table-movie {
         width: 100%;
-
+        .table-movie-body{
+            font-weight: 600;
+            .list-table-link{
+                cursor: pointer;
+            }
+            
+        }
         .table-title {
             background: -webkit-gradient(
                 linear,

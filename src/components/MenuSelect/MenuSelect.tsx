@@ -1,6 +1,6 @@
 import { Row, Col } from 'antd';
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { menuselector } from '../../model/user';
 
 import './menuStyle.scss';
@@ -15,12 +15,12 @@ export function StarTiTle({ lable }: { lable: string }) {
     );
 }
 
-export const Tabs = React.memo(function Tabs({ tab,change=()=>{} }: { tab: string[],change?:Function }) {
+export const Tabs = React.memo(function Tabs({ tab, change = () => {} }: { tab: string[]; change?: Function }) {
     const [active, setActive] = useState<number>(0);
     function handleClickTab(e: any) {
         if (Number(e.target.getAttribute('data-index')) !== active) {
             setActive(Number(e.target.getAttribute('data-index')));
-           change(Number(e.target.getAttribute('data-index')));
+            change(Number(e.target.getAttribute('data-index')));
         }
         // Number(e.target.getAttribute('data-index')) == active ? setActive(Number(e.target.getAttribute('data-index'))): {};
     }
@@ -41,8 +41,14 @@ export const Tabs = React.memo(function Tabs({ tab,change=()=>{} }: { tab: strin
 });
 
 export function ListAnimeItem({ data }: { data: menuselector }) {
+    const nav = useNavigate();
     return (
-        <div className="list-top-movie-item ">
+        <div
+            className="list-top-movie-item"
+            onClick={() => {
+                nav('/anime/' + data.id);
+            }}
+        >
             <Row>
                 <span className="list-top-movie-item-status">
                     {data.ep}/{data.total}
@@ -54,7 +60,7 @@ export function ListAnimeItem({ data }: { data: menuselector }) {
                 </Col>
                 <Col span={19} style={{ marginLeft: '8px' }}>
                     <span className="list-top-movie-item-name">{data.name}</span>
-                    <span className="list-top-movie-item-decript"> Management of ...</span>
+                    <span className="list-top-movie-item-decript"> {data.description.slice(0, 24)}..</span>
                     <span className="list-top-movie-item-view"> {data.view} Lượt xem</span>
                 </Col>
             </Row>
@@ -69,9 +75,13 @@ export interface MenuProps {
     tab: string[];
 }
 export const MenuSelect = React.memo(function MenuSelect(props: MenuProps) {
-    const { data, title, tab,change } = props;
-    console.log("render menu")
-    const dataFirst: menuselector | undefined = data.shift();
+    const nav = useNavigate();
+    const { data, title, tab, change } = props;
+    const [dataFirst2, setDataFirst] = useState<menuselector[]>();
+    useEffect(() => {
+        setDataFirst([...data.slice(1, 8)]);
+        // console.log(dataFirst2);
+    }, [data]);
     return (
         <div className="menu-container">
             <div className="menu-content">
@@ -81,21 +91,26 @@ export const MenuSelect = React.memo(function MenuSelect(props: MenuProps) {
                     <div className="playlist-content">
                         <div className="list-top-movies">
                             <div className="movie-lable">
-                                {dataFirst ? (
-                                    <div>
+                                {data[0] ? (
+                                    <div
+                                        onClick={() => {
+                                            nav('/anime/' + data[0].id);
+                                        }}
+                                    >
                                         <div
                                             className="backgound"
-                                            style={{ backgroundImage: `url(${dataFirst.img})` }}
+                                            style={{ backgroundImage: `url(${data[0].img})` }}
                                         ></div>
                                         <span className="list-top-movie-status">
-                                            {dataFirst.ep}/{dataFirst.total}
+                                            {data[0].ep}/{data[0].total}
                                         </span>
                                         <div className="list-top-movie-item-info">
-                                            <span className="list-top-movie-item-vn">
-                                                {dataFirst.name.slice(0, 24)}
+                                            <span className="list-top-movie-item-vn">{data[0].name.slice(0, 24)}</span>
+                                            <span className="list-top-movie-item-en">
+                                                {' '}
+                                                {data[0].description.slice(0, 18)}...
                                             </span>
-                                            <span className="list-top-movie-item-en"> Bleach: Huyết ...</span>
-                                            <span className="list-top-movie-item-view">{dataFirst.view} Lượt xem</span>
+                                            <span className="list-top-movie-item-view">{data[0].view} Lượt xem</span>
                                         </div>
                                     </div>
                                 ) : (
@@ -103,7 +118,7 @@ export const MenuSelect = React.memo(function MenuSelect(props: MenuProps) {
                                 )}
                             </div>
                         </div>
-                        {data.map((value, i) => (
+                        {dataFirst2?.map((value, i) => (
                             <ListAnimeItem key={i} data={value}></ListAnimeItem>
                         ))}
                     </div>

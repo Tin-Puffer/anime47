@@ -139,7 +139,7 @@ export function FilterAnime() {
             <h1 className="header-list-index">
                 <span className="title-list-index">THỂ LOẠI PHIM : Lịch Sử - Anime Vietsub Online</span>
             </h1>
-            <GridFilm></GridFilm>;
+            {/* <GridFilm></GridFilm>; */}
             <div className="paginationCustomFilter" style={{ margin: '20px 0' }}>
                 <PaginationCustom></PaginationCustom>
             </div>

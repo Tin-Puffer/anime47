@@ -8,6 +8,45 @@ import { topMember, TopMember } from '../Topmember/Topmember';
 import { carouselApi } from '../../api/anime';
 import './defaultLayoutStyle.scss';
 import { listViewAll, menuselector } from '../../model/user';
+
+ function XXX() {
+    const [coords, setCoords] = useState({ x: 0, y: 0 });
+    const [hide, setHide] = useState(false);
+
+    const handleMouseMove = (event:any) => {
+        setCoords({
+            x: event.clientX ,
+            y: event.clientY ,
+        });
+    };
+    return (
+        <div>
+            <div
+            
+                onMouseMove={handleMouseMove}
+                onMouseOver={() => setHide(true)}
+                onMouseOut={() => setHide(false)}
+                style={{ padding: '3rem', backgroundColor: 'lightgray',position:'relative' }}
+            >
+                Coords: {coords.x} {coords.y}
+                {hide && (
+                    <div
+                        style={{
+                            width: '100px',
+                            height: '100px',
+                            backgroundColor: 'black',
+                            position: 'absolute',
+                            left: coords.x,
+                            top: coords.y,
+                        }}
+                    ></div>
+                )}
+            </div>
+
+            <hr />
+        </div>
+    );
+}
 interface DefaultLayoutProps {
     header?: ReactNode;
     main: ReactNode;
@@ -23,7 +62,6 @@ function DefaultLayout(props: DefaultLayoutProps) {
         return ['Mùa này', 'Mùa Trước', 'Năm', 'ALL'];
     }, []);
     let params = useParams();
-    console.log('render default');
 
     // console.log(params['*']); // "one/two"
 
@@ -55,14 +93,15 @@ function DefaultLayout(props: DefaultLayoutProps) {
         })();
     }, []);
     useEffect(() => {
+        SetListComent(listComentAll ? [...listComentAll[loadComent].list] : []);
+    }, [listComentAll, loadComent]);
+    useEffect(() => {
         SetListView(listViewAll ? [...listViewAll[loadView].list] : []);
     }, [listViewAll, loadView]);
-    useEffect(() => {
-        SetListComent(listComentAll ? [...listComentAll[loadComent].list] : []);
-    }, [listViewAll, loadComent]);
 
     return (
         <div>
+            {/* <XXX></XXX> */}
             <Header />
             <div>
                 <div className="container-df">
@@ -92,7 +131,6 @@ function DefaultLayout(props: DefaultLayoutProps) {
                     </div>
                 </div>
             </div>
-
             <Footer></Footer>
         </div>
     );
