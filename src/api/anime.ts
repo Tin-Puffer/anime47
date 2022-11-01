@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { deltailAnimme } from '../model/user';
+import { deltailAnimme, ParamFilter } from '../model/user';
 const axiosMock_10 = axios.create({
     baseURL: 'https://63566b9e9243cf412f842b92.mockapi.io',
     headers: {
@@ -52,4 +52,8 @@ export const carouselApi = {
             },
         });
     },
+    getListFilter(): Promise<any> {
+        const URL = '/amime47detail';
+         return axiosMock_10.get(URL);
+    }
 };

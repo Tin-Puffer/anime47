@@ -64,8 +64,8 @@ $tablet-breakpoint: 1024px;
         display: inline-block;
         float: left;
         &:hover {
-    background: transparent url(https://anime47.com/skin/24032017/img/image.png?v=1.2) no-repeat 0 -41px;
-    }
+            background: transparent url(https://anime47.com/skin/24032017/img/image.png?v=1.2) no-repeat 0 -41px;
+        }
     }
     .button-login {
         background: transparent url(https://anime47.com/skin/24032017/img/image.png?v=1.2) no-repeat -79px 0;
@@ -136,9 +136,12 @@ $tablet-breakpoint: 1024px;
     .m2 {
         font-size: 13px;
         width: 160px;
-        padding: 7px 10px;
+        padding: 12px 10px;
         &:hover {
             background-color: #4e4b4b33;
+        }
+        &.disible {
+            color: #969696;
         }
     }
     &.type {

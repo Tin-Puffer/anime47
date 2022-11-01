@@ -2,7 +2,7 @@ import { Col, Row } from 'antd';
 import './animeDetail.scss';
 
 import { Comment } from '../../components/Comment';
-import { useNavigate, useParams } from 'react-router-dom';
+import { createSearchParams, useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 import { deltailAnimme } from '../../model/user';
 import { carouselApi } from '../../api/anime';
@@ -13,12 +13,12 @@ export function AnimeDetail() {
     const ref = useRef<null | HTMLDivElement>(null);
     const refTrailer = useRef<null | HTMLDivElement>(null);
 
-    const nav = useNavigate();
+    const navigate = useNavigate();
     // console.log(id);
     const [detail, setDetail] = useState<deltailAnimme>();
     const handelChange = (item: string) => {
-        ref.current?.scrollIntoView({ behavior: 'smooth' }); 
-        item !== id && nav('/anime/' + item);
+        ref.current?.scrollIntoView({ behavior: 'smooth' });
+        item !== id && navigate('/anime/' + item);
         // scroller.scrollTo();
     };
     // scroller.scrollTo('scroll-container-second-element', {
@@ -33,7 +33,7 @@ export function AnimeDetail() {
                 setDetail(res.data[0]);
             });
         })();
-        ref.current?.scrollIntoView({ behavior: 'smooth' }); 
+        ref.current?.scrollIntoView({ behavior: 'smooth' });
     }, [id]);
     return (
         <div className="anime-deital-container" ref={ref}>
@@ -55,7 +55,9 @@ export function AnimeDetail() {
                                     <a
                                         id="btn-film-trailer"
                                         className="btn btn-primary btn-film-trailer"
-                                        onClick={() => {refTrailer.current?.scrollIntoView({ behavior: 'smooth' })}}
+                                        onClick={() => {
+                                            refTrailer.current?.scrollIntoView({ behavior: 'smooth' });
+                                        }}
                                     >
                                         Trailer
                                     </a>
@@ -89,7 +91,17 @@ export function AnimeDetail() {
                             <dt className="movie-dt">Thể loại: </dt>
                             <dd className="movie-dd dd-cat">
                                 {detail?.grenre.map((item, i) => (
-                                    <a key={i} href="#">
+                                    <a
+                                        key={i}
+                                        onClick={() => {
+                                            navigate({
+                                                pathname: '/filter',
+                                                search: createSearchParams({
+                                                    grenre: item,
+                                                }).toString(),
+                                            });
+                                        }}
+                                    >
                                         {item},{' '}
                                     </a>
                                 ))}
@@ -97,12 +109,33 @@ export function AnimeDetail() {
                             <br />
                             <dt className="movie-dt">Dạng Anime: </dt>
                             <dd className="movie-dd">
-                                <a href="danh-sach/tv-series/1.html">{detail?.type}</a>
+                                <a
+                                    onClick={() => {
+                                        navigate({
+                                            pathname: '/filter',
+                                            search: createSearchParams({
+                                                type: `${detail?.type}`,
+                                            }).toString(),
+                                        });
+                                    }}
+                                >
+                                    {detail?.type}
+                                </a>
                             </dd>
                             <br />
                             <dt className="movie-dt">Season: </dt>
                             <dd className="movie-dd">
-                                <a href="#">
+                                <a
+                                    onClick={() => {
+                                        navigate({
+                                            pathname: '/filter',
+                                            search: createSearchParams({
+                                                season: `${detail?.season}`,
+                                                year: `${detail?.year}`,
+                                            }).toString(),
+                                        });
+                                    }}
+                                >
                                     {detail?.season}
                                     {' Năm '}
                                     {detail?.year}
@@ -111,7 +144,19 @@ export function AnimeDetail() {
                             <br />
                             <dt className="movie-dt">Năm: </dt>
                             <dd className="movie-dd">
-                                <a href="#">{detail?.year}</a>
+                                <a
+                                    onClick={() => {
+                                        navigate({
+                                            pathname: '/filter',
+                                            search: createSearchParams({
+                                            
+                                                year: `${detail?.year}`,
+                                            }).toString(),
+                                        });
+                                    }}
+                                >
+                                    {detail?.year}
+                                </a>
                             </dd>
                             <br />
                             <dt className="movie-dt">Lượt Xem: </dt>

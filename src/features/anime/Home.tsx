@@ -9,7 +9,7 @@ import { Col, Row } from 'antd';
 import { Tabs } from '../../components/MenuSelect';
 
 import { useEffect, useMemo, useState } from 'react';
-import { carouselItem, viewUpdate } from '../../model/user';
+import { carouselItem, deltailAnimme, viewUpdate } from '../../model/user';
 import { useNavigate } from 'react-router-dom';
 
 function CustomSlide({ data }: { data: carouselItem }) {
@@ -18,7 +18,12 @@ function CustomSlide({ data }: { data: carouselItem }) {
         backgroundImage: `url(${data.img})`,
     };
     return (
-        <div className="carousel-item" onClick={()=> {nav(`/anime/${data.id}`)}}>
+        <div
+            className="carousel-item"
+            onClick={() => {
+                nav(`/anime/${data.id}`);
+            }}
+        >
             <div className="block-wrapper" style={Background}>
                 <div>
                     <div className="movie-title-1">{data.name.slice(0, 12)}...</div>
@@ -77,7 +82,6 @@ function SamplePrevArrow(props: any) {
     );
 }
 export function CarouselHome() {
-    
     const [listCarousel, setListCarousel] = useState<carouselItem[]>([]);
     useEffect(() => {
         (async () => {
@@ -95,6 +99,39 @@ export function CarouselHome() {
         swipeToSlide: true,
         nextArrow: <SampleNextArrow />,
         prevArrow: <SamplePrevArrow />,
+        responsive: [
+            {
+                breakpoint: 970,
+                settings: {
+                    slidesToShow: 4,
+                    slidesToScroll: 4,
+                    infinite: true,
+                    dots: true,
+                },
+            },
+            {
+                breakpoint: 782,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                    initialSlide: 2,
+                },
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2,
+                },
+            },
+            {
+                breakpoint: 380,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                },
+            },
+        ],
         afterChange: function (index: number) {},
     };
     // console.log(listCarousel);
@@ -110,15 +147,15 @@ export function TitleHome({ title }: { title: string }) {
     return <h3 className="title-home">{title}</h3>;
 }
 export function GridFilmItem({ item }: { item: viewUpdate }) {
-    const nav= useNavigate()
+    const nav = useNavigate();
     const [coords, setCoords] = useState({ x: 0, y: 0 });
     const [isHide, setIsHide] = useState(false);
 
     const handleMouseMove = (event: any) => {
         // console.log(event);
         setCoords({
-            x: event.clientX +15 ,
-            y: event.clientY +15,
+            x: event.clientX + 15,
+            y: event.clientY + 15,
         });
     };
     return (
@@ -161,11 +198,11 @@ export function GridFilmItem({ item }: { item: viewUpdate }) {
         </div>
     );
 }
-export function GridFilm({ list }: { list: viewUpdate[] }) {
+export function GridFilm({ list }: { list: viewUpdate[] | deltailAnimme[] |undefined }) {
     return (
         <div>
             <Row gutter={[8, 8]}>
-                {list.map((e, i) => (
+                {list?.map((e, i) => (
                     <Col key={i} xs={8} md={6} className="col-grid-film">
                         <GridFilmItem item={e}></GridFilmItem>
                         {/* <div className="ss">

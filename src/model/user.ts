@@ -51,3 +51,11 @@ export interface deltailAnimme {
     trailer: string;
     chain: chain[];
 }
+export interface ParamFilter {
+    status?: string | null;
+    grenre?: string[];
+    type?: string | null;
+    season?: string | null;
+    year?: string | null;
+    sortBy?: string | null;
+}

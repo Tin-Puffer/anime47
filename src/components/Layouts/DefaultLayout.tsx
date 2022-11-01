@@ -1,6 +1,6 @@
 import { Col, Row } from 'antd';
 import { ReactNode, useEffect, useMemo, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import Footer from '../Footer/Footet';
 import Header from '../Header/Header';
 import { MenuSelect } from '../MenuSelect';
@@ -9,44 +9,6 @@ import { carouselApi } from '../../api/anime';
 import './defaultLayoutStyle.scss';
 import { listViewAll, menuselector } from '../../model/user';
 
- function XXX() {
-    const [coords, setCoords] = useState({ x: 0, y: 0 });
-    const [hide, setHide] = useState(false);
-
-    const handleMouseMove = (event:any) => {
-        setCoords({
-            x: event.clientX ,
-            y: event.clientY ,
-        });
-    };
-    return (
-        <div>
-            <div
-            
-                onMouseMove={handleMouseMove}
-                onMouseOver={() => setHide(true)}
-                onMouseOut={() => setHide(false)}
-                style={{ padding: '3rem', backgroundColor: 'lightgray',position:'relative' }}
-            >
-                Coords: {coords.x} {coords.y}
-                {hide && (
-                    <div
-                        style={{
-                            width: '100px',
-                            height: '100px',
-                            backgroundColor: 'black',
-                            position: 'absolute',
-                            left: coords.x,
-                            top: coords.y,
-                        }}
-                    ></div>
-                )}
-            </div>
-
-            <hr />
-        </div>
-    );
-}
 interface DefaultLayoutProps {
     header?: ReactNode;
     main: ReactNode;
@@ -54,6 +16,8 @@ interface DefaultLayoutProps {
     offSelectCol?: 'off';
 }
 function DefaultLayout(props: DefaultLayoutProps) {
+    // let [searchParams, setSearchParams] = useSearchParams();
+
     const selcetClass = `select-col ${props.offSelectCol}`;
     const tabLableView = useMemo<string[]>(() => {
         return ['Ngày', 'Tuần', 'Tháng', 'Mùa', 'Năm'];

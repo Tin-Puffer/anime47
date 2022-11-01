@@ -36,7 +36,7 @@ export function Comment() {
                     <CommentItem></CommentItem>
                 </div>
                 <div className="paginationCustomFilter" >
-                    <PaginationCustom></PaginationCustom>
+                    {/* <PaginationCustom></PaginationCustom> */}
                 </div>
             </div>
         </div>
