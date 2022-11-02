@@ -58,4 +58,5 @@ export interface ParamFilter {
     season?: string | null;
     year?: string | null;
     sortBy?: string | null;
+    name?: string | null;
 }

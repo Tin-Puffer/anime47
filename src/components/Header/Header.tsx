@@ -2,20 +2,54 @@ import { Col, Row } from 'antd';
 import 'antd/dist/antd.less';
 import './headerStyle.scss';
 import { createSearchParams, Link, useNavigate, useSearchParams } from 'react-router-dom';
-import { useMemo } from 'react';
-import { error } from 'console';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import console, { error } from 'console';
+import { keyboardKey } from '@testing-library/user-event';
+import { deltailAnimme } from '../../model/user';
+import { carouselApi } from '../../api/anime';
+import { grenres } from '../../model/constans';
 export default function () {
     const navigate = useNavigate();
-    const [searchParams, setSearchParams] = useSearchParams();
+    // const [searchParams, setSearchParams] = useSearchParams();
+    const [isHide, setIsHide] = useState(false);
+    const [boxList, setBoxList] = useState<deltailAnimme[]>();
 
-    // <Col className="m2">Harem/ hài hước</Col>
-    // <Col className="m2">Đời thường/ học đường</Col>
-    // <Col className="m2">Lãng mạng/ học đường</Col>
-    // <Col className="m2">Ecchi/ harem</Col>
-    // <Col className="m2">Học đường/Ecchi</Col>
-    interface grenResType{
-        type1:string,
-        type2:string,
+    const [inputValue, setInputvalue] = useState('');
+    let boxSrarchRef = useRef<HTMLDivElement>(null);
+    const handleClick = (event: any) => {
+        const { target } = event;
+        if (!boxSrarchRef.current?.contains(target)) {
+            setIsHide(false);
+            document.removeEventListener('click', handleClick);
+        }
+    };
+    const handleSearchBox = (event: keyboardKey) => {
+        if (event.key === ' ') {
+            setIsHide(true);
+            document.addEventListener('click', handleClick);
+        } else if (event.key === 'Enter') {
+            setIsHide(false);
+            setInputvalue('');
+            document.removeEventListener('click', handleClick);
+            navigate('/filter?name=' + inputValue);
+        }
+    };
+    useEffect(() => {
+        if (inputValue === '') {
+            setIsHide(false);
+        }
+    }, [inputValue]);
+    useEffect(() => {
+        // if (isHide === true)
+        // {
+        carouselApi.getListSearch(inputValue).then((res) => {
+            setBoxList(res.data);
+        });
+        // }
+    }, [isHide]);
+    interface grenResType {
+        type1: string;
+        type2: string;
     }
     const grenRes = useMemo<grenResType[]>(() => {
         return [
@@ -42,9 +76,9 @@ export default function () {
         ];
     }, []);
     const years = useMemo<string[]>(() => {
-        return ["2015","2016","2017","2018","2019","2020","2021","2022"]
-    },[])
-
+        return ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022'];
+    }, []);
+   
     return (
         <div className="header">
             <div className="top-line"></div>
@@ -56,7 +90,48 @@ export default function () {
                 </Col>
                 <Col className="item" xs={24} md={16} lg={9}>
                     <div className="widget_search">
-                        <input type={'text'} placeholder={' Tìm: tên anime ...'}></input>
+                        <input
+                            type={'text'}
+                            value={inputValue}
+                            placeholder={' Tìm: tên anime ...'}
+                            onKeyPress={handleSearchBox}
+                            onChange={(e) => {
+                                setInputvalue(e.target.value);
+                                // console.log(inputValue)
+                            }}
+                        ></input>
+                        {isHide && (
+                            <div ref={boxSrarchRef} className="search-box">
+                                {boxList?.map((item, i) => {
+                                    return (
+                                        <div
+                                            className="view-item"
+                                            key={i}
+                                            onClick={() => {
+                                                setIsHide(false);
+                                                setInputvalue('');
+                                                navigate('/anime/' + item.id);
+                                            }}
+                                        >
+                                            <div
+                                                className="thumb"
+                                                style={{ backgroundImage: `url(${item.img})` }}
+                                            ></div>
+                                            <div className="ss-info">
+                                                <p className="ss-title">{item.name}</p>
+                                                <p>{item.description}</p>
+                                                <p>
+                                                    {item.ep}/{item.total}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    );
+                                })}
+                                <div className="ss-bottom">
+                                    <p className="more-resoult">Enter để tìm kiếm</p>
+                                </div>
+                            </div>
+                        )}
                     </div>
                 </Col>
                 <Col className="item" xs={24} md={24} lg={9}>
@@ -76,15 +151,13 @@ export default function () {
                         <Col className="item-search">
                             thể loại
                             <Row className="mega-menu-2 type">
-                                <Col className="m2" onClick={(e) => {}}>
-                                    b1
-                                </Col>
-                                <Col className="m2">b2</Col>
-                                <Col className="m2">b3</Col>
-                                <Col className="m2">b4</Col>
-                                <Col className="m2">b5</Col>
-                                <Col className="m2">b6</Col>
-                                <Col className="m2">b7</Col>
+                                {grenres.map((item, i) => {
+                                    return (
+                                        <Col onClick={() => navigate('/filter?grenre=' + item)} className="m2" key={i}>
+                                            {item}
+                                        </Col>
+                                    );
+                                })}
                             </Row>
                         </Col>
                         <Col className="item-search">
@@ -170,7 +243,9 @@ export default function () {
                                                     }).toString(),
                                                 })
                                             }
-                                        >{e.type1}/{e.type2}</Col>
+                                        >
+                                            {e.type1}/{e.type2}
+                                        </Col>
                                     );
                                 })}
                             </Row>
@@ -191,7 +266,9 @@ export default function () {
                                                     }).toString(),
                                                 })
                                             }
-                                        >{e}</Col>
+                                        >
+                                            {e}
+                                        </Col>
                                     );
                                 })}
                             </Row>

@@ -6,6 +6,7 @@ import './filterAnime.scss';
 import { createSearchParams, Navigate, useNavigate, useSearchParams } from 'react-router-dom';
 import { deltailAnimme, ParamFilter } from '../../model/user';
 import { carouselApi } from '../../api/anime';
+import { grenres } from '../../model/constans';
 
 export function PaginationCustom({
     total,
@@ -69,14 +70,14 @@ export function FilterInput() {
     const [selected, setSelected] = useState<Option[]>([]);
     const navigate = useNavigate();
     const [paramFilter, setParamFilter] = useState<ParamFilter>({});
-    const options = useMemo<any>(() => {
-        return [
-            { label: 'Fantasy', value: '1' },
-            { label: 'Mango', value: '2' },
-            { label: 'Mango', value: '4' },
-            { label: 'Mango', value: '3' },
-        ];
-    }, []);
+
+    const options: Option[] = grenres.map((e, i) => {
+        return {
+            label: e,
+            value: i,
+        };
+    });
+
     const handleFilter = () => {
         let str = '';
         paramFilter.status ? (str += '&status=' + paramFilter.status) : (str += '');
@@ -198,12 +199,18 @@ export function FilterAnime() {
     const [searchParams, setSearchParams] = useSearchParams();
     const [paramList, setParamList] = useState<ParamFilter>();
     const [page, setPage] = useState<number>(0);
-    const ref = useRef();
     const [listAll, setListAll] = useState<deltailAnimme[]>();
     const [list, setList] = useState<deltailAnimme[]>();
     useEffect(() => {
-        console.log(searchParams.get('status'));
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: 'smooth',
+        });
+    }, []);
+    useEffect(() => {
         setParamList({
+            name: searchParams.get('name'),
             status: searchParams.get('status'),
             type: searchParams.get('type'),
             grenre: searchParams.getAll('grenre'),
@@ -211,51 +218,64 @@ export function FilterAnime() {
             year: searchParams.get('year'),
             sortBy: searchParams.get('sortBy'),
         });
+        setPage(0);
     }, [searchParams]);
     useEffect(() => {
-        // console.log('param ww', paramList);
-        setList(
-            listAll
-                ?.filter((x) => {
-                    const dkstatus = () => {
-                        if (paramList?.status === null) return true;
-                        else if (x.status !== paramList?.status) return false;
-                        else return true;
-                    };
-                    const dkgrenre = () => {
-                        if (paramList?.grenre === undefined) return true;
-                        else {
-                            for (const item of paramList?.grenre) {
-                                if (!x.grenre.includes(item)) {
-                                    return false;
+        if (typeof paramList?.name === 'string') {
+            (async () => {
+                await carouselApi.getListSearch(String(paramList?.name), 1, 100).then((res) => {
+                    setList(res.data);
+                });
+            })();
+        } else {
+            setList(
+                listAll
+                    ?.filter((x) => {
+                        const dkstatus = () => {
+                            if (paramList?.status === null) return true;
+                            else if (x.status !== paramList?.status) return false;
+                            else return true;
+                        };
+                        const dkgrenre = () => {
+                            if (paramList?.grenre === undefined) return true;
+                            else {
+                                for (const item of paramList?.grenre) {
+                                    if (!x.grenre.includes(item)) {
+                                        return false;
+                                    }
                                 }
+                                return true;
                             }
-                            return true;
-                        }
-                    };
-                    const dktype = () => {
-                        if (paramList?.type === null) return true;
-                        else if (x.type !== paramList?.type) return false;
-                        else return true;
-                    };
-                    const dkyear = () => {
-                        if (paramList?.year === null) return true;
-                        else if (x.year !== paramList?.year) return false;
-                        else return true;
-                    };
-                    const dkseason = () => {
-                        if (paramList?.season === null) return true;
-                        else if (x.season !== paramList?.season) return false;
-                        else return true;
-                    };
-                    return dkgrenre() && dkyear() && dkstatus() && dkseason() && dktype();
-                })
-                ?.sort((a, b) =>
-                    paramList?.sortBy === null || paramList?.sortBy === 'view'
-                        ? b.view - a.view
-                        : Number(b.year) - Number(a.year),
-                ),
-        );
+                        };
+                        const dktype = () => {
+                            if (paramList?.type === null) return true;
+                            else if (x.type !== paramList?.type) return false;
+                            else return true;
+                        };
+                        const dkname = () => {
+                            if (paramList?.name === null) return true;
+                            else if (x.name.includes(String(paramList?.name).trim())) return true;
+                            else return false;
+                        };
+                        const dkyear = () => {
+                            if (paramList?.year === null) return true;
+                            else if (x.year !== paramList?.year) return false;
+                            else return true;
+                        };
+                        const dkseason = () => {
+                            if (paramList?.season === null) return true;
+                            else if (x.season !== paramList?.season) return false;
+                            else return true;
+                        };
+                        return dkgrenre() && dkyear() && dkstatus() && dkseason() && dktype() && dkname();
+                    })
+                    ?.sort((a, b) =>
+                        paramList?.sortBy === null || paramList?.sortBy === 'view'
+                            ? b.view - a.view
+                            : Number(b.year) - Number(a.year),
+                    ),
+            );
+        }
     }, [paramList, listAll]);
 
     useEffect(() => {
@@ -266,7 +286,7 @@ export function FilterAnime() {
         })();
     }, []);
 
-    // console.log('ren ui witd', list);
+    console.log('ren ui witd', list);
 
     return (
         <>
@@ -282,6 +302,7 @@ export function FilterAnime() {
                     {paramList?.year !== null ? ' Năm ' + paramList?.year : ''}
                     {paramList?.sortBy !== null ? ' Xắp Xếp: ' + paramList?.sortBy : ''}
                     {paramList?.type !== null ? ' Loại: ' + paramList?.type : ''}
+                    {paramList?.name !== null ? ' Search: ' + paramList?.name : ''}
                 </span>
             </h1>
             <GridFilm list={list ? list.slice(page * 24, (page + 1) * 24) : undefined}></GridFilm>;

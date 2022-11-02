@@ -54,6 +54,17 @@ export const carouselApi = {
     },
     getListFilter(): Promise<any> {
         const URL = '/amime47detail';
-         return axiosMock_10.get(URL);
-    }
+        return axiosMock_10.get(URL);
+    },
+    getListSearch(value: string,p:number=1,l:number=2): Promise<any> {
+        const URL = '/amime47detail';
+        return axiosMock_10.get(URL, {
+            params: {
+                name: value,
+                p: p,
+                l: l,
+            },
+        });
+    },
+    
 };

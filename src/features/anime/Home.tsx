@@ -10,7 +10,7 @@ import { Tabs } from '../../components/MenuSelect';
 
 import { useEffect, useMemo, useState } from 'react';
 import { carouselItem, deltailAnimme, viewUpdate } from '../../model/user';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function CustomSlide({ data }: { data: carouselItem }) {
     const nav = useNavigate();
@@ -198,7 +198,7 @@ export function GridFilmItem({ item }: { item: viewUpdate }) {
         </div>
     );
 }
-export function GridFilm({ list }: { list: viewUpdate[] | deltailAnimme[] |undefined }) {
+export function GridFilm({ list }: { list: viewUpdate[] | deltailAnimme[] | undefined }) {
     return (
         <div>
             <Row gutter={[8, 8]}>
@@ -230,6 +230,7 @@ export function GridFilm({ list }: { list: viewUpdate[] | deltailAnimme[] |undef
 }
 export function Home() {
     const [selectNewUpdate, setSelectNewUpdate] = useState(0);
+    const navigate = useNavigate();
     const [listUpdateALL, setListUpdateAll] = useState<viewUpdate[]>([]);
     const [listUpdate, setListUpdate] = useState<viewUpdate[]>([]);
     const [listGrenre, setListGrenre] = useState<viewUpdate[]>([]);
@@ -269,17 +270,15 @@ export function Home() {
                 <Col lg={{ span: '7' }} md={{ span: '5' }}>
                     <TitleHome title="Mới Cập Nhật"></TitleHome>
                 </Col>
-                <Col
-                    lg={{ span: '12', offset: '0' }}
-                    md={{ span: '12', offset: '0' }}
-                    style={{ marginTop: '4px', marginBottom: '20px' }}
-                >
+                <Col lg={{ span: '12', offset: '0' }} md={{ span: '12', offset: '0' }} style={{ marginTop: '4px' }}>
                     <Tabs change={setSelectNewUpdate} tab={tabNewUpdate}></Tabs>
                 </Col>
             </Row>
             <GridFilm list={listUpdate}></GridFilm>
             <div style={{ width: '100%', display: 'flex', justifyContent: 'end' }}>
-                <a className="xem-them">Xem thêm...</a>
+                <Link to={'/filter?&year=2022'} className="xem-them">
+                    Xem thêm...
+                </Link>
             </div>
             {/*  */}
             <Row>
@@ -289,12 +288,14 @@ export function Home() {
                 <Col
                     lg={{ span: '12', offset: '0' }}
                     md={{ span: '12', offset: '0' }}
-                    style={{ marginTop: '4px', marginBottom: '20px' }}
+                    style={{ marginTop: '4px' }}
                 ></Col>
             </Row>
             <GridFilm list={listGrenre}></GridFilm>
             <div style={{ width: '100%', display: 'flex', justifyContent: 'end' }}>
-                <a className="xem-them">Xem thêm...</a>
+                <Link to={'/filter?grenre=Xuyên Không - Chuyển Kiếp'} className="xem-them">
+                    Xem thêm...
+                </Link>
             </div>
             {/*  */}
             <Row>
@@ -304,13 +305,15 @@ export function Home() {
                 <Col
                     lg={{ span: '12', offset: '0' }}
                     md={{ span: '12', offset: '0' }}
-                    style={{ marginTop: '4px', marginBottom: '20px' }}
+                    style={{ marginTop: '4px' }}
                 ></Col>
             </Row>
             <GridFilm list={listManyView}></GridFilm>
 
             <div style={{ width: '100%', display: 'flex', justifyContent: 'end', marginBottom: '30px' }}>
-                <a className="xem-them">Xem thêm...</a>
+                <Link to={'/filter?sortBy=view&year=2022'} className="xem-them">
+                    Xem thêm...
+                </Link>
             </div>
         </div>
     );
