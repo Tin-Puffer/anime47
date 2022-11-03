@@ -4,29 +4,41 @@ import './animeDetail.scss';
 import { Comment } from '../../components/Comment';
 import { createSearchParams, useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
-import { deltailAnimme } from '../../model/user';
-import { carouselApi } from '../../api/anime';
-import { Link, animateScroll as scroll, scroller } from 'react-scroll';
+import { deltailAnimme, listSever } from '../../model/user';
+import { animeList, carouselApi } from '../../api/anime';
 
 export function AnimeDetail() {
     let { id } = useParams<string>();
     const ref = useRef<null | HTMLDivElement>(null);
     const refTrailer = useRef<null | HTMLDivElement>(null);
-
+    
     const navigate = useNavigate();
     // console.log(id);
     const [detail, setDetail] = useState<deltailAnimme>();
+    const [servetList, setServerList] = useState<listSever>();
     const handelChange = (item: string) => {
         ref.current?.scrollIntoView({ behavior: 'smooth' });
         item !== id && navigate('/anime/' + item);
         // scroller.scrollTo();
     };
-    // scroller.scrollTo('scroll-container-second-element', {
-    //     duration: 800,
-    //     delay: 0,
-    //     smooth: 'easeInOutQuart',
-    //     containerId: 'top-content',
-    // });
+    const handleClickWatchMovie = () => {
+        if (servetList !== undefined) {
+            localStorage.setItem('Link', servetList.mainSV22[0].link);
+            navigate('/watch?id=' + id + '&server=mainSV22&ep=01');
+        }
+    };
+
+    useEffect(() => {
+        (async () => {
+            await animeList.getDetailList(id || '').then((res) => {
+                if (res.data[0]) {
+                    setServerList(res.data[0]);
+                } else {
+                    setServerList(undefined);
+                }
+            });
+        })();
+    }, [detail]);
     useEffect(() => {
         (async () => {
             await carouselApi.getDetail(id || '').then((res) => {
@@ -39,7 +51,7 @@ export function AnimeDetail() {
         <div className="anime-deital-container" ref={ref}>
             <Row>
                 <Col ref={ref} id="top-content"></Col>
-                <Col xs={24} md={24} lg={12} style={{ float: 'left' }} className="col-img">
+                <Col xs={12} md={12} lg={12} style={{ float: 'left' }} className="col-img">
                     <div className="movie-l-img">
                         <img alt={detail?.name} src={detail?.img} style={{ width: '100%', height: '100' }} />
 
@@ -64,14 +76,20 @@ export function AnimeDetail() {
                                 </li>
                             )}
                             <li className="item">
-                                <a id="btn-film-watch" className="btn btn-red">
-                                    Xem Anime
-                                </a>
+                                {servetList ? (
+                                    <a className="btn btn-red" onClick={handleClickWatchMovie}>
+                                        Xem Anime
+                                    </a>
+                                ) : (
+                                    <a className="btn btn-disible" onClick={handleClickWatchMovie}>
+                                        Xem Anime
+                                    </a>
+                                )}
                             </li>
                         </ul>
                     </div>
                 </Col>
-                <Col className="movie-detail" xs={24} md={24} lg={12}>
+                <Col className="movie-detail" xs={12} md={12} lg={12}>
                     <h1 className="movie-title">
                         <span className="title-1" itemProp="name">
                             {detail?.name}
@@ -149,7 +167,6 @@ export function AnimeDetail() {
                                         navigate({
                                             pathname: '/filter',
                                             search: createSearchParams({
-                                            
                                                 year: `${detail?.year}`,
                                             }).toString(),
                                         });
@@ -168,56 +185,74 @@ export function AnimeDetail() {
                         <b>
                             Mới cập nhật:
                             <div className="block2 servers">
-                                <div className="server" data-type="watch">
-                                    <div className="name">
-                                        <img src="https://iili.io/DCJ2EP.jpg" style={{ marginTop: '-7px' }} />{' '}
-                                        <span>YureiFansub</span>{' '}
-                                    </div>
-                                    <div className="episodes">
-                                        <ul>
-                                            <li>
-                                                <a className="new-update" href="#" title="15">
-                                                    15
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a className="new-update" href="#" title="14">
-                                                    14
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a className="new-update" href="#" title="13">
-                                                    13
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div className="server" data-type="watch">
-                                    <div className="name">
-                                        <img src="https://iili.io/DCJ2EP.jpg" style={{ marginTop: '-7px' }} />{' '}
-                                        <span>YureiFansub</span>{' '}
-                                    </div>
-                                    <div className="episodes">
-                                        <ul>
-                                            <li>
-                                                <a className="new-update" href="#" title="15">
-                                                    15
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a className="new-update" href="#" title="14">
-                                                    14
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a className="new-update" href="#" title="13">
-                                                    13
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
+                                {servetList ? (
+                                    <>
+                                        <div className="server" data-type="watch">
+                                            <div className="name">
+                                                <img src="https://iili.io/DCJ2EP.jpg" style={{ marginTop: '-7px' }} />{' '}
+                                                <span>mainSV22</span>{' '}
+                                            </div>
+                                            <div className="episodes">
+                                                <ul>
+                                                    {servetList?.mainSV22
+                                                        ?.slice(-3)
+                                                        .reverse()
+                                                        .map((e, i) => (
+                                                            <li
+                                                                key={i}
+                                                                onClick={() => {
+                                                                    localStorage.setItem('Link', e.link);
+                                                                    navigate(
+                                                                        '/watch?id=' +
+                                                                            id +
+                                                                            '&server=mainSV22&ep=' +
+                                                                            e.ep,
+                                                                    );
+                                                                }}
+                                                            >
+                                                                <a className="new-update" title="15">
+                                                                    {e.ep}
+                                                                </a>
+                                                            </li>
+                                                        ))}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div className="server" data-type="watch">
+                                            <div className="name">
+                                                <img src="https://iili.io/DCJ2EP.jpg" style={{ marginTop: '-7px' }} />{' '}
+                                                <span>BackUpSV23</span>{' '}
+                                            </div>
+                                            <div className="episodes">
+                                                <ul>
+                                                    {servetList?.BackUpSV23?.slice(-3)
+                                                        .reverse()
+                                                        .map((e, i) => (
+                                                            <li
+                                                                key={i}
+                                                                onClick={() => {
+                                                                    localStorage.setItem('Link', e.link);
+
+                                                                    navigate(
+                                                                        '/watch?id=' +
+                                                                            id +
+                                                                            '&server=BackUpSV23&ep=' +
+                                                                            e.ep,
+                                                                    );
+                                                                }}
+                                                            >
+                                                                <a className="new-update" title="15">
+                                                                    {e.ep}
+                                                                </a>
+                                                            </li>
+                                                        ))}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </>
+                                ) : (
+                                    <h1 style={{ margin: 0, textAlign: 'center', color: 'gray' }}>NO SERVER</h1>
+                                )}
                             </div>
                         </b>
                     </div>

@@ -31,7 +31,7 @@ export default function () {
             setIsHide(false);
             setInputvalue('');
             document.removeEventListener('click', handleClick);
-            navigate('/filter?name=' + inputValue);
+            navigate('/filter?name=' + inputValue.trim());
         }
     };
     useEffect(() => {
@@ -78,7 +78,7 @@ export default function () {
     const years = useMemo<string[]>(() => {
         return ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022'];
     }, []);
-   
+
     return (
         <div className="header">
             <div className="top-line"></div>

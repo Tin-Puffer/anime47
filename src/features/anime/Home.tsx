@@ -6,6 +6,7 @@ import { carouselApi } from '../../api/anime';
 import './homeStyle.scss';
 import { Content } from 'antd/lib/layout/layout';
 import { Col, Row } from 'antd';
+import Skeleton from '../../components/Skeleton/Skeleton';
 import { Tabs } from '../../components/MenuSelect';
 
 import { useEffect, useMemo, useState } from 'react';
@@ -18,20 +19,33 @@ function CustomSlide({ data }: { data: carouselItem }) {
         backgroundImage: `url(${data.img})`,
     };
     return (
-        <div
-            className="carousel-item"
-            onClick={() => {
-                nav(`/anime/${data.id}`);
-            }}
-        >
-            <div className="block-wrapper" style={Background}>
-                <div>
-                    <div className="movie-title-1">{data.name.slice(0, 12)}...</div>
+        <div className="">
+            {!data ? (
+                <div className="carousel-item">
+                    <Skeleton
+                        props={{
+                            width: '100%',
+                            height: '250px',
+                        }}
+                    ></Skeleton>
                 </div>
-                <div className="movie-status">
-                    {data.ep}/{data.total}
+            ) : (
+                <div
+                    className="carousel-item"
+                    onClick={() => {
+                        nav(`/anime/${data.id}`);
+                    }}
+                >
+                    <div className="block-wrapper" style={Background}>
+                        <div>
+                            <div className="movie-title-1">{data.name.slice(0, 12)}...</div>
+                        </div>
+                        <div className="movie-status">
+                            {data.ep}/{data.total}
+                        </div>
+                    </div>
                 </div>
-            </div>
+            )}
         </div>
     );
 }
@@ -176,6 +190,8 @@ export function GridFilmItem({ item }: { item: viewUpdate }) {
 
                                 maxWidth: '400px',
                                 backgroundColor: ' #090909c4',
+                                border: ' 1px solid black',
+                                textAlign: 'left',
                                 position: 'fixed',
                                 zIndex: 2,
                                 left: coords.x,
@@ -270,7 +286,11 @@ export function Home() {
                 <Col lg={{ span: '7' }} md={{ span: '5' }}>
                     <TitleHome title="Mới Cập Nhật"></TitleHome>
                 </Col>
-                <Col lg={{ span: '12', offset: '0' }} md={{ span: '12', offset: '0' }} style={{ marginTop: '4px' }}>
+                <Col
+                    lg={{ span: '12', offset: '0' }}
+                    md={{ span: '12', offset: '0' }}
+                    style={{ marginTop: '4px', marginBottom: '20px' }}
+                >
                     <Tabs change={setSelectNewUpdate} tab={tabNewUpdate}></Tabs>
                 </Col>
             </Row>

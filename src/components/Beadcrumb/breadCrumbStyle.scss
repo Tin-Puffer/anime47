@@ -1,0 +1,24 @@
+.able-click {
+    color: #46e1ff !important;
+    font-size: 15px;
+    &:hover {
+        color: #dacb46 !important;
+    }
+}
+.unable-click {
+    font-size: 15px;
+
+    color: #999999;
+}
+.separator{
+    color: white;
+    display: inline-block;
+    
+}
+.container-crumb {
+    width: 100%;
+    padding: 5px 10px;
+    margin-top: 10px;
+    list-style: none;
+    background-color: #111;
+}

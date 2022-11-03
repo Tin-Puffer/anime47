@@ -120,6 +120,10 @@
         border-color: #c9302c;
     }
 }
+.btn-disible {
+    color: #ffffff;
+    background-color: #5e5e5e;
+}
 .box-rating {
     position: relative;
     margin-top: 10px;
@@ -191,12 +195,11 @@
     }
     .table-movie {
         width: 100%;
-        .table-movie-body{
+        .table-movie-body {
             font-weight: 600;
-            .list-table-link{
+            .list-table-link {
                 cursor: pointer;
             }
-            
         }
         .table-title {
             background: -webkit-gradient(

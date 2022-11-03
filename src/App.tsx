@@ -5,6 +5,7 @@ import { Login } from './features/auth/page';
 import Register from './features/auth/page/Register';
 import { FilterAnime, FilterInput, CarouselHome, Home, AnimeDetail } from './features/anime';
 import { AnimeWatch } from './features/anime/AnimeWatch';
+import { Crumb } from './components/Beadcrumb/BreadCrumb';
 
 function App() {
     return (
@@ -26,7 +27,13 @@ function App() {
                 ></Route>
                 <Route
                     path="/anime/:id"
-                    element={<DefaultLayout offSelectCol={'off'} main={<AnimeDetail></AnimeDetail>}></DefaultLayout>}
+                    element={
+                        <DefaultLayout
+                            offSelectCol={'off'}
+                            header={<Crumb></Crumb>}
+                            main={<AnimeDetail></AnimeDetail>}
+                        ></DefaultLayout>
+                    }
                 ></Route>
                 <Route
                     path="/filter/*"
@@ -40,7 +47,13 @@ function App() {
                 ></Route>
                 <Route
                     path="/watch/*"
-                    element={<DefaultLayout offSelectCol={'off'} main={<AnimeWatch></AnimeWatch>}></DefaultLayout>}
+                    element={
+                        <DefaultLayout
+                            offSelectCol={'off'}
+                            main={<AnimeWatch></AnimeWatch>}
+                            header={<Crumb></Crumb>}
+                        ></DefaultLayout>
+                    }
                 ></Route>
             </Routes>
         </div>

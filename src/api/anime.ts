@@ -6,6 +6,22 @@ const axiosMock_10 = axios.create({
         'Content-Type': 'application/json',
     },
 });
+const axiosMock_1 = axios.create({
+    baseURL: 'https://6362825e37f2167d6f66451d.mockapi.io',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+});
+export const animeList = {
+    getDetailList(id: string): Promise<any> {
+        const URL = '/list';
+        return axiosMock_1.get(URL, {
+            params: {
+                id: id,
+            },
+        });
+    },
+};
 export const carouselApi = {
     getAll(): Promise<any> {
         const URL = '/carousel';
@@ -56,7 +72,7 @@ export const carouselApi = {
         const URL = '/amime47detail';
         return axiosMock_10.get(URL);
     },
-    getListSearch(value: string,p:number=1,l:number=2): Promise<any> {
+    getListSearch(value: string, p: number = 1, l: number = 2): Promise<any> {
         const URL = '/amime47detail';
         return axiosMock_10.get(URL, {
             params: {
@@ -66,5 +82,4 @@ export const carouselApi = {
             },
         });
     },
-    
 };

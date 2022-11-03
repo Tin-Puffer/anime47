@@ -58,7 +58,7 @@ export function ListAnimeItem({ data }: { data: menuselector }) {
                         <div className="list-top-movie-item-img" style={{ backgroundImage: `url(${data.img})` }}></div>
                     </Link>
                 </Col>
-                <Col span={19} style={{ marginLeft: '8px' }}>
+                <Col span={19} style={{ marginLeft: '8px', marginBottom: '20px' }}>
                     <span className="list-top-movie-item-name">{data.name}</span>
                     <span className="list-top-movie-item-decript"> {data.description.slice(0, 24)}..</span>
                     <span className="list-top-movie-item-view"> {data.view} Lượt xem</span>

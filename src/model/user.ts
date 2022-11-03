@@ -51,6 +51,20 @@ export interface deltailAnimme {
     trailer: string;
     chain: chain[];
 }
+export  interface itemListServer{
+    ep:string;
+    link:string;
+}
+export interface listSever {
+    id: string;
+    mainSV22: itemListServer[];
+    BackUpSV23: itemListServer[];
+}
+export interface ParamWatch{
+    id:string| null;
+    server:string| null;
+    ep: string| null;
+}
 export interface ParamFilter {
     status?: string | null;
     grenre?: string[];

@@ -7,6 +7,7 @@ import { createSearchParams, Navigate, useNavigate, useSearchParams } from 'reac
 import { deltailAnimme, ParamFilter } from '../../model/user';
 import { carouselApi } from '../../api/anime';
 import { grenres } from '../../model/constans';
+import { Crumb } from '../../components/Beadcrumb/BreadCrumb';
 
 export function PaginationCustom({
     total,
@@ -92,6 +93,8 @@ export function FilterInput() {
         // console.log(str);
     };
     return (
+        <>
+        <Crumb/>
         <div className="filter-input-container" style={{ marginBottom: '10px' }}>
             <div className="list-movie-flilter-item">
                 <label className="filter-eptype-label">Tiến Độ</label>
@@ -192,6 +195,7 @@ export function FilterInput() {
                 <span onClick={handleFilter}>Duyệt phim</span>
             </button>
         </div>
+        </>
     );
 }
 
