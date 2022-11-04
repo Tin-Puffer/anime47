@@ -11,9 +11,8 @@ export function AnimeDetail() {
     let { id } = useParams<string>();
     const ref = useRef<null | HTMLDivElement>(null);
     const refTrailer = useRef<null | HTMLDivElement>(null);
-    
+
     const navigate = useNavigate();
-    // console.log(id);
     const [detail, setDetail] = useState<deltailAnimme>();
     const [servetList, setServerList] = useState<listSever>();
     const handelChange = (item: string) => {
@@ -21,6 +20,7 @@ export function AnimeDetail() {
         item !== id && navigate('/anime/' + item);
         // scroller.scrollTo();
     };
+    console.log("serverlist: ",servetList);
     const handleClickWatchMovie = () => {
         if (servetList !== undefined) {
             localStorage.setItem('Link', servetList.mainSV22[0].link);

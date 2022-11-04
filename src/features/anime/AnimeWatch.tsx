@@ -82,23 +82,27 @@ export function AnimeWatch() {
                     </div>
                     <div className="episodes">
                         <ul>
-                            {servetList?.mainSV22?.map((e, i) => (
-                                <li
-                                    key={i}
-                                    onClick={() => {
-                                        localStorage.setItem('Link', e.link);
-                                        setSearchParams({
-                                            id: servetList.id,
-                                            server: 'mainSV22',
-                                            ep: e.ep,
-                                        });
-                                    }}
-                                >
-                                    <a className="new-update" title="15">
-                                        {e.ep}
-                                    </a>
-                                </li>
-                            ))}
+                            {servetList?.mainSV22?.map((e, i) => {
+                                let clasEp = '';
+                                paramList?.server === 'mainSV22' && paramList.ep === e.ep
+                                    ? (clasEp = 'new-update active')
+                                    : (clasEp = 'new-update');
+                                return (
+                                    <li
+                                        key={i}
+                                        onClick={() => {
+                                            localStorage.setItem('Link', e.link);
+                                            setSearchParams({
+                                                id: servetList.id,
+                                                server: 'mainSV22',
+                                                ep: e.ep,
+                                            });
+                                        }}
+                                    >
+                                        <a className={clasEp}>{e.ep}</a>
+                                    </li>
+                                );
+                            })}
                         </ul>
                     </div>
                 </div>
@@ -108,23 +112,27 @@ export function AnimeWatch() {
                     </div>
                     <div className="episodes">
                         <ul>
-                            {servetList?.mainSV22?.map((e, i) => (
-                                <li
-                                    key={i}
-                                    onClick={() => {
-                                        localStorage.setItem('Link', e.link);
-                                        setSearchParams({
-                                            id: servetList.id,
-                                            server: 'mainSV22',
-                                            ep: e.ep,
-                                        });
-                                    }}
-                                >
-                                    <a className="new-update" title="15">
-                                        {e.ep}
-                                    </a>
-                                </li>
-                            ))}
+                            {servetList?.BackUpSV23?.map((e, i) => {
+                                let clasEp = '';
+                                paramList?.server === 'BackUpSV23' && paramList.ep === e.ep
+                                    ? (clasEp = 'new-update active')
+                                    : (clasEp = 'new-update');
+                                return (
+                                    <li
+                                        key={i}
+                                        onClick={() => {
+                                            localStorage.setItem('Link', e.link);
+                                            setSearchParams({
+                                                id: servetList.id,
+                                                server: 'BackUpSV23',
+                                                ep: e.ep,
+                                            });
+                                        }}
+                                    >
+                                        <a className={clasEp}>{e.ep}</a>
+                                    </li>
+                                );
+                            })}
                         </ul>
                     </div>
                 </div>

@@ -176,6 +176,10 @@
                     &:hover {
                         background: #e2bcbc;
                     }
+                    &.active {
+                        background: #eaab0c;
+                        color: #000;
+                    }
                 }
             }
         }

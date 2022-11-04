@@ -8,8 +8,9 @@ $tablet-breakpoint: 1024px;
     width: 100%;
     height: 56px;
     display: block;
-    background: #282828 url(https://anime47.com/skin/24032017/img/header-bg.jpg) repeat-x;
+    // background: #282828 url(https://anime47.com/skin/24032017/img/header-bg.jpg) repeat-x;
     position: absolute;
+    background-color: #404040;
 }
 .container {
     max-width: 1000px;
@@ -27,7 +28,7 @@ $tablet-breakpoint: 1024px;
         width: 260px;
         height: 55px;
         display: block;
-        background: url(https://anime47.com/skin/24032017/img/image.png?v=1.2) 0px -320px no-repeat;
+        background: url(https://iili.io/mIlKP9.png) no-repeat;
     }
 }
 .widget_search {

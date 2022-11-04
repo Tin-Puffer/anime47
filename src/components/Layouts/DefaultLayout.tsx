@@ -65,7 +65,7 @@ function DefaultLayout(props: DefaultLayoutProps) {
 
     return (
         <div>
-            {/* <XXX></XXX> */}
+           
             <Header />
             <div>
                 <div className="container-df">
