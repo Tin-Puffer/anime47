@@ -19,7 +19,7 @@ export function Crumb() {
     const [crumb, setCrumb] = useState<CrumbType[]>([]);
     // console.log('id=' + id);
     // console.log(detail);
-    
+
     useEffect(() => {
         if (detail) {
             detail.grenre.map((e) => {
@@ -81,7 +81,7 @@ export function Crumb() {
                 break;
             }
             default: {
-                console.log('s');
+                setCrumb([{ name: 'Home', path: '/' }, { name: `${local.pathname.substring(1)}` }]);
             }
         }
     }, [local.pathname, searchParams]);

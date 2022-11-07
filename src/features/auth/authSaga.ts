@@ -38,7 +38,7 @@ function* handleLogout() {
 function* whatLoginFlow() {
     while (true) {
         const isLogin = localStorage.getItem('access_token');
-        console.log('trang thai cua islogin:', !isLogin);
+        // console.log('trang thai cua islogin:', !isLogin);
         if (!isLogin) {
             console.log('chaylogin');
             const acction: PayloadAction<loginState> = yield take(authAction.login.type);

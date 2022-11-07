@@ -211,6 +211,8 @@ export function FilterAnime({ detailAccount }: { detailAccount: boolean }) {
 
     const navigate = useNavigate();
     const listCabinet = useAppSelector((state) => state.authMC.listMC);
+    const loadDataCabinet = useAppSelector((state) => state.authMC.loadDataCabinet);
+
     const islogin = useAppSelector((state) => state.auth.isLogin);
 
     const dispatch = useAppDispatch();
@@ -253,7 +255,7 @@ export function FilterAnime({ detailAccount }: { detailAccount: boolean }) {
                 });
             })();
         } else {
-            if (listCabinet[0] && local.pathname === '/moviecabinet/' + id) {
+            if (loadDataCabinet  && local.pathname === '/moviecabinet/' + id) {
                 setList(
                     listCabinet
                         ?.filter((x) => {
@@ -354,19 +356,9 @@ export function FilterAnime({ detailAccount }: { detailAccount: boolean }) {
     }, [paramList, listAll, listCabinet]);
 
     useEffect(() => {
-        // if (!detailAccount) {
-        //     (async () => {
-        //         await carouselApi.getListFilter().then((res) => {
-        //             setListAll(res.data);
-        //         });
-        //     })();
-        // }
-        // else {
-        //     dispatch(autheMCAction.loadingListMC(id || ''));
-        // }
-        if (detailAccount) {
+        if (detailAccount && !loadDataCabinet) {
             dispatch(autheMCAction.loadingListMC(id || ''));
-        } else {
+        } else if (local.pathname === '/filter') {
             (async () => {
                 await carouselApi.getListFilter().then((res) => {
                     setListAll(res.data);

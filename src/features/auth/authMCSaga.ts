@@ -1,6 +1,5 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { all, call, delay, fork, put, take, takeEvery, takeLatest } from 'redux-saga/effects';
-import { json } from 'stream/consumers';
 import { animeList } from '../../api/anime';
 import { deltailAnimme, user } from '../../model/user';
 import { autheMCAction } from './authMCSlipe';
@@ -32,6 +31,14 @@ function* handleDeleteAPI(idItemCabinet: string) {
         // XU LY LOI
     }
 }
+function* handleAddAPI(idItemCabinet: string) {
+    try {
+        console.log('goi api thêm cabinet item ID:' + idItemCabinet);
+        //GOIJ API DELETE
+    } catch (error) {
+        // XU LY LOI
+    }
+}
 
 function* loadingFlow() {
     while (true) {
@@ -45,7 +52,13 @@ function* ApiDeleteCabinet() {
         yield fork(handleDeleteAPI, acction.payload);
     }
 }
+function* ApiAddCabinet() {
+    while (true) {
+        const acction: PayloadAction<string> = yield take(autheMCAction.AddItemCabinet.type);
+        yield fork(handleAddAPI, acction.payload);
+    }
+}
 export function* authMCSaga() {
-    yield all([call(ApiDeleteCabinet), call(loadingFlow)]);
+    yield all([call(ApiDeleteCabinet), call(loadingFlow), call(ApiAddCabinet)]);
     // yield fork(loadingFlow);
 }

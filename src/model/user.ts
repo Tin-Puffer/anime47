@@ -78,8 +78,9 @@ export interface ParamFilter {
     name?: string | null;
 }
 export  interface authMC {
-    listMC: deltailAnimme[],
-    loadingCabinet:boolean
-    loadAdd: boolean,
-    loadDelete: boolean
+    listMC: deltailAnimme[];
+    loadingCabinet: boolean;
+    loadAdd: boolean;
+    loadDelete: boolean;
+    loadDataCabinet:boolean;
 }

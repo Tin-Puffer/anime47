@@ -303,8 +303,6 @@ export function Home() {
     }, []);
     useEffect(() => {
         setListUpdate([...listUpdateALL].slice(20 * selectNewUpdate, 20 * (selectNewUpdate + 1)));
-        // console.log('DataALL', listUpdateALL);
-        // console.log('Data', listUpdate);
     }, [listUpdateALL, selectNewUpdate]);
     return (
         <div className="home-content">

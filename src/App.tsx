@@ -20,15 +20,33 @@ function App() {
                 ></Route>
                 <Route
                     path="/login"
-                    element={<DefaultLayout offSelectCol={'off'} main={<Login></Login>}></DefaultLayout>}
+                    element={
+                        <DefaultLayout
+                            header={<Crumb></Crumb>}
+                            offSelectCol={'off'}
+                            main={<Login></Login>}
+                        ></DefaultLayout>
+                    }
                 ></Route>
                 <Route
                     path="/deltailaccount"
-                    element={<DefaultLayout offSelectCol={'off'} main={<DetailAcount></DetailAcount>}></DefaultLayout>}
+                    element={
+                        <DefaultLayout
+                            header={<Crumb></Crumb>}
+                            offSelectCol={'off'}
+                            main={<DetailAcount></DetailAcount>}
+                        ></DefaultLayout>
+                    }
                 ></Route>
                 <Route
                     path="/register"
-                    element={<DefaultLayout offSelectCol={'off'} main={<Register></Register>}></DefaultLayout>}
+                    element={
+                        <DefaultLayout
+                            header={<Crumb></Crumb>}
+                            offSelectCol={'off'}
+                            main={<Register></Register>}
+                        ></DefaultLayout>
+                    }
                 ></Route>
                 <Route
                     path="/anime/:id"

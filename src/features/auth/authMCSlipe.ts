@@ -6,6 +6,7 @@ const initAutheMC = (): authMC => {
         loadAdd: false,
         loadingCabinet: false,
         loadDelete: false,
+        loadDataCabinet: false,
         listMC: [],
     };
 };
@@ -19,12 +20,14 @@ const autheMCSlipe = createSlice({
         },
         loadingSuccess(state, action: PayloadAction<deltailAnimme[]>) {
             state.loadingCabinet = false;
-            state.listMC = action.payload;
+            state.loadDataCabinet = true;
+            state.listMC = state.listMC.concat(action.payload);
         },
         loadingFailed(state, action: PayloadAction<String>) {
             state.loadingCabinet = false;
         },
         resetListMC(state) {
+            state.loadDataCabinet = false;
             state.listMC = [];
         },
         DelteItemCabinet(state, action: PayloadAction<String>) {
@@ -33,7 +36,10 @@ const autheMCSlipe = createSlice({
             });
         },
         AddItemCabinet(state, action: PayloadAction<deltailAnimme>) {
-            state.listMC.concat(action.payload);
+            if (!state.listMC.find((e) => e.id === action.payload.id)) {
+                console.log('add');
+                state.listMC = state.listMC.concat(action.payload);
+            }
         },
     },
 });

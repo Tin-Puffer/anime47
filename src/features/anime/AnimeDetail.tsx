@@ -6,13 +6,20 @@ import { createSearchParams, useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 import { deltailAnimme, listSever } from '../../model/user';
 import { animeList, carouselApi } from '../../api/anime';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { autheMCAction } from '../auth/authMCSlipe';
+import openNotification from '../../components/Notyfication/notyfication';
 
 export function AnimeDetail() {
     let { id } = useParams<string>();
     const ref = useRef<null | HTMLDivElement>(null);
     const refTrailer = useRef<null | HTMLDivElement>(null);
-
+    const dispatch = useAppDispatch();
     const navigate = useNavigate();
+    const islogin = useAppSelector((state) => state.auth.isLogin);
+    const idUser = useAppSelector((state) => state.auth.currentUser?.id);
+    const listCabinet = useAppSelector((state) => state.authMC.listMC);
+    const loadDataCabinet = useAppSelector((state) => state.authMC.loadDataCabinet);
     const [detail, setDetail] = useState<deltailAnimme>();
     const [servetList, setServerList] = useState<listSever>();
     const handelChange = (item: string) => {
@@ -20,7 +27,7 @@ export function AnimeDetail() {
         item !== id && navigate('/anime/' + item);
         // scroller.scrollTo();
     };
-    console.log("serverlist: ",servetList);
+    console.log('serverlist: ', servetList);
     const handleClickWatchMovie = () => {
         if (servetList !== undefined) {
             localStorage.setItem('Link', servetList.mainSV22[0].link);
@@ -47,6 +54,23 @@ export function AnimeDetail() {
         })();
         ref.current?.scrollIntoView({ behavior: 'smooth' });
     }, [id]);
+    const handleAddCabinet = () => {
+        if (islogin) {
+            if (!loadDataCabinet) {
+                dispatch(autheMCAction.loadingListMC(idUser || ''));
+            }
+            if (detail) {
+                if (listCabinet.find((e) => e.id === detail.id)) {
+                    openNotification('Wanning', 'MOVE HAS BEEN SAVED');
+                } else {
+                    dispatch(autheMCAction.AddItemCabinet(detail));
+                    openNotification('success', 'FEATURES NOT AVAILABLE');
+                }
+            }
+        } else {
+            openNotification('Wanning', 'con me m ');
+        }
+    };
     return (
         <div className="anime-deital-container" ref={ref}>
             <Row>
@@ -57,7 +81,12 @@ export function AnimeDetail() {
 
                         <ul className="btn-block">
                             <li className="item">
-                                <a id="btn-film-watch" className="btn btn-green btn" title="Đánh Dấu">
+                                <a
+                                    id="btn-film-watch"
+                                    className="btn btn-green btn"
+                                    title="Đánh Dấu"
+                                    onClick={handleAddCabinet}
+                                >
                                     {' '}
                                     Lưu lại
                                 </a>
