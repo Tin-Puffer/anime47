@@ -25,7 +25,14 @@ export function Crumb() {
                 const tmp: CrumbType = { name: e, path: '/filter?grenre=' + e };
                 setCrumb((pr) => pr.concat(tmp));
             });
-            setCrumb((pr) => pr.concat({ name: detail?.name }));
+            local.pathname === '/watch'
+                ? setCrumb((pr) =>
+                      pr.concat(
+                          { name: detail?.name, path: '/anime/' + detail.id },
+                          { name: 'EP: ' + searchParams.get('ep') },
+                      ),
+                  )
+                : setCrumb((pr) => pr.concat({ name: detail?.name }));
         }
     }, [detail]);
     useEffect(() => {

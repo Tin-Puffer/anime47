@@ -8,9 +8,17 @@
         text-align: left;
     }
 }
-
+.logi-main-content{
+    padding: 15px;
+}
 .form-group-lable {
-    padding: 9px 10px 0 10px;
+    &.lable-right{
+        text-align: left;
+        font-weight: 700;
+    }
+    &.lable-left{
+        text-align: left;
+    }
 }
 .form-group {
     margin-bottom: 15px;
@@ -71,4 +79,13 @@
             background: transparent url('https://anime47.com/skin/24032017/img/image.png?v=1.2') -177px -41px;
         }
     }
+}
+.avata-detail{
+    width: 150px;
+    height: 150px;
+    background-color: gray;
+    float: left;
+    background-size: cover;
+    background-position: center;
+    
 }

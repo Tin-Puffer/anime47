@@ -118,7 +118,7 @@
     }
 }
 .a1 {
-
+    position: relative;
     padding: 0;
     background: #4f4e52 url('https://anime47.com/skin/24032017/img/item_bg.gif') repeat;
     border-bottom: 1px solid #000;
@@ -204,4 +204,19 @@
     font-size: 14px;
     text-decoration: none;
     background: url('https://anime47.com/skin/24032017/img/viewmore.png') no-repeat 80px 8px;
+}
+.container-close-bnt{
+    width: 30px;
+    height: 30px;
+    background-color: #ad3b2c;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 20;
+    &:hover{
+         background-color: #eb3e27;
+    }
+    .close-bnt-cabinet{
+        font-size: 30px;
+    }
 }

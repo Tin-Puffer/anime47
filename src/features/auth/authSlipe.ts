@@ -5,7 +5,7 @@ export interface loginState {
     userName: string;
     password: string;
 }
-interface authState {
+export interface authState {
     isLogin: boolean;
     login?: boolean;
     currentUser?: user;
@@ -16,10 +16,26 @@ const initAuth: authState = {
     login: false,
     currentUser: undefined,
 };
+const initAuthLoad = (): authState => {
+    if (!localStorage.getItem('access_token')) {
+        return {
+            isLogin: false,
+            login: false,
+            currentUser: undefined,
+        };
+    } else {
+        const local = JSON.parse(localStorage?.getItem('user') || '') as user;
+        return {
+            isLogin: true,
+            login: false,
+            currentUser: local,
+        };
+    }
+};
 
 const authSlice = createSlice({
     name: 'auth',
-    initialState: initAuth,
+    initialState: initAuthLoad(),
     reducers: {
         login(state, action: PayloadAction<loginState>) {
             state.login = true;
@@ -31,6 +47,7 @@ const authSlice = createSlice({
         },
         loginFailed(state, action: PayloadAction<String>) {
             state.login = false;
+            state.isLogin = false;
         },
         logout(state) {
             state.isLogin = false;

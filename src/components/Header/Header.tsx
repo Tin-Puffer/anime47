@@ -1,21 +1,28 @@
 import { Col, Row } from 'antd';
 import 'antd/dist/antd.less';
 import './headerStyle.scss';
-import { createSearchParams, Link, useNavigate, useSearchParams } from 'react-router-dom';
+import { createSearchParams, Link, useNavigate } from 'react-router-dom';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import console, { error } from 'console';
 import { keyboardKey } from '@testing-library/user-event';
 import { deltailAnimme } from '../../model/user';
 import { carouselApi } from '../../api/anime';
 import { grenres } from '../../model/constans';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { authAction } from '../../features/auth/authSlipe';
+
 export default function () {
     const navigate = useNavigate();
-    // const [searchParams, setSearchParams] = useSearchParams();
+
+    const dispatch = useAppDispatch();
     const [isHide, setIsHide] = useState(false);
     const [boxList, setBoxList] = useState<deltailAnimme[]>();
-
     const [inputValue, setInputvalue] = useState('');
+    const user = useAppSelector((state) => state.auth.currentUser);
     let boxSrarchRef = useRef<HTMLDivElement>(null);
+    console.log('RENDER');
+    const handleLogout = () => {
+        dispatch(authAction.logout());
+    };
     const handleClick = (event: any) => {
         const { target } = event;
         if (!boxSrarchRef.current?.contains(target)) {
@@ -40,12 +47,9 @@ export default function () {
         }
     }, [inputValue]);
     useEffect(() => {
-        // if (isHide === true)
-        // {
         carouselApi.getListSearch(inputValue).then((res) => {
             setBoxList(res.data);
         });
-        // }
     }, [isHide]);
     interface grenResType {
         type1: string;
@@ -135,11 +139,37 @@ export default function () {
                     </div>
                 </Col>
                 <Col className="item" xs={24} md={24} lg={9}>
-                    <div className="widget_user_header">
-                        <Link to={'/register'} className="button-register"></Link>
-                        <Link to={'/login'} className="button-login"></Link>
-                        <Link to={'/login'} className="button-login-fb"></Link>
-                    </div>
+                    {user ? (
+                        <div className="widget_user_header">
+                            <div className=" btn-blue btn btn-small nonclick">
+                                Xin chào, {user.name}
+                                <ul className="dropdown-menu" role="menu">
+                                    <li
+                                        onClick={() => {
+                                            navigate('/deltailaccount');
+                                        }}
+                                    >
+                                        <span>Thông tin tài khoản</span>
+                                    </li>
+
+                                    <li className="divider"></li>
+                                    <li>
+                                        <span onClick={handleLogout}>Thoát</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div className="btn btn-red btn-small" onClick={() => navigate('/moviecabinet/' + user.id)}>
+                                {' '}
+                                Tủ phim
+                            </div>
+                        </div>
+                    ) : (
+                        <div className="widget_user_header">
+                            <Link to={'/register'} className="button-register"></Link>
+                            <Link to={'/login'} className="button-login"></Link>
+                            <Link to={'/login'} className="button-login-fb"></Link>
+                        </div>
+                    )}
                 </Col>
             </Row>
             <div className="nav">

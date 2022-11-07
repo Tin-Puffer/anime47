@@ -6,6 +6,7 @@ import Register from './features/auth/page/Register';
 import { FilterAnime, FilterInput, CarouselHome, Home, AnimeDetail } from './features/anime';
 import { AnimeWatch } from './features/anime/AnimeWatch';
 import { Crumb } from './components/Beadcrumb/BreadCrumb';
+import DetailAcount from './features/auth/page/DedtailAcount';
 
 function App() {
     return (
@@ -20,6 +21,10 @@ function App() {
                 <Route
                     path="/login"
                     element={<DefaultLayout offSelectCol={'off'} main={<Login></Login>}></DefaultLayout>}
+                ></Route>
+                <Route
+                    path="/deltailaccount"
+                    element={<DefaultLayout offSelectCol={'off'} main={<DetailAcount></DetailAcount>}></DefaultLayout>}
                 ></Route>
                 <Route
                     path="/register"
@@ -40,8 +45,18 @@ function App() {
                     element={
                         <DefaultLayout
                             offSelectCol={'off'}
-                            header={<FilterInput></FilterInput>}
-                            main={<FilterAnime></FilterAnime>}
+                            header={<FilterInput movieCabinet={false}></FilterInput>}
+                            main={<FilterAnime detailAccount={false}></FilterAnime>}
+                        ></DefaultLayout>
+                    }
+                ></Route>
+                <Route
+                    path="/moviecabinet/:id"
+                    element={
+                        <DefaultLayout
+                            offSelectCol={'off'}
+                            header={<FilterInput movieCabinet={true}></FilterInput>}
+                            main={<FilterAnime detailAccount={true}></FilterAnime>}
                         ></DefaultLayout>
                     }
                 ></Route>

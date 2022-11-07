@@ -12,7 +12,9 @@ import { Tabs } from '../../components/MenuSelect';
 import { useEffect, useMemo, useState } from 'react';
 import { carouselItem, deltailAnimme, viewUpdate } from '../../model/user';
 import { Link, useNavigate } from 'react-router-dom';
-
+import { CloseOutlined } from '@ant-design/icons';
+import { useAppDispatch } from '../../app/hooks';
+import { autheMCAction } from '../auth/authMCSlipe';
 function CustomSlide({ data }: { data: carouselItem }) {
     const nav = useNavigate();
     const Background = {
@@ -100,7 +102,7 @@ export function CarouselHome() {
     useEffect(() => {
         (async () => {
             await carouselApi.getAll().then((res) => {
-                setListCarousel(res.data);
+                setListCarousel(res);
             });
         })();
     }, []);
@@ -160,11 +162,16 @@ export function CarouselHome() {
 export function TitleHome({ title }: { title: string }) {
     return <h3 className="title-home">{title}</h3>;
 }
-export function GridFilmItem({ item }: { item: viewUpdate }) {
+export function GridFilmItem({ item, cabinet }: { item: viewUpdate; cabinet: boolean }) {
     const nav = useNavigate();
     const [coords, setCoords] = useState({ x: 0, y: 0 });
     const [isHide, setIsHide] = useState(false);
+    const dispatch = useAppDispatch();
 
+    const handleDelete = () => {
+        console.log(item.id);
+        dispatch(autheMCAction.DelteItemCabinet(item.id));
+    };
     const handleMouseMove = (event: any) => {
         // console.log(event);
         setCoords({
@@ -176,6 +183,20 @@ export function GridFilmItem({ item }: { item: viewUpdate }) {
         <div className="ss">
             <a className="a">
                 <div className="a1" onClick={() => nav('/anime/' + item.id)}>
+                    {cabinet && (
+                        <div className="container-close-bnt">
+                            <CloseOutlined
+                                className="close-bnt-cabinet"
+                                onMouseOver={(e) => {
+                                    e.stopPropagation();
+                                }}
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    handleDelete();
+                                }}
+                            />
+                        </div>
+                    )}
                     <div
                         style={{ backgroundImage: `url(${item.img})` }}
                         className="a2"
@@ -187,7 +208,6 @@ export function GridFilmItem({ item }: { item: viewUpdate }) {
                         <div
                             style={{
                                 minWidth: '100px',
-
                                 maxWidth: '400px',
                                 backgroundColor: ' #090909c4',
                                 border: ' 1px solid black',
@@ -214,13 +234,19 @@ export function GridFilmItem({ item }: { item: viewUpdate }) {
         </div>
     );
 }
-export function GridFilm({ list }: { list: viewUpdate[] | deltailAnimme[] | undefined }) {
+export function GridFilm({
+    list,
+    cabinet = false,
+}: {
+    list: viewUpdate[] | deltailAnimme[] | undefined;
+    cabinet?: boolean;
+}) {
     return (
         <div>
             <Row gutter={[8, 8]}>
                 {list?.map((e, i) => (
                     <Col key={i} xs={8} md={6} className="col-grid-film">
-                        <GridFilmItem item={e}></GridFilmItem>
+                        <GridFilmItem cabinet={cabinet} item={e}></GridFilmItem>
                         {/* <div className="ss">
                             <a className="a">
                                 <div className="a1">

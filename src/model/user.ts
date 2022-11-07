@@ -1,6 +1,9 @@
 export interface user {
     id: string;
     name: string;
+    userName?:string,
+    email: string;
+    img: string;
 }
 export interface carouselItem {
     id: string;
@@ -73,4 +76,10 @@ export interface ParamFilter {
     year?: string | null;
     sortBy?: string | null;
     name?: string | null;
+}
+export  interface authMC {
+    listMC: deltailAnimme[],
+    loadingCabinet:boolean
+    loadAdd: boolean,
+    loadDelete: boolean
 }
