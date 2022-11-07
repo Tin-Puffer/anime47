@@ -29,14 +29,12 @@ const autheMCSlipe = createSlice({
         },
         DelteItemCabinet(state, action: PayloadAction<String>) {
             state.listMC = state.listMC.filter((item) => {
-                console.log(action.payload);
                 return item.id !== action.payload;
             });
         },
-        // logout(state) {
-        //     state.isLogin = false;
-        //     state.currentUser = undefined;
-        // },
+        AddItemCabinet(state, action: PayloadAction<deltailAnimme>) {
+            state.listMC.concat(action.payload);
+        },
     },
 });
 //action

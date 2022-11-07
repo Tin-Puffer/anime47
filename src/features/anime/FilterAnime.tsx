@@ -3,14 +3,13 @@ import { MultiSelect, Option } from 'react-multi-select-component';
 import { GridFilm } from './Home';
 import { Pagination } from 'antd';
 import './filterAnime.scss';
-import { createSearchParams, Navigate, useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import { createSearchParams, Navigate, useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { deltailAnimme, ParamFilter } from '../../model/user';
 import { carouselApi } from '../../api/anime';
 import { grenres } from '../../model/constans';
 import { Crumb } from '../../components/Beadcrumb/BreadCrumb';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { autheMCAction } from '../auth/authMCSlipe';
-
 
 export function PaginationCustom({
     total,
@@ -71,6 +70,7 @@ export function PaginationCustom({
 
 export function FilterInput({ movieCabinet }: { movieCabinet: boolean }) {
     // const [searchParams, setSearchParams] = useSearchParams();
+
     const { id } = useParams();
     const [selected, setSelected] = useState<Option[]>([]);
     const navigate = useNavigate();
@@ -207,6 +207,7 @@ export function FilterInput({ movieCabinet }: { movieCabinet: boolean }) {
 export function FilterAnime({ detailAccount }: { detailAccount: boolean }) {
     const [searchParams, setSearchParams] = useSearchParams();
     const { id } = useParams();
+    const local = useLocation();
 
     const navigate = useNavigate();
     const listCabinet = useAppSelector((state) => state.authMC.listMC);
@@ -217,11 +218,14 @@ export function FilterAnime({ detailAccount }: { detailAccount: boolean }) {
     const [page, setPage] = useState<number>(0);
     const [listAll, setListAll] = useState<deltailAnimme[]>();
     const [list, setList] = useState<deltailAnimme[]>();
+
+    // console.log('listAll: ', listAll);
+    // console.log('listCabinet: ', listCabinet);
     useEffect(() => {
-        if (!islogin) {
+        if (detailAccount && !islogin) {
             navigate('/');
         }
-    }, [islogin]);
+    });
     useEffect(() => {
         window.scrollTo({
             top: 0,
@@ -249,7 +253,7 @@ export function FilterAnime({ detailAccount }: { detailAccount: boolean }) {
                 });
             })();
         } else {
-            if (listCabinet[0]) {
+            if (listCabinet[0] && local.pathname === '/moviecabinet/' + id) {
                 setList(
                     listCabinet
                         ?.filter((x) => {
@@ -350,16 +354,26 @@ export function FilterAnime({ detailAccount }: { detailAccount: boolean }) {
     }, [paramList, listAll, listCabinet]);
 
     useEffect(() => {
-        if (detailAccount === false) {
+        // if (!detailAccount) {
+        //     (async () => {
+        //         await carouselApi.getListFilter().then((res) => {
+        //             setListAll(res.data);
+        //         });
+        //     })();
+        // }
+        // else {
+        //     dispatch(autheMCAction.loadingListMC(id || ''));
+        // }
+        if (detailAccount) {
+            dispatch(autheMCAction.loadingListMC(id || ''));
+        } else {
             (async () => {
                 await carouselApi.getListFilter().then((res) => {
                     setListAll(res.data);
                 });
             })();
-        } else {
-            dispatch(autheMCAction.loadingListMC(id || ''));
         }
-    }, []);
+    }, [local.pathname]);
     return (
         <>
             <h1 className="header-list-index">

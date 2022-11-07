@@ -19,6 +19,7 @@ export function Crumb() {
     const [crumb, setCrumb] = useState<CrumbType[]>([]);
     // console.log('id=' + id);
     // console.log(detail);
+    
     useEffect(() => {
         if (detail) {
             detail.grenre.map((e) => {
@@ -73,6 +74,10 @@ export function Crumb() {
                         setCrumb([{ name: 'Home', path: '/' }]);
                     });
                 })();
+                break;
+            }
+            case '/moviecabinet/' + id: {
+                setCrumb([{ name: 'Home', path: '/' }, { name: 'Movie Cabinet ' }]);
                 break;
             }
             default: {
