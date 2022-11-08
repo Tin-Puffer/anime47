@@ -44,16 +44,20 @@
 }
 
 //
+.container-coment-itme{
+    margin-bottom: 20px;
+}
 .comment-item {
     width: 100%;
 
     .comment-item-left {
         float: left;
+ 
         .cmt-user-avatar-wrap {
             width: 40px;
             height: 40px;
             overflow: hidden;
-            background-image: url('https://iili.io/D318ZB.jpg');
+           
             background-position: center;
             background-size: cover;
         }
@@ -89,6 +93,12 @@
                 background: 0 0;
                 border: 1px solid #209cee;
                 color: #209cee;
+                padding: 0px 3px;
+            }
+            .user-type-user-member {
+                background: 0 0;
+                border: 1px solid #37d659;
+                color: #37d659;
                 padding: 0px 3px;
             }
             .cmt-datetime {

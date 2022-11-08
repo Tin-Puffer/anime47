@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { AuthMC } from '../features/auth/authMCSaga';
 import { loginState } from '../features/auth/authSlipe';
-import { carouselItem, deltailAnimme, ParamFilter, user } from '../model/user';
+import { carouselItem, comment, deltailAnimme, ParamFilter, user } from '../model/user';
 const axiosMock_10 = axios.create({
     baseURL: 'https://63566b9e9243cf412f842b92.mockapi.io',
     headers: {
@@ -35,6 +35,17 @@ export const animeList = {
             })
             .then((res) => res.data[0]);
     },
+    getComment(idFilm: string): Promise<comment> {
+        const URL = '/comment';
+        return axiosMock_1
+            .get(URL, {
+                params: {
+                    idFilm: idFilm,
+                },
+            })
+            .then((res) => res.data[0]);
+    },
+
     getUserMC(id: string): Promise<AuthMC> {
         const URL = '/userMC';
         return axiosMock_1

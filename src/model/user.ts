@@ -1,7 +1,7 @@
 export interface user {
     id: string;
     name: string;
-    userName?:string,
+    userName?: string;
     email: string;
     img: string;
 }
@@ -54,19 +54,19 @@ export interface deltailAnimme {
     trailer: string;
     chain: chain[];
 }
-export  interface itemListServer{
-    ep:string;
-    link:string;
+export interface itemListServer {
+    ep: string;
+    link: string;
 }
 export interface listSever {
     id: string;
     mainSV22: itemListServer[];
     BackUpSV23: itemListServer[];
 }
-export interface ParamWatch{
-    id:string| null;
-    server:string| null;
-    ep: string| null;
+export interface ParamWatch {
+    id: string | null;
+    server: string | null;
+    ep: string | null;
 }
 export interface ParamFilter {
     status?: string | null;
@@ -77,10 +77,30 @@ export interface ParamFilter {
     sortBy?: string | null;
     name?: string | null;
 }
-export  interface authMC {
+export interface authMC {
     listMC: deltailAnimme[];
     loadingCabinet: boolean;
     loadAdd: boolean;
     loadDelete: boolean;
-    loadDataCabinet:boolean;
+    loadDataCabinet: boolean;
+}
+export interface commentItemAdd {
+    item: commentItem;
+    idFilm: string;
+    idChild?: string;
+}
+export interface commentItem {
+    id: string;
+    name: string;
+    img: string;
+    type: 1 | 2;
+    time: string;
+    content: string;
+    listRep: commentItem[];
+}
+export interface comment {
+    idFilm: string;
+    loading?: boolean;
+    isLoading?: boolean;
+    listComentAll: commentItem[];
 }

@@ -1,16 +1,26 @@
 import { useEffect, useRef, useState } from 'react';
 import { useLocation, useSearchParams } from 'react-router-dom';
 import { animeList } from '../../api/anime';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { Comment } from '../../components/Comment';
+import openNotification from '../../components/Notyfication/notyfication';
 import { listSever, ParamWatch } from '../../model/user';
 import './animeWath.scss';
+import { commentAction } from './commentSlipe';
 export function AnimeWatch() {
     const [searchParams, setSearchParams] = useSearchParams();
     const [paramList, setParamList] = useState<ParamWatch>();
     const [servetList, setServerList] = useState<listSever>();
     const [link, SetLink] = useState<string | null>();
+    const dispatch = useAppDispatch();
+    const idComment = useAppSelector((state) => state.comment.idFilm);
     const ref = useRef<HTMLDivElement>(null);
-
+    const CmtList = useAppSelector((state) => state.comment);
+    useEffect(() => {
+        if (paramList?.id && paramList?.id !== idComment) {
+            dispatch(commentAction.loadingComment(paramList?.id));
+        }
+    }, [paramList]);
     useEffect(() => {
         ref.current?.scroll();
         setParamList({
@@ -59,7 +69,11 @@ export function AnimeWatch() {
                 <span className="btn btn-green actives" title="Fa">
                     Fa
                 </span>
-                <span className="btn btn-green" title="Fe">
+                <span
+                    className="btn btn-green"
+                    title="Fe"
+                    onClick={() => openNotification('notify', 'SERVER NOT WOKING')}
+                >
                     Fe
                 </span>
             </div>
@@ -69,7 +83,11 @@ export function AnimeWatch() {
                 </h3>
                 <p style={{ textAlign: 'center', fontSize: '20px', color: '#dacb46' }}>
                     Ủng hộ và donate cho Kanefusa
-                    <a href="https://www.facebook.com/kanefusafansub/" target="_blank">
+                    <a
+                        onClick={() => {
+                            window.open('https://github.com/Tin-Puffer', '_blank');
+                        }}
+                    >
                         {' '}
                         tại đây
                     </a>
@@ -137,7 +155,7 @@ export function AnimeWatch() {
                     </div>
                 </div>
             </div>
-            <Comment></Comment>
+            <Comment CmList={CmtList}></Comment>
         </div>
     );
 }

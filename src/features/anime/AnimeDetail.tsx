@@ -9,6 +9,7 @@ import { animeList, carouselApi } from '../../api/anime';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { autheMCAction } from '../auth/authMCSlipe';
 import openNotification from '../../components/Notyfication/notyfication';
+import { commentAction, commentReducer } from './commentSlipe';
 
 export function AnimeDetail() {
     let { id } = useParams<string>();
@@ -18,6 +19,9 @@ export function AnimeDetail() {
     const navigate = useNavigate();
     const islogin = useAppSelector((state) => state.auth.isLogin);
     const idUser = useAppSelector((state) => state.auth.currentUser?.id);
+    const idComment = useAppSelector((state) => state.comment.idFilm);
+    const CmtList = useAppSelector((state) => state.comment);
+
     const listCabinet = useAppSelector((state) => state.authMC.listMC);
     const loadDataCabinet = useAppSelector((state) => state.authMC.loadDataCabinet);
     const [detail, setDetail] = useState<deltailAnimme>();
@@ -34,7 +38,11 @@ export function AnimeDetail() {
             navigate('/watch?id=' + id + '&server=mainSV22&ep=01');
         }
     };
-
+    useEffect(() => {
+        if (id && id !== idComment) {
+            dispatch(commentAction.loadingComment(id));
+        }
+    }, [id]);
     useEffect(() => {
         (async () => {
             await animeList.getDetailList(id || '').then((res) => {
@@ -68,7 +76,7 @@ export function AnimeDetail() {
                 }
             }
         } else {
-            openNotification('Wanning', 'con me m ');
+            openNotification('Wanning', 'LOGIN TO USE');
         }
     };
     return (
@@ -334,7 +342,7 @@ export function AnimeDetail() {
                     vui vẻ tại ANIME47.COM
                 </p>
             </div>
-            <Comment></Comment>
+            <Comment CmList={CmtList}></Comment>
         </div>
     );
 }

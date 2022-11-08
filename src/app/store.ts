@@ -1,5 +1,6 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import creatSAGA from 'redux-saga';
+import { commentReducer } from '../features/anime/commentSlipe';
 import { authMCReducer } from '../features/auth/authMCSlipe';
 import { authReducer } from '../features/auth/authSlipe';
 import rootSaga from './rootSaga';
@@ -8,6 +9,7 @@ export const store = configureStore({
     reducer: {
         auth: authReducer,
         authMC: authMCReducer,
+        comment: commentReducer
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({
