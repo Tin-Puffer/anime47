@@ -13,6 +13,7 @@ export function Login() {
     const isLogin = useAppSelector((state) => state.auth.isLogin);
     const Login = useAppSelector((state) => state.auth.login);
     const [userName, setUserName] = useState('');
+    const [password, setPassword] = useState('');
 
     useEffect(() => {
         if (isLogin) {
@@ -25,12 +26,13 @@ export function Login() {
         openNotification('notify', 'FEATURES NOT AVAILABLE');
     };
     const handleLogin = () => {
-        dispatch(
-            authAction.login({
-                userName: userName,
-                password: '',
-            }),
-        );
+        if ((userName === 'sasuke' || userName === 'madara' || userName === 'itachi') && password === '123123')
+            dispatch(
+                authAction.login({
+                    userName: userName,
+                    password: '',
+                }),
+            );
     };
     return (
         <div className="login-main">
@@ -48,7 +50,7 @@ export function Login() {
                             <Col xs={24} md={16} lg={9}>
                                 <input
                                     type="text"
-                                    placeholder="Nhập email hoặc tên đăng nhập"
+                                    placeholder="Nhập tên đăng nhập"
                                     className="name"
                                     onChange={(e) => setUserName(e.target.value)}
                                 />
@@ -67,7 +69,12 @@ export function Login() {
                                 Mật Khẩu
                             </Col>
                             <Col xs={24} md={16} lg={9}>
-                                <input type="text" placeholder="Nhập mật khẩu truy cập" className="name" />
+                                <input
+                                    type="text"
+                                    placeholder="Nhập mật khẩu truy cập"
+                                    className="name"
+                                    onChange={(e) => setPassword(e.target.value)}
+                                />
                             </Col>
                         </Row>
                         <Row className="form-group">
