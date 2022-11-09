@@ -1,79 +1,20 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { MultiSelect, Option } from 'react-multi-select-component';
 import { GridFilm } from './Home';
-import { Pagination } from 'antd';
-import './filterAnime.scss';
-import { createSearchParams, Navigate, useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom';
-import { deltailAnimme, ParamFilter } from '../../model/user';
-import { carouselApi } from '../../api/anime';
-import { grenres } from '../../model/constans';
+import { useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import { deltailAnimme, ParamFilter } from '../../model';
+import { apiMock_10 } from '../../api/axiosMock_10';
+import { grenres, years } from '../../model';
 import { Crumb } from '../../components/Beadcrumb/BreadCrumb';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { autheMCAction } from '../auth/authMCSlipe';
-
-export function PaginationCustom({
-    total,
-    pagenow,
-    handleChange,
-}: {
-    total: number;
-    pagenow: number;
-    handleChange: Function;
-}) {
-    const onChange = (page: number) => {
-        handleChange(page - 1);
-        window.scrollTo({
-            top: 0,
-            left: 0,
-            behavior: 'smooth',
-        });
-    };
-
-    if (total <= 1) return <></>;
-    else {
-        return (
-            <Pagination
-                pageSize={1}
-                // showLessItems={true}
-                showSizeChanger={false}
-                itemRender={(page, type, originalElement) => {
-                    if (type === 'next') {
-                        return (
-                            <div className="box">
-                                <b className="box-txt">»</b>
-                            </div>
-                        );
-                    }
-                    if (type === 'prev') {
-                        return (
-                            <div className="box">
-                                <b className="box-txt">«</b>
-                            </div>
-                        );
-                    }
-                    if (type === 'page') {
-                        return (
-                            <div className="box">
-                                <b className="box-txt">{page}</b>
-                            </div>
-                        );
-                    }
-                    return originalElement;
-                }}
-                current={pagenow + 1}
-                onChange={onChange}
-                total={total}
-            />
-        );
-    }
-}
+import { PaginationCustom } from '../../components/Pagination/Pagination';
+import './filterAnime.scss';
 
 export function FilterInput({ movieCabinet }: { movieCabinet: boolean }) {
-    // const [searchParams, setSearchParams] = useSearchParams();
-
+    const navigate = useNavigate();
     const { id } = useParams();
     const [selected, setSelected] = useState<Option[]>([]);
-    const navigate = useNavigate();
     const [paramFilter, setParamFilter] = useState<ParamFilter>({});
 
     const options: Option[] = grenres.map((e, i) => {
@@ -95,7 +36,6 @@ export function FilterInput({ movieCabinet }: { movieCabinet: boolean }) {
         });
         if (!movieCabinet) navigate('/filter?' + str);
         else navigate('/moviecabinet/' + id + '?' + str);
-        // console.log(str);
     };
     return (
         <>
@@ -104,9 +44,7 @@ export function FilterInput({ movieCabinet }: { movieCabinet: boolean }) {
                 <div className="list-movie-flilter-item">
                     <label className="filter-eptype-label">Tiến Độ</label>
                     <select
-                        // value={status}
                         name="status"
-                        id="filter-eptype"
                         className="from-control"
                         onChange={(e) => {
                             e.target.value !== 'null'
@@ -165,19 +103,9 @@ export function FilterInput({ movieCabinet }: { movieCabinet: boolean }) {
                         }}
                     >
                         <option value="null">Tất cả</option>
-                        <option value="2022">2022</option>
-                        <option value="2021">2021</option>
-                        <option value="2020">2020</option>
-                        <option value="2019">2019</option>
-                        <option value="2018">2018</option>
-                        <option value="2017">2017</option>
-                        <option value="2016">2016</option>
-                        <option value="2015">2015</option>
-                        <option value="2014">2014</option>
-                        <option value="2013">2013</option>
-                        <option value="2012">2012</option>
-                        <option value="2011">2011</option>
-                        <option value="2010">2010</option>
+                        {years.map((year) => (
+                            <option value={year}>{year}</option>
+                        ))}
                     </select>
                 </div>
                 <div className="list-movie-flilter-item">
@@ -205,24 +133,21 @@ export function FilterInput({ movieCabinet }: { movieCabinet: boolean }) {
 }
 
 export function FilterAnime({ detailAccount }: { detailAccount: boolean }) {
-    const [searchParams, setSearchParams] = useSearchParams();
-    const { id } = useParams();
-    const local = useLocation();
-
     const navigate = useNavigate();
+    const dispatch = useAppDispatch();
+    const local = useLocation();
+    const { id } = useParams();
+
     const listCabinet = useAppSelector((state) => state.authMC.listMC);
     const loadDataCabinet = useAppSelector((state) => state.authMC.loadDataCabinet);
-
     const islogin = useAppSelector((state) => state.auth.isLogin);
 
-    const dispatch = useAppDispatch();
+    const [searchParams, setSearchParams] = useSearchParams();
     const [paramList, setParamList] = useState<ParamFilter>();
     const [page, setPage] = useState<number>(0);
     const [listAll, setListAll] = useState<deltailAnimme[]>();
     const [list, setList] = useState<deltailAnimme[]>();
 
-    // console.log('listAll: ', listAll);
-    // console.log('listCabinet: ', listCabinet);
     useEffect(() => {
         if (detailAccount && !islogin) {
             navigate('/');
@@ -250,12 +175,12 @@ export function FilterAnime({ detailAccount }: { detailAccount: boolean }) {
     useEffect(() => {
         if (typeof paramList?.name === 'string') {
             (async () => {
-                await carouselApi.getListSearch(String(paramList?.name), 1, 100).then((res) => {
+                await apiMock_10.getListSearch(String(paramList?.name), 1, 100).then((res) => {
                     setList(res.data);
                 });
             })();
         } else {
-            if (loadDataCabinet  && local.pathname === '/moviecabinet/' + id) {
+            if (loadDataCabinet && local.pathname === '/moviecabinet/' + id) {
                 setList(
                     listCabinet
                         ?.filter((x) => {
@@ -360,7 +285,7 @@ export function FilterAnime({ detailAccount }: { detailAccount: boolean }) {
             dispatch(autheMCAction.loadingListMC(id || ''));
         } else if (local.pathname === '/filter') {
             (async () => {
-                await carouselApi.getListFilter().then((res) => {
+                await apiMock_10.getListFilter().then((res) => {
                     setListAll(res.data);
                 });
             })();

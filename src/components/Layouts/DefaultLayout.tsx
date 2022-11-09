@@ -1,13 +1,12 @@
-import { Col, Row } from 'antd';
-import { ReactNode, useEffect, useMemo, useState } from 'react';
-import { useParams, useSearchParams } from 'react-router-dom';
 import Footer from '../Footer/Footet';
 import Header from '../Header/Header';
+import { Col, Row } from 'antd';
+import { ReactNode, useEffect, useState } from 'react';
 import { MenuSelect } from '../MenuSelect';
-import { topMember, TopMember } from '../Topmember/Topmember';
-import { carouselApi } from '../../api/anime';
+import {  TopMember } from '../Topmember/Topmember';
+import { apiMock_10 } from '../../api/axiosMock_10';
+import { listViewAll, menuselector, tabLableComent, tabLableView, topMember } from '../../model';
 import './defaultLayoutStyle.scss';
-import { listViewAll, menuselector } from '../../model/user';
 
 interface DefaultLayoutProps {
     header?: ReactNode;
@@ -16,18 +15,8 @@ interface DefaultLayoutProps {
     offSelectCol?: 'off';
 }
 function DefaultLayout(props: DefaultLayoutProps) {
-    // let [searchParams, setSearchParams] = useSearchParams();
-
     const selcetClass = `select-col ${props.offSelectCol}`;
-    const tabLableView = useMemo<string[]>(() => {
-        return ['Ngày', 'Tuần', 'Tháng', 'Mùa', 'Năm'];
-    }, []);
-    const tabLableComent = useMemo<string[]>(() => {
-        return ['Mùa này', 'Mùa Trước', 'Năm', 'ALL'];
-    }, []);
-    let params = useParams();
-
-    // console.log(params['*']); // "one/two"
+  
 
     const [listView, SetListView] = useState<menuselector[]>([]);
     const [listComent, SetListComent] = useState<menuselector[]>([]);
@@ -41,17 +30,17 @@ function DefaultLayout(props: DefaultLayoutProps) {
 
     useEffect(() => {
         (async () => {
-            await carouselApi.getMostView('01').then((res) => {
+            await apiMock_10.getMostView('01').then((res) => {
                 SetListViewAll(res.data[0].data);
             });
         })();
         (async () => {
-            await carouselApi.getMostView('02').then((res) => {
+            await apiMock_10.getMostView('02').then((res) => {
                 SetListComentAll(res.data[0].data);
             });
         })();
         (async () => {
-            await carouselApi.getMostView('03').then((res) => {
+            await apiMock_10.getMostView('03').then((res) => {
                 SetTopList(res.data[0].data);
             });
         })();
@@ -65,7 +54,6 @@ function DefaultLayout(props: DefaultLayoutProps) {
 
     return (
         <div>
-           
             <Header />
             <div>
                 <div className="container-df">

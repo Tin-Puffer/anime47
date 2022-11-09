@@ -1,5 +1,5 @@
-import { ReactNode, useState } from 'react';
-import { comment } from '../../model/user';
+import { useState } from 'react';
+import { comment } from '../../model';
 import { BoxComment } from './Coment';
 
 export function CommentItem({ reply = true, listComment }: { reply?: boolean; listComment?: comment }) {
@@ -8,7 +8,7 @@ export function CommentItem({ reply = true, listComment }: { reply?: boolean; li
         SetBoxComent('');
     }
     function handleReply(e: string) {
-        if (boxComent !== '') SetBoxComent('');
+        if (!boxComent.length) SetBoxComent('');
         else SetBoxComent(e);
     }
     return (
@@ -30,11 +30,7 @@ export function CommentItem({ reply = true, listComment }: { reply?: boolean; li
                                 ></div>
                                 <div className="cmt-btns">
                                     {reply && (
-                                        <span
-                                            className="cmt-reply"
-                                            data-parent_id="17087"
-                                            onClick={() => handleReply(e.id)}
-                                        >
+                                        <span className="cmt-reply" onClick={() => handleReply(e.id)}>
                                             Trả lời
                                         </span>
                                     )}
@@ -43,7 +39,7 @@ export function CommentItem({ reply = true, listComment }: { reply?: boolean; li
                             <div className="comment-item-right">
                                 <div className="cmt-meta-data">
                                     <span className="cmt-username">{e.name}</span>
-                                    {e.type === 1 ? (
+                                    {e.type === 2 ? (
                                         <span className="user-type user-type-user">Khách vãng lai</span>
                                     ) : (
                                         <span className="user-type user-type-user-member">Thành Viên</span>
@@ -57,11 +53,11 @@ export function CommentItem({ reply = true, listComment }: { reply?: boolean; li
                                     <BoxComment
                                         childID={e.id}
                                         IdFIlm={listComment.idFilm}
-                                        closeReply={()=>close()}
+                                        closeReply={() => close()}
                                     ></BoxComment>
                                 </div>
                             )}
-                            {!!e.listRep.length ? (
+                            {!!e.listRep.length &&
                                 e.listRep.map((item, i) => {
                                     const dateComment: Date = new Date(item.time);
                                     return (
@@ -80,7 +76,7 @@ export function CommentItem({ reply = true, listComment }: { reply?: boolean; li
                                             <div className="comment-item-right">
                                                 <div className="cmt-meta-data">
                                                     <span className="cmt-username">{item.name}</span>
-                                                    {item.type === 1 ? (
+                                                    {item.type === 2 ? (
                                                         <span className="user-type user-type-user">Khách vãng lai</span>
                                                     ) : (
                                                         <span className="user-type user-type-user-member">
@@ -93,10 +89,7 @@ export function CommentItem({ reply = true, listComment }: { reply?: boolean; li
                                             </div>
                                         </div>
                                     );
-                                })
-                            ) : (
-                                <></>
-                            )}
+                                })}
                         </div>
                     );
                 })}

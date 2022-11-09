@@ -1,11 +1,10 @@
-import { Col, Row, Input } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
+import openNotification from '../Notyfication/notyfication';
+import { Col, Row } from 'antd';
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { PaginationCustom } from '../../features/anime';
 import { commentAction } from '../../features/anime/commentSlipe';
-import { comment, commentItemAdd } from '../../model/user';
-import openNotification from '../Notyfication/notyfication';
+import { comment, commentItemAdd } from '../../model';
 import { CommentItem } from './ComentItem';
 import './CommentSytle.scss';
 
@@ -18,15 +17,13 @@ export function BoxComment({
     IdFIlm: string;
     closeReply?: Function;
 }) {
-    const [name, setName] = useState('');
     const user = useAppSelector((state) => state.auth.currentUser);
     const dispatch = useAppDispatch();
+    const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [content, setCtent] = useState('');
-    // const isLogin = useAppSelector((state) => state.auth.isLogin);
     const handelClickSend = () => {
         const now = new Date();
-
         if (content !== '')
             if (!user) {
                 if (name === '' && email === '') {
@@ -36,7 +33,7 @@ export function BoxComment({
                         idFilm: IdFIlm,
                         idChild: childID,
                         item: {
-                            id: '..',
+                            id: '',
                             name: name,
                             img: '',
                             type: 1,
@@ -57,7 +54,7 @@ export function BoxComment({
                     idFilm: IdFIlm,
                     idChild: childID,
                     item: {
-                        id: '..',
+                        id: '',
                         name: user.name,
                         img: user.img,
                         type: 2,
@@ -116,7 +113,7 @@ export function Comment({ CmList }: { CmList: comment }) {
             <div style={{ padding: '10px' }}>
                 <CommentItem listComment={CmList}></CommentItem>
             </div>
-            <div className="paginationCustomFilter">{/* <PaginationCustom></PaginationCustom> */}</div>
+            <div className="paginationCustomFilter"></div>
         </div>
     );
 }

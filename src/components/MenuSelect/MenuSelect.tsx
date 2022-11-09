@@ -1,8 +1,7 @@
 import { Row, Col } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { menuselector } from '../../model/user';
-
+import { menuselector } from '../../model';
 import './menuStyle.scss';
 
 export function StarTiTle({ lable }: { lable: string }) {
@@ -22,7 +21,6 @@ export const Tabs = React.memo(function Tabs({ tab, change = () => {} }: { tab: 
             setActive(Number(e.target.getAttribute('data-index')));
             change(Number(e.target.getAttribute('data-index')));
         }
-        // Number(e.target.getAttribute('data-index')) == active ? setActive(Number(e.target.getAttribute('data-index'))): {};
     }
     return (
         <div className="tabs">
@@ -80,7 +78,6 @@ export const MenuSelect = React.memo(function MenuSelect(props: MenuProps) {
     const [dataFirst2, setDataFirst] = useState<menuselector[]>();
     useEffect(() => {
         setDataFirst([...data.slice(1, 8)]);
-        // console.log(dataFirst2);
     }, [data]);
     return (
         <div className="menu-container">

@@ -11,11 +11,6 @@ export interface authState {
     currentUser?: user;
 }
 
-const initAuth: authState = {
-    isLogin: false,
-    login: false,
-    currentUser: undefined,
-};
 const initAuthLoad = (): authState => {
     if (!localStorage.getItem('access_token')) {
         return {

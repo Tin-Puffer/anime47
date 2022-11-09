@@ -1,9 +1,9 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
-import { Col, Row } from 'antd';
-import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import Skeleton from '../../../components/Skeleton/Skeleton';
-import { useNavigate } from 'react-router-dom';
 import openNotification from '../../../components/Notyfication/notyfication';
+import { ChangeEvent, useEffect, useState } from 'react';
+import { Col, Row } from 'antd';
+import { useAppSelector } from '../../../app/hooks';
+import { useNavigate } from 'react-router-dom';
 import { authState } from '../authSlipe';
 import './loginStyle.scss';
 
@@ -14,7 +14,7 @@ export default function DetailAcount() {
     const [confirm, setConfirm] = useState<boolean>(false);
     const setSelectedFile = (e: ChangeEvent<HTMLInputElement>) => {
         const file: File = (e.target.files as FileList)[0];
-        const imageLink:string = URL.createObjectURL(file);
+        const imageLink: string = URL.createObjectURL(file);
         setAvata(imageLink);
     };
     const handleConfirm = () => {
@@ -35,20 +35,10 @@ export default function DetailAcount() {
             navigate('/');
         }
     }, [user]);
-
-    // const handleRegister = () => {
-    //     dispatch(
-    //         authAction.login({
-    //             userName: '',
-    //             password: '',
-    //         }),
-    //     );
-    // };
     return (
         <div className="login-main">
             <h1></h1>
             <div className="logi-main-content">
-                {/* <h3 className="message"></h3> */}
                 <div className="form-login">
                     <div className="form-horizontal">
                         <Row className="form-group">
@@ -88,21 +78,14 @@ export default function DetailAcount() {
                                 Avatar
                             </Col>
                             <Col xs={24} md={16} lg={13}>
-                                {/* */}
-                                {
-                                    avata ? (
-                                        <div
-                                            className="avata-detail"
-                                            style={{ backgroundImage: `url(${avata})` }}
-                                        ></div>
-                                    ) : (
-                                        <div
-                                            className="avata-detail"
-                                            style={{ backgroundImage: `url(${user.currentUser?.img})` }}
-                                        ></div>
-                                    )
-                                    // <img src={avata} className='avata-detail'></img>
-                                }
+                                {avata ? (
+                                    <div className="avata-detail" style={{ backgroundImage: `url(${avata})` }}></div>
+                                ) : (
+                                    <div
+                                        className="avata-detail"
+                                        style={{ backgroundImage: `url(${user.currentUser?.img})` }}
+                                    ></div>
+                                )}
                             </Col>
                         </Row>
                         <Row className="form-group">

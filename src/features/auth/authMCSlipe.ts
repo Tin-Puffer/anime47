@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { authMC, deltailAnimme, user } from '../../model/user';
+import { authMC, deltailAnimme } from '../../model';
 
 const initAutheMC = (): authMC => {
     return {

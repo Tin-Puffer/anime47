@@ -1,6 +1,7 @@
+import { topMember } from '../../model';
 import { StarTiTle } from '../MenuSelect';
-
 import './topMember.scss';
+
 export function TopMemberItem({ value, rank }: { value: topMember; rank: number }) {
     return (
         <div className="top-member-item">
@@ -18,12 +19,7 @@ export function TopMemberItem({ value, rank }: { value: topMember; rank: number 
         </div>
     );
 }
- export interface topMember {
-    id: string;
-    name: string;
-    img: string;
-    lever: string;
-}
+ 
 interface PropMember {
     title: string;
     list: topMember[];

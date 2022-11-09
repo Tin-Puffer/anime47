@@ -1,26 +1,28 @@
 import { useEffect, useRef, useState } from 'react';
-import { useLocation, useSearchParams } from 'react-router-dom';
-import { animeList } from '../../api/anime';
+import { useSearchParams } from 'react-router-dom';
+import { apiMock_1 } from '../../api/axiosMock_1';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { Comment } from '../../components/Comment';
 import openNotification from '../../components/Notyfication/notyfication';
-import { listSever, ParamWatch } from '../../model/user';
+import { listSever, ParamWatch } from '../../model';
 import './animeWath.scss';
 import { commentAction } from './commentSlipe';
 export function AnimeWatch() {
+    const dispatch = useAppDispatch();
+    const ref = useRef<HTMLDivElement>(null);
+    const idComment = useAppSelector((state) => state.comment.idFilm);
+    const CmtList = useAppSelector((state) => state.comment);
     const [searchParams, setSearchParams] = useSearchParams();
     const [paramList, setParamList] = useState<ParamWatch>();
     const [servetList, setServerList] = useState<listSever>();
     const [link, SetLink] = useState<string | null>();
-    const dispatch = useAppDispatch();
-    const idComment = useAppSelector((state) => state.comment.idFilm);
-    const ref = useRef<HTMLDivElement>(null);
-    const CmtList = useAppSelector((state) => state.comment);
+
     useEffect(() => {
         if (paramList?.id && paramList?.id !== idComment) {
             dispatch(commentAction.loadingComment(paramList?.id));
         }
     }, [paramList]);
+    
     useEffect(() => {
         ref.current?.scroll();
         setParamList({
@@ -33,7 +35,7 @@ export function AnimeWatch() {
     console.log(servetList);
     useEffect(() => {
         (async () => {
-            await animeList.getDetailList(searchParams.get('id') || '').then((res) => {
+            await apiMock_1.getDetailList(searchParams.get('id') || '').then((res) => {
                 if (res.data[0]) {
                     setServerList(res.data[0]);
                 } else {

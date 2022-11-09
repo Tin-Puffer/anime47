@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { comment, commentItemAdd } from '../../model/user';
+import { comment, commentItemAdd } from '../../model';
 
 const initComment = (): comment => {
     return {
@@ -43,18 +43,7 @@ const commentSlipe = createSlice({
                     });
                 }
             }
-        },
-        // DelteItemCabinet(state, action: PayloadAction<String>) {
-        //     state.listMC = state.listMC.filter((item) => {
-        //         return item.id !== action.payload;
-        //     });
-        // },
-        // AddItemCabinet(state, action: PayloadAction<deltailAnimme>) {
-        //     if (!state.listMC.find((e) => e.id === action.payload.id)) {
-        //         console.log('add');
-        //         state.listMC = state.listMC.concat(action.payload);
-        //     }
-        // },
+        }
     },
 });
 //action

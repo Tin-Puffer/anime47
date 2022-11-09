@@ -1,7 +1,7 @@
-import './footerStyle.scss';
 import { Col, Row } from 'antd';
-import 'antd/dist/antd.min.css';
 import { Link } from 'react-router-dom';
+import './footerStyle.scss';
+import 'antd/dist/antd.min.css';
 export default function Footet() {
     return (
         <div className="footer">
@@ -11,7 +11,7 @@ export default function Footet() {
                         <Link to={'/'} style={{ marginBottom: '10px', display: 'block', marginLeft: '5px' }}>
                             Xem anime
                         </Link>
-                        <p className="title-p"> © 2022 NguyenChiTin •</p>
+                        <p className="title-p"> ©2022 Tin-Puffer •</p>
                     </Col>
                     <Col xs={{ offset: 2, span: 22 }} md={{ offset: 0, span: 14 }}>
                         <Row>

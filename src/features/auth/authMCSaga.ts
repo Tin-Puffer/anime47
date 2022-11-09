@@ -1,16 +1,15 @@
 import { PayloadAction } from '@reduxjs/toolkit';
-import { all, call, delay, fork, put, take, takeEvery, takeLatest } from 'redux-saga/effects';
-import { animeList } from '../../api/anime';
-import { deltailAnimme, user } from '../../model/user';
+import { all, call, fork, put, take} from 'redux-saga/effects';
+import { apiMock_1 } from '../../api/axiosMock_1';
+import { deltailAnimme } from '../../model';
 import { autheMCAction } from './authMCSlipe';
 
-import { authAction, loginState } from './authSlipe';
 export interface AuthMC {
     list: deltailAnimme[];
     id: string;
 }
 const callApiListMC = async (idUser: string) => {
-    return await animeList.getUserMC(idUser).then((res) => {
+    return await apiMock_1.getUserMC(idUser).then((res) => {
         return { res };
     });
 };
@@ -60,5 +59,4 @@ function* ApiAddCabinet() {
 }
 export function* authMCSaga() {
     yield all([call(ApiDeleteCabinet), call(loadingFlow), call(ApiAddCabinet)]);
-    // yield fork(loadingFlow);
 }

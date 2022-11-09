@@ -1,8 +1,8 @@
 import { Breadcrumb } from 'antd';
 import { useEffect, useState } from 'react';
 import { Link, useLocation, useParams, useSearchParams } from 'react-router-dom';
-import { animeList, carouselApi } from '../../api/anime';
-import { deltailAnimme } from '../../model/user';
+import { apiMock_10 } from '../../api/axiosMock_10';
+import { deltailAnimme } from '../../model';
 import './breadCrumbStyle.scss';
 interface CrumbType {
     name: string | undefined;
@@ -14,16 +14,13 @@ function Separator() {
 export function Crumb() {
     const local = useLocation();
     let { id } = useParams<string>();
-    const [searchParams, setSearchParams] = useSearchParams();
+    const [searchParams] = useSearchParams();
     const [detail, setDetail] = useState<deltailAnimme>();
     const [crumb, setCrumb] = useState<CrumbType[]>([]);
-    // console.log('id=' + id);
-    // console.log(detail);
-
     useEffect(() => {
         if (detail) {
-            detail.grenre.map((e) => {
-                const tmp: CrumbType = { name: e, path: '/filter?grenre=' + e };
+            detail.grenre.forEach((grenreItem) => {
+                const tmp: CrumbType = { name: grenreItem, path: '/filter?grenre=' + grenreItem };
                 setCrumb((pr) => pr.concat(tmp));
             });
             local.pathname === '/watch'
@@ -38,11 +35,10 @@ export function Crumb() {
     }, [detail]);
     useEffect(() => {
         console.log(detail);
-
         switch (local.pathname) {
             case '/anime/' + id: {
                 (async () => {
-                    await carouselApi.getDetail(id || '').then((res) => {
+                    await apiMock_10.getDetail(id || '').then((res) => {
                         setDetail(res.data[0]);
                         setCrumb([{ name: 'Home', path: '/' }]);
                     });
@@ -69,7 +65,7 @@ export function Crumb() {
             }
             case '/watch': {
                 (async () => {
-                    await carouselApi.getDetail(searchParams.get('id') || '').then((res) => {
+                    await apiMock_10.getDetail(searchParams.get('id') || '').then((res) => {
                         setDetail(res.data[0]);
                         setCrumb([{ name: 'Home', path: '/' }]);
                     });
@@ -87,16 +83,16 @@ export function Crumb() {
     }, [local.pathname, searchParams]);
     return (
         <Breadcrumb separator={<Separator />} className="container-crumb">
-            {crumb.map((e, i) =>
-                e.path ? (
+            {crumb.map((crumbItem, i) =>
+                crumbItem.path ? (
                     <Breadcrumb.Item key={i}>
-                        <Link className="able-click" to={e.path}>
-                            {e.name?.toUpperCase()}
+                        <Link className="able-click" to={crumbItem.path}>
+                            {crumbItem.name?.toUpperCase()}
                         </Link>
                     </Breadcrumb.Item>
                 ) : (
                     <Breadcrumb.Item className="unable-click" key={i}>
-                        {e.name?.toUpperCase()}
+                        {crumbItem.name?.toUpperCase()}
                     </Breadcrumb.Item>
                 ),
             )}

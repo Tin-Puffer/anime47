@@ -1,15 +1,15 @@
+import openNotification from '../../components/Notyfication/notyfication';
 import { Col, Row } from 'antd';
-import './animeDetail.scss';
-
 import { Comment } from '../../components/Comment';
 import { createSearchParams, useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
-import { deltailAnimme, listSever } from '../../model/user';
-import { animeList, carouselApi } from '../../api/anime';
+import { deltailAnimme, listSever } from '../../model';
+import { apiMock_1 } from '../../api/axiosMock_1';
+import { apiMock_10 } from '../../api/axiosMock_10';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { autheMCAction } from '../auth/authMCSlipe';
-import openNotification from '../../components/Notyfication/notyfication';
-import { commentAction, commentReducer } from './commentSlipe';
+import { commentAction } from './commentSlipe';
+import './animeDetail.scss';
 
 export function AnimeDetail() {
     let { id } = useParams<string>();
@@ -21,7 +21,6 @@ export function AnimeDetail() {
     const idUser = useAppSelector((state) => state.auth.currentUser?.id);
     const idComment = useAppSelector((state) => state.comment.idFilm);
     const CmtList = useAppSelector((state) => state.comment);
-
     const listCabinet = useAppSelector((state) => state.authMC.listMC);
     const loadDataCabinet = useAppSelector((state) => state.authMC.loadDataCabinet);
     const [detail, setDetail] = useState<deltailAnimme>();
@@ -29,9 +28,7 @@ export function AnimeDetail() {
     const handelChange = (item: string) => {
         ref.current?.scrollIntoView({ behavior: 'smooth' });
         item !== id && navigate('/anime/' + item);
-        // scroller.scrollTo();
     };
-    console.log('serverlist: ', servetList);
     const handleClickWatchMovie = () => {
         if (servetList !== undefined) {
             localStorage.setItem('Link', servetList.mainSV22[0].link);
@@ -44,28 +41,30 @@ export function AnimeDetail() {
         }
     }, [id]);
     useEffect(() => {
-        (async () => {
-            await animeList.getDetailList(id || '').then((res) => {
-                if (res.data[0]) {
-                    setServerList(res.data[0]);
-                } else {
-                    setServerList(undefined);
-                }
-            });
-        })();
+        if (id)
+            (async () => {
+                await apiMock_1.getDetailList(id).then((res) => {
+                    if (res.data[0]) {
+                        setServerList(res.data[0]);
+                    } else {
+                        setServerList(undefined);
+                    }
+                });
+            })();
     }, [detail]);
     useEffect(() => {
-        (async () => {
-            await carouselApi.getDetail(id || '').then((res) => {
-                setDetail(res.data[0]);
-            });
-        })();
+        if (id)
+            (async () => {
+                await apiMock_10.getDetail(id || '').then((res) => {
+                    setDetail(res.data[0]);
+                });
+            })();
         ref.current?.scrollIntoView({ behavior: 'smooth' });
     }, [id]);
     const handleAddCabinet = () => {
         if (islogin) {
-            if (!loadDataCabinet) {
-                dispatch(autheMCAction.loadingListMC(idUser || ''));
+            if (!loadDataCabinet && idUser) {
+                dispatch(autheMCAction.loadingListMC(idUser));
             }
             if (detail) {
                 if (listCabinet.find((e) => e.id === detail.id)) {
@@ -89,7 +88,7 @@ export function AnimeDetail() {
 
                         <ul className="btn-block">
                             <li className="item">
-                                <a
+                                <p
                                     id="btn-film-watch"
                                     className="btn btn-green btn"
                                     title="Đánh Dấu"
@@ -97,7 +96,7 @@ export function AnimeDetail() {
                                 >
                                     {' '}
                                     Lưu lại
-                                </a>
+                                </p>
                             </li>
                             {detail?.trailer && (
                                 <li className="item">
@@ -118,9 +117,9 @@ export function AnimeDetail() {
                                         Xem Anime
                                     </a>
                                 ) : (
-                                    <a className="btn btn-disible" onClick={handleClickWatchMovie}>
+                                    <p className="btn btn-disible" onClick={handleClickWatchMovie}>
                                         Xem Anime
-                                    </a>
+                                    </p>
                                 )}
                             </li>
                         </ul>

@@ -1,63 +1,13 @@
 import axios from 'axios';
-import { AuthMC } from '../features/auth/authMCSaga';
-import { loginState } from '../features/auth/authSlipe';
-import { carouselItem, comment, deltailAnimme, ParamFilter, user } from '../model/user';
-const axiosMock_10 = axios.create({
+import { carouselItem } from '../../model';
+
+export const axiosMock_10 = axios.create({
     baseURL: 'https://63566b9e9243cf412f842b92.mockapi.io',
     headers: {
         'Content-Type': 'application/json',
     },
 });
-const axiosMock_1 = axios.create({
-    baseURL: 'https://6362825e37f2167d6f66451d.mockapi.io',
-    headers: {
-        'Content-Type': 'application/json',
-    },
-});
-
-export const animeList = {
-    getDetailList(id: string): Promise<any> {
-        const URL = '/list';
-        return axiosMock_1.get(URL, {
-            params: {
-                id: id,
-            },
-        });
-    },
-    getUser(userName: string): Promise<user> {
-        console.log('u:', userName);
-        const URL = '/user';
-        return axiosMock_1
-            .get(URL, {
-                params: {
-                    userName: userName,
-                },
-            })
-            .then((res) => res.data[0]);
-    },
-    getComment(idFilm: string): Promise<comment> {
-        const URL = '/comment';
-        return axiosMock_1
-            .get(URL, {
-                params: {
-                    idFilm: idFilm,
-                },
-            })
-            .then((res) => res.data[0]);
-    },
-
-    getUserMC(id: string): Promise<AuthMC> {
-        const URL = '/userMC';
-        return axiosMock_1
-            .get(URL, {
-                params: {
-                    id: id,
-                },
-            })
-            .then((response) => response.data[0]);
-    },
-};
-export const carouselApi = {
+export const apiMock_10 = {
     getAll(): Promise<carouselItem[]> {
         const URL = '/carousel';
         return axiosMock_10.get(URL).then((res) => {

@@ -1,9 +1,9 @@
-import { Col, Row } from 'antd';
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import openNotification from '../../../components/Notyfication/notyfication';
 import Skeleton from '../../../components/Skeleton/Skeleton';
+import { Col, Row } from 'antd';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { authAction } from '../authSlipe';
 import './loginStyle.scss';
 

@@ -1,25 +1,22 @@
 import { Col, Row } from 'antd';
-import 'antd/dist/antd.less';
-import './headerStyle.scss';
 import { createSearchParams, Link, useNavigate } from 'react-router-dom';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { keyboardKey } from '@testing-library/user-event';
-import { deltailAnimme } from '../../model/user';
-import { carouselApi } from '../../api/anime';
-import { grenres } from '../../model/constans';
+import { deltailAnimme, grenRes, grenres, sortComent, years } from '../../model';
+import { apiMock_10 } from '../../api/axiosMock_10';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { authAction } from '../../features/auth/authSlipe';
+import 'antd/dist/antd.less';
+import './headerStyle.scss';
 
 export default function () {
     const navigate = useNavigate();
-
     const dispatch = useAppDispatch();
+    let boxSrarchRef = useRef<HTMLDivElement>(null);
+    const user = useAppSelector((state) => state.auth.currentUser);
     const [isHide, setIsHide] = useState(false);
     const [boxList, setBoxList] = useState<deltailAnimme[]>();
     const [inputValue, setInputvalue] = useState('');
-    const user = useAppSelector((state) => state.auth.currentUser);
-    let boxSrarchRef = useRef<HTMLDivElement>(null);
-    console.log('RENDER');
     const handleLogout = () => {
         dispatch(authAction.logout());
     };
@@ -47,42 +44,10 @@ export default function () {
         }
     }, [inputValue]);
     useEffect(() => {
-        carouselApi.getListSearch(inputValue).then((res) => {
+        apiMock_10.getListSearch(inputValue).then((res) => {
             setBoxList(res.data);
         });
     }, [isHide]);
-    interface grenResType {
-        type1: string;
-        type2: string;
-    }
-    const grenRes = useMemo<grenResType[]>(() => {
-        return [
-            {
-                type1: 'Harem',
-                type2: 'Hài Hước',
-            },
-            {
-                type1: 'Đời Thường',
-                type2: 'Học Đường',
-            },
-            {
-                type1: 'Lãng Mạng',
-                type2: 'Học Đường',
-            },
-            {
-                type1: 'Ecchi',
-                type2: 'Harem',
-            },
-            {
-                type1: 'Học Đường',
-                type2: 'Ecchi',
-            },
-        ];
-    }, []);
-    const years = useMemo<string[]>(() => {
-        return ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022'];
-    }, []);
-
     return (
         <div className="header">
             <div className="top-line"></div>
@@ -101,7 +66,6 @@ export default function () {
                             onKeyPress={handleSearchBox}
                             onChange={(e) => {
                                 setInputvalue(e.target.value);
-                                // console.log(inputValue)
                             }}
                         ></input>
                         {isHide && (
@@ -194,7 +158,6 @@ export default function () {
                             trạng thái
                             <Row className="mega-menu-2 status">
                                 <Col
-                                    // title="unfinish"
                                     data-status="unfinish"
                                     className="m2"
                                     onClick={(e) =>
@@ -228,6 +191,7 @@ export default function () {
                         <Col className="item-search">
                             xem nhiều
                             <Row className="mega-menu-2 viewCount">
+                                {}
                                 <Col className="m2 disible">Ngày</Col>
                                 <Col className="m2 disible">Tuần</Col>
                                 <Col className="m2 disible">Tháng</Col>
@@ -250,57 +214,53 @@ export default function () {
                         <Col className="item-search">
                             bình luận nhiều
                             <Row className="mega-menu-2 commentCount">
-                                <Col className="m2 disible">Mùa Vày</Col>
-                                <Col className="m2 disible">Mùa Trước</Col>
-                                <Col className="m2 disible">Năm Này</Col>
-                                <Col className="m2 disible">Năm Trước</Col>
-                                <Col className="m2 disible">Tất Cả</Col>
+                                {sortComent.map((item, i) => (
+                                    <Col key={i} className="m2 disible">
+                                        {item}
+                                    </Col>
+                                ))}
                             </Row>
                         </Col>
                         <Col className="item-search ">
                             lưỡng long nhất thể
                             <Row className="mega-menu-2 type-2">
-                                {grenRes.map((e, i) => {
-                                    return (
-                                        <Col
-                                            className="m2"
-                                            key={i}
-                                            onClick={() =>
-                                                navigate({
-                                                    pathname: '/filter',
-                                                    search: createSearchParams({
-                                                        grenre: [e.type1, e.type2],
-                                                    }).toString(),
-                                                })
-                                            }
-                                        >
-                                            {e.type1}/{e.type2}
-                                        </Col>
-                                    );
-                                })}
+                                {grenRes.map((e, i) => (
+                                    <Col
+                                        className="m2"
+                                        key={i}
+                                        onClick={() =>
+                                            navigate({
+                                                pathname: '/filter',
+                                                search: createSearchParams({
+                                                    grenre: [e.grenres_1, e.grenres_2],
+                                                }).toString(),
+                                            })
+                                        }
+                                    >
+                                        {e.grenres_1}/{e.grenres_2}
+                                    </Col>
+                                ))}
                             </Row>
                         </Col>
                         <Col className="item-search">
                             năm
                             <Row className="mega-menu-2">
-                                {years.map((e, i) => {
-                                    return (
-                                        <Col
-                                            className="m2"
-                                            key={i}
-                                            onClick={() =>
-                                                navigate({
-                                                    pathname: '/filter',
-                                                    search: createSearchParams({
-                                                        year: [e],
-                                                    }).toString(),
-                                                })
-                                            }
-                                        >
-                                            {e}
-                                        </Col>
-                                    );
-                                })}
+                                {years.map((e, i) => (
+                                    <Col
+                                        className="m2"
+                                        key={i}
+                                        onClick={() =>
+                                            navigate({
+                                                pathname: '/filter',
+                                                search: createSearchParams({
+                                                    year: [e],
+                                                }).toString(),
+                                            })
+                                        }
+                                    >
+                                        {e}
+                                    </Col>
+                                ))}
                             </Row>
                         </Col>
                     </Row>

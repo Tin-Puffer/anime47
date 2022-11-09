@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
+import Skeleton from '../../../components/Skeleton/Skeleton';
+import openNotification from '../../../components/Notyfication/notyfication';
+import  { useEffect } from 'react';
 import { Col, Row } from 'antd';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
-import Skeleton from '../../../components/Skeleton/Skeleton';
 import { useNavigate } from 'react-router-dom';
-import openNotification from '../../../components/Notyfication/notyfication';
 import { authAction } from '../authSlipe';
 
 export default function Register() {
