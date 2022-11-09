@@ -1,6 +1,6 @@
 import axios from "axios";
 import { AuthMC } from "../../features/auth/authMCSaga";
-import { comment, user } from "../../model";
+import { comment, listSever, user } from "../../model";
 
 export const axiosMock_1 = axios.create({
 
@@ -11,13 +11,15 @@ export const axiosMock_1 = axios.create({
 });
 
 export const apiMock_1 = {
-    getDetailList(id: string): Promise<any> {
+    getDetailList(id: string): Promise<listSever> {
         const URL = '/list';
-        return axiosMock_1.get(URL, {
-            params: {
-                id: id,
-            },
-        });
+        return axiosMock_1
+            .get(URL, {
+                params: {
+                    id: id,
+                },
+            })
+            .then((res) => res.data[0]);
     },
     getUser(userName: string): Promise<user> {
         console.log('u:', userName);

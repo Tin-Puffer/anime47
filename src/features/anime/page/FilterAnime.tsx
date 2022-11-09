@@ -2,13 +2,12 @@ import { useEffect, useState } from 'react';
 import { MultiSelect, Option } from 'react-multi-select-component';
 import { GridFilm } from './Home';
 import { useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom';
-import { deltailAnimme, ParamFilter } from '../../model';
-import { apiMock_10 } from '../../api/axiosMock_10';
-import { grenres, years } from '../../model';
-import { Crumb } from '../../components/Beadcrumb/BreadCrumb';
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { autheMCAction } from '../auth/authMCSlipe';
-import { PaginationCustom } from '../../components/Pagination/Pagination';
+import { deltailAnimme, grenres, ParamFilter, years } from '../../../model';
+import { Crumb } from '../../../components/Beadcrumb/BreadCrumb';
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
+import { apiMock_10 } from '../../../api/axiosMock_10';
+import { autheMCAction } from '../../auth/authMCSlipe';
+import { PaginationCustom } from '../../../components/Pagination/Pagination';
 import './filterAnime.scss';
 
 export function FilterInput({ movieCabinet }: { movieCabinet: boolean }) {
@@ -103,8 +102,8 @@ export function FilterInput({ movieCabinet }: { movieCabinet: boolean }) {
                         }}
                     >
                         <option value="null">Tất cả</option>
-                        {years.map((year) => (
-                            <option value={year}>{year}</option>
+                        {years.map((year,i) => (
+                            <option key={i} value={year}>{year}</option>
                         ))}
                     </select>
                 </div>

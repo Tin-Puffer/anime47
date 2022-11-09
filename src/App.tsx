@@ -3,9 +3,9 @@ import { Routes, Route } from 'react-router-dom';
 import DefaultLayout from './components/Layouts/DefaultLayout';
 import { Login } from './features/auth/page';
 import Register from './features/auth/page/Register';
-import { FilterAnime, FilterInput, Home, AnimeDetail } from './features/anime';
+import { FilterAnime, FilterInput, Home, AnimeDetail } from './features/anime/page';
 
-import { AnimeWatch } from './features/anime/AnimeWatch';
+import { AnimeWatch } from './features/anime/page/AnimeWatch';
 import { Crumb } from './components/Beadcrumb/BreadCrumb';
 import DetailAcount from './features/auth/page/DedtailAcount';
 import { CarouselHome } from './components/Carousel/Carousel';

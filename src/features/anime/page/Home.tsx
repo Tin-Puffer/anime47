@@ -1,15 +1,17 @@
-import { apiMock_10 } from '../../api/axiosMock_10';
+
 import { Col, Row } from 'antd';
-import { Tabs } from '../../components/MenuSelect';
 import { useEffect, useMemo, useState } from 'react';
-import { deltailAnimme, viewUpdate } from '../../model';
 import { Link, useNavigate } from 'react-router-dom';
 import { CloseOutlined } from '@ant-design/icons';
-import { useAppDispatch } from '../../app/hooks';
-import { autheMCAction } from '../auth/authMCSlipe';
+import { deltailAnimme, viewUpdate } from '../../../model';
+import { useAppDispatch } from '../../../app/hooks';
+import { autheMCAction } from '../../auth/authMCSlipe';
+import { apiMock_10 } from '../../../api/axiosMock_10';
+import { Tabs } from '../../../components/MenuSelect';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import './homeStyle.scss';
+
 export function TitleHome({ title }: { title: string }) {
     return <h3 className="title-home">{title}</h3>;
 }

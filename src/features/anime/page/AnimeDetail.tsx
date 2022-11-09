@@ -1,14 +1,15 @@
-import openNotification from '../../components/Notyfication/notyfication';
+
+import openNotification from '../../../components/Notyfication/notyfication';
 import { Col, Row } from 'antd';
-import { Comment } from '../../components/Comment';
 import { createSearchParams, useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
-import { deltailAnimme, listSever } from '../../model';
-import { apiMock_1 } from '../../api/axiosMock_1';
-import { apiMock_10 } from '../../api/axiosMock_10';
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { autheMCAction } from '../auth/authMCSlipe';
-import { commentAction } from './commentSlipe';
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
+import { deltailAnimme, listSever } from '../../../model';
+import { commentAction } from '../AnimeSaga/commentSlipe';
+import { apiMock_1 } from '../../../api/axiosMock_1';
+import { apiMock_10 } from '../../../api/axiosMock_10';
+import { autheMCAction } from '../../auth/authMCSlipe';
+import { Comment } from '../../../components/Comment';
 import './animeDetail.scss';
 
 export function AnimeDetail() {
@@ -44,8 +45,8 @@ export function AnimeDetail() {
         if (id)
             (async () => {
                 await apiMock_1.getDetailList(id).then((res) => {
-                    if (res.data[0]) {
-                        setServerList(res.data[0]);
+                    if (res) {
+                        setServerList(res);
                     } else {
                         setServerList(undefined);
                     }

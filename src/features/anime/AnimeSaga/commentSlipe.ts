@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { comment, commentItemAdd } from '../../model';
+import { comment, commentItemAdd } from '../../../model'; 
 
 const initComment = (): comment => {
     return {

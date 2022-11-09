@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { apiMock_1 } from '../../api/axiosMock_1';
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { Comment } from '../../components/Comment';
-import openNotification from '../../components/Notyfication/notyfication';
-import { listSever, ParamWatch } from '../../model';
+import { apiMock_1 } from '../../../api/axiosMock_1';
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
+import { Comment } from '../../../components/Comment';
+import openNotification from '../../../components/Notyfication/notyfication';
+import { listSever, ParamWatch } from '../../../model';
+import { commentAction } from '../AnimeSaga/commentSlipe';
 import './animeWath.scss';
-import { commentAction } from './commentSlipe';
+
 export function AnimeWatch() {
     const dispatch = useAppDispatch();
     const ref = useRef<HTMLDivElement>(null);
@@ -36,8 +37,8 @@ export function AnimeWatch() {
     useEffect(() => {
         (async () => {
             await apiMock_1.getDetailList(searchParams.get('id') || '').then((res) => {
-                if (res.data[0]) {
-                    setServerList(res.data[0]);
+                if (res) {
+                    setServerList(res);
                 } else {
                     setServerList(undefined);
                 }

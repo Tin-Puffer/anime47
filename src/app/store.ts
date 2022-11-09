@@ -1,6 +1,6 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import creatSAGA from 'redux-saga';
-import { commentReducer } from '../features/anime/commentSlipe';
+import { commentReducer } from '../features/anime/AnimeSaga/commentSlipe';
 import { authMCReducer } from '../features/auth/authMCSlipe';
 import { authReducer } from '../features/auth/authSlipe';
 import rootSaga from './rootSaga';

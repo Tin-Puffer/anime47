@@ -26,13 +26,12 @@ export function Login() {
         openNotification('notify', 'FEATURES NOT AVAILABLE');
     };
     const handleLogin = () => {
-        if ((userName === 'sasuke' || userName === 'madara' || userName === 'itachi') && password === '123123')
-            dispatch(
-                authAction.login({
-                    userName: userName,
-                    password: '',
-                }),
-            );
+        dispatch(
+            authAction.login({
+                userName: userName,
+                password: '',
+            }),
+        );
     };
     return (
         <div className="login-main">

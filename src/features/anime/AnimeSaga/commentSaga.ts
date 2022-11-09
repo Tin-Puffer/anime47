@@ -1,7 +1,7 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { all, call, put, take } from 'redux-saga/effects';
-import { apiMock_1 } from '../../api/axiosMock_1'; 
-import { comment, commentItemAdd } from '../../model';
+import { apiMock_1 } from '../../../api/axiosMock_1'; 
+import { comment, commentItemAdd } from '../../../model';
 import { commentAction } from './commentSlipe';
 
 const callApiComent = async (idFilm: string) => {

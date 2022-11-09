@@ -1,5 +1,3 @@
-
-
 import { notification } from 'antd';
 import { CheckCircleOutlined, InfoCircleOutlined, FrownOutlined } from '@ant-design/icons';
 import './notyficationStyle.scss';
@@ -32,7 +30,7 @@ const openNotification = (type: string, message: string) => {
         case 'Wanning': {
             notification.error({
                 message: message,
-                duration: 2,
+                duration: 1.5,
                 closeIcon: <div />,
                 description: '',
                 icon: <FrownOutlined className="icon" />,

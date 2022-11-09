@@ -3,10 +3,11 @@ import openNotification from '../Notyfication/notyfication';
 import { Col, Row } from 'antd';
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { commentAction } from '../../features/anime/commentSlipe';
+
 import { comment, commentItemAdd } from '../../model';
 import { CommentItem } from './ComentItem';
 import './CommentSytle.scss';
+import { commentAction } from '../../features/anime/AnimeSaga/commentSlipe';
 
 export function BoxComment({
     childID,
