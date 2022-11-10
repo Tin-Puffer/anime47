@@ -8,7 +8,7 @@ export function CommentItem({ reply = true, listComment }: { reply?: boolean; li
         SetBoxComent('');
     }
     function handleReply(e: string) {
-        if (!boxComent.length) SetBoxComent('');
+        if (boxComent !== '') SetBoxComent('');
         else SetBoxComent(e);
     }
     return (
