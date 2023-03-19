@@ -1,46 +1,109 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) TS template.
+# 🔥 AnimeZ.top
 
-## Available Scripts
 
-In the project directory, you can run:
+![alt text](https://iili.io/HhBSbkB.png)
 
-### `npm start`
+## Decription
+AnimeZ.top is a website to watch anime online with basic functions such as watching anime, filtering, searching. In addition, it also provides the functions of saving movies, logging in, registerin
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Tech Stack
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+**Front-End:** ReactJS, Typescript, HTML, CSS, Antd, ReduxTookit, Redux-saga ...
 
-### `npm test`
+**Back-end:** mockapi.io
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**Host Video:** abyss.to 
 
-### `npm run build`
+## Features
+1.  **User** 
+- #### Register and Login Account. 
+- #### filter film
+- #### What film online
+- #### Comment film
+- #### Save and remove to Cabinet
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+## Demo
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- **[AnimeZ.top - official website](https://anime47-t.vercel.app)**
+- **Video Demo**
+[![alt text](https://cdn.nguyenkimmall.com/images/companies/_1/tin-tuc/review/co-gi-tren-tivi-top-15-anime-hay-xung-tam-huyen-thoai-h1.jpg)]()
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Authors
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- [Nguyễn Tín](https://www.facebook.com/profile.php?id=100010025195735)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+## Run Locally
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Clone the project
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+  git clone https://github.com/Tin-Puffer/anime47
+```
+
+Go to the project directory
+
+```bash
+  cd my-project
+```
+
+Install dependencies
+
+```bash
+  npm install
+```
+
+Start the server
+
+```bash
+  npm start
+```
+
+
+## Build and run project
+
+```bash
+  npm run build
+```
+
+
+
+
+## Deployment
+
+To run this project, you must link your github repo to [vercel](https://vercel.com/).
+    
+## FAQ
+
+#### Registration and login not working properly?
+ - because mockapi.io doesn't support query
+
+#### Why are comments not saved?
+
+- because at that time mocapi is not supported, so can't add comments to the database
+
+
+## Feedback
+
+If you have any feedback, please reach out to us at akumaraito1@gmail.com
+
+
+## Screenshots
+
+![App Screenshot](https://iili.io/HhBi34n.png)
+
+![App Screenshot](https://iili.io/HhBi2EX.png)
+
+![App Screenshot](https://iili.io/HhBidBt.png)
+
+
+
+
+## Support
+
+For support, email akumaraito1@gmail.com or join our Slack channel.
+
