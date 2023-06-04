@@ -108,7 +108,7 @@ export function FilterInput({ movieCabinet }: { movieCabinet: boolean }) {
                     </select>
                 </div>
                 <div className="list-movie-flilter-item">
-                    <label className="filter-eptype-label">Sắp xếp</label>
+                    <label className="filter-eptype-label">Sắp xếpX</label>
                     <select
                         name="sort"
                         id="filter-eptype"
