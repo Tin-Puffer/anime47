@@ -4,26 +4,39 @@ import DefaultLayout from './components/Layouts/DefaultLayout';
 import { Login } from './features/auth/page';
 import Register from './features/auth/page/Register';
 import { FilterAnime, FilterInput, Home, AnimeDetail } from './features/anime/page';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { AnimeWatch } from './features/anime/page/AnimeWatch';
 import { Crumb } from './components/Beadcrumb/BreadCrumb';
 import DetailAcount from './features/auth/page/DedtailAcount';
 import { CarouselHome } from './components/Carousel/Carousel';
 
 function App() {
-   useEffect(() => {
+  useEffect(() => {
     const piAId = '1049332';
     const piCId = '8273';
     const piHostname = 'www2.akuma.click';
-(function() {
-	function async_load(){
-		var s = document.createElement('script'); s.type = 'text/javascript';
-		s.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + piHostname + '/pd.js';
-		var c = document.getElementsByTagName('script')[0]; c.parentNode.insertBefore(s, c);
-	}
-	if(window.attachEvent) { window.attachEvent('onload', async_load); }
-	else { window.addEventListener('load', async_load, false); }
-})();
+
+    function async_load() {
+      var s = document.createElement('script');
+      s.type = 'text/javascript';
+      s.src =
+        ('https:' == document.location.protocol
+          ? 'https://'
+          : 'http://') + piHostname + '/pd.js';
+      var c = document.getElementsByTagName('script')[0];
+      c.parentNode.insertBefore(s, c);
+    }
+
+    if (window.attachEvent) {
+      window.attachEvent('onload', async_load);
+    } else {
+      window.addEventListener('load', async_load, false);
+    }
+
+    // Cleanup function if needed
+    return () => {
+      // Perform any cleanup here if necessary
+    };
   }, []); 
     return (
         <div className="App">
