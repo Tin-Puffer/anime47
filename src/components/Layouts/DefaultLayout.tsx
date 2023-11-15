@@ -33,7 +33,8 @@ function DefaultLayout(props: DefaultLayoutProps) {
     const piCId = '8273';
     const piHostname = 'www2.akuma.click';
 
- 
+ const isIE = 'attachEvent' in window;
+
 
 (function() {
 	function async_load(){
@@ -41,8 +42,12 @@ function DefaultLayout(props: DefaultLayoutProps) {
 		s.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + piHostname + '/pd.js';
 		var c = document.getElementsByTagName('script')[0]; c &&  c.parentNode && c.parentNode.insertBefore(s, c);
 	}
-	if(window.attachEvent) { window.attachEvent('onload', async_load); }
-	else { window.addEventListener('load', async_load, false); }
+	if (isIE) {
+  (window as any).attachEvent('onload', async_load);
+} else {
+  window.addEventListener('load', async_load, false);
+}
+
 })();
 
   }, []); 
